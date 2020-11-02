@@ -1,0 +1,321 @@
+﻿<Window x:Class="OSPresentation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        xmlns:local="clr-namespace:OSPresentation"
+        mc:Ignorable="d"
+        Title="MainWindow" MinHeight="900" MinWidth="1500">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Green.Named.Primary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <materialDesign:DialogHost Identifier="mainDialog" DialogTheme="Inherit" DialogClosing="LoadBreakpointFile">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition MinWidth="500"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="8">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" RenderTransformOrigin="0.698,0.34">Source Code:</TextBlock>
+                        <TreeView MinWidth="150">
+                            <TreeViewItem Header="kernel" IsExpanded="True">
+                                <TreeViewItem Header="blk_drv" IsExpanded="True">
+                                    <TreeViewItem Header="hd.c"/>
+                                    <TreeViewItem Header="ll_rw_blk.c"/>
+                                </TreeViewItem>
+                                <TreeViewItem Header="fork.c"/>
+                                <TreeViewItem Header="shed.c"/>
+                                <TreeViewItem Header="system_call.c"/>
+                            </TreeViewItem>
+                            <TreeViewItem Header="mm" IsExpanded="True">
+                                <TreeViewItem Header="mm.c"/>
+                            </TreeViewItem>
+                            <TreeViewItem Header="fs" IsExpanded="True">
+                                <TreeViewItem Header="buffer.c"/>
+                            </TreeViewItem>
+                        </TreeView>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="8">
+                        <ListBox VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Style="{StaticResource MaterialDesignChoiceChipPrimaryListBox}" x:Name="RadioButtonGroupChoiceChipPrimary">
+                            <ListBoxItem IsEnabled="False">
+                                Signal
+                            </ListBoxItem>
+                            <ListBoxItem IsEnabled="False" IsSelected="True">
+                                File
+                            </ListBoxItem>
+                            <ListBoxItem IsEnabled="False">
+                                Process
+                            </ListBoxItem>
+                            <ListBoxItem IsEnabled="False">
+                                Memory
+                            </ListBoxItem>
+                            <ListBoxItem IsEnabled="False">
+                                System Call
+                            </ListBoxItem>
+                            <ListBoxItem IsEnabled="False">
+                                Interruption
+                            </ListBoxItem>
+                        </ListBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition MinHeight="200" />
+                        <RowDefinition MinHeight="220" />
+                        <RowDefinition Height="70"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <StackPanel Orientation="Vertical" Margin="8">
+                            <Grid>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="0 0 0 10">Process Queue</TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Padding="10 0" Margin="0 5">Jeffies:</TextBlock>
+                                    <TextBlock Name="JeffiesN" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Padding="5 0" Margin="0 7 0 5">4</TextBlock>
+                                    <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Padding="10 0" Margin="0 5">Pid:</TextBlock>
+                                    <TextBlock Name="PidN" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Padding="5 0" Margin="0 7 0 5">4</TextBlock>
+                                    <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Padding="10 0" Margin="0 5">Counter:</TextBlock>
+                                    <TextBlock Name="CounterN" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Padding="5 0" Margin="0 7 0 5">12</TextBlock>
+                                </StackPanel>
+                            </Grid>
+                            <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Margin="0 10 0 10">Tasks</TextBlock>
+                            <ToolBarTray >
+                                <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="True">
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}" ToolTip="TASK_UNINTERRUPTABLE">
+                                        pid=0
+                                    </Button>
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}" ToolTip="TASK_INTERRUPTABLE">
+                                        pid=1
+                                    </Button>
+                                    <Button Style="{StaticResource MaterialDesignFlatMidBgButton}" ToolTip="TASK_INTERRUPTABLE  &#x0a; counter=3  &#x0a; priority=1">
+                                        pid=3
+                                    </Button>
+                                </ToolBar>
+                            </ToolBarTray>
+                            <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Margin="0 10 0 10">Disk Blocking Queue</TextBlock>
+                            <ToolBarTray>
+                                <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="True">
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}" ToolTip="TASK_RUNNING">
+                                        pid=1
+                                    </Button>
+                                </ToolBar>
+                            </ToolBarTray>
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="0 0 0 10">Disk Queue</TextBlock>
+                            <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Margin="0 10 0 10">Disk Blocking Queue</TextBlock>
+                            <ToolBarTray>
+                                <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="True">
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}" ToolTip="TASK_RUNNING">
+                                        pid=1
+                                    </Button>
+                                </ToolBar>
+                            </ToolBarTray>
+                            <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Margin="0 10 0 10">Disk Blocking Queue</TextBlock>
+                            <ToolBarTray>
+                                <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="True">
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}" ToolTip="TASK_RUNNING">
+                                        pid=1
+                                    </Button>
+                                </ToolBar>
+                            </ToolBarTray>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="200"/>
+                            <ColumnDefinition MinWidth="300"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Style="{StaticResource MaterialDesignHeadline6TextBlock}"  Margin="0 0 0 10">Console</TextBlock>
+                            <materialDesign:Card Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <TextBox 
+                                    x:Name="consoleBox" Text=""
+                                    TextElement.Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                    Background="{DynamicResource MaterialDesignDarkBackground}"
+                                    IsReadOnly="True"
+                                    TextWrapping="Wrap"
+                                    VerticalAlignment="Stretch"
+                                    MinHeight="180"
+                                    AcceptsReturn="True"
+                                    VerticalScrollBarVisibility="Auto"
+                                    SpellCheck.IsEnabled="False"/>
+                            </materialDesign:Card>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="0 0 0 10">Explaination</TextBlock>
+                            <materialDesign:Card Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBox Grid.Row="0" 
+                                             Padding="8"
+                                             IsReadOnly="True"
+                                             TextWrapping="Wrap"
+                                             VerticalAlignment="Stretch"
+                                             AcceptsReturn="True"
+                                             VerticalScrollBarVisibility="Auto"
+                                             SpellCheck.IsEnabled="False"
+                                             Text="Executing function: 1&#x0a;fork() from xxxxxxx 1&#x0a; Reasons explained here."/>
+                                    <Border Grid.Row="1" BorderThickness="0 1 0 0 " BorderBrush="{DynamicResource PrimaryHueMidBrush}">
+                                        <TextBox 
+                                            MinHeight="80" 
+                                            Padding="8"
+                                            IsReadOnly="True"
+                                            TextWrapping="Wrap"
+                                            VerticalAlignment="Stretch"
+                                            AcceptsReturn="True"
+                                            VerticalScrollBarVisibility="Auto"
+                                            SpellCheck.IsEnabled="False"
+                                            Text="Executing function: 1&#x0a;fork() from xxxxxxx 1&#x0a; Reasons explained here."/>
+                                    </Border>
+                                </Grid>
+                                
+                            </materialDesign:Card>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Name="StartPauseAnimationButton" Style="{StaticResource MaterialDesignIconButton}" IsEnabled="True" ToolTip="MaterialDesignIconButton" Click="StartPauseAnimation">
+                                    <materialDesign:PackIcon Kind="PlayPause" />
+                                </Button>
+                                <Button Style="{StaticResource MaterialDesignIconButton}" IsEnabled="True" ToolTip="MaterialDesignIconButton">
+                                    <materialDesign:PackIcon Kind="Restart" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Slider Orientation="Horizontal" Minimum="0"  Maximum="200"  Value="0" Style="{StaticResource MaterialDesignDiscreteSlider}"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8">
+                        <Expander ExpandDirection="Right" IsExpanded="False">
+                            <Expander.Header>
+                                <TextBlock Text="File System" Style="{StaticResource MaterialDesignHeadline6TextBlock}" RenderTransformOrigin=".5,.5">
+                                    <TextBlock.LayoutTransform>
+                                        <RotateTransform Angle="270" />
+                                    </TextBlock.LayoutTransform>
+                                </TextBlock>
+                            </Expander.Header>
+                            <StackPanel Width="500" Orientation="Horizontal" VerticalAlignment="Stretch">
+                                <Rectangle Width="200">
+
+                                </Rectangle>
+                            </StackPanel>
+                        </Expander>
+                        <Expander ExpandDirection="Right" IsExpanded="True">
+                            <Expander.Header>
+                                <TextBlock Text="Stacks" Style="{StaticResource MaterialDesignHeadline6TextBlock}" RenderTransformOrigin=".5,.5">
+                                    <TextBlock.LayoutTransform>
+                                        <RotateTransform Angle="270"/>
+                                    </TextBlock.LayoutTransform>
+                                </TextBlock>
+                            </Expander.Header>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
+                                <StackPanel Orientation="Vertical" Margin="10 0">
+                                    <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}">
+                                Kernel Stack
+                                    </TextBlock>
+                                    <ListView>
+                                        <ListViewItem Visibility="Collapsed" ToolTip="address:0x00000021h &#x0a;content:0x00000d88h">
+                                            ss
+                                        </ListViewItem>
+                                        <ListViewItem>
+                                            esp
+                                        </ListViewItem>
+                                        <ListViewItem>
+                                            eflags
+                                        </ListViewItem>
+                                        <ListViewItem>
+                                            cs
+                                        </ListViewItem>
+                                        <ListViewItem>
+                                            eip
+                                        </ListViewItem>
+                                        <ListViewItem>
+                                            ds
+                                        </ListViewItem>
+                                        <ListViewItem>
+                                            es
+                                        </ListViewItem>
+                                    </ListView>
+                                </StackPanel>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                </Grid>
+                <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                 Margin="32" Grid.Column="2">
+                    <StackPanel>
+                        <Slider Orientation="Vertical"    Minimum="20"    Maximum="100"    Height="100"    Style="{StaticResource MaterialDesignDiscreteSlider}"    ToolTip="MaterialDesignDiscreteSlider" />
+                        <Button Name="Load" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  ToolTip="MaterialDesignIconButton"
+                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                            <materialDesign:PackIcon Kind="Plus"/>
+                        </Button>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </Grid>
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Margin="16">
+                    <TextBlock>Input the file path here.</TextBlock>
+                    <TextBox Text="./Data/output_all_m.txt"  Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="bpFileBox" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsDefault="True"
+                                        Margin="0 8 8 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                            <Button.CommandParameter>
+                                <system:Boolean>True</system:Boolean>
+                            </Button.CommandParameter>
+                            ACCEPT
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsCancel="True"
+                                        Margin="0 8 8 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                            <Button.CommandParameter>
+                                <system:Boolean>False</system:Boolean>
+                            </Button.CommandParameter>
+                            CANCEL
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+    </Grid>
+</Window>
