@@ -15,15 +15,15 @@ namespace OSPresentation.DataManipulation
             BPN = bpn;
             Jeffies = -1;
             Pid = -1;
-            funcitonName = Regex.Match(bpo, @",\s(.*?)\sat").Groups[1].Value;
-            fileName = Regex.Match(bpo, @"at\s(.*?):").Groups[1].Value;
-            lineString = Regex.Match(bpo, @"\d+?\t+(.*?)\n").Groups[1].Value;
-            description = Regex.Match(bpo, @"\*{5,}\s*(.*?)\s*\*{5,}").Groups[1].Value;
-            console = Regex.Match(bpo, @"-{50,}((.|\n)*?)-{50,}").Groups[1].Value;
+            funcitonName = Regex.Match(bpo, @",\s(.*?)\sat").Groups[1].Value.Trim();
+            fileName = Regex.Match(bpo, @"at\s(.*?):").Groups[1].Value.Trim();
+            lineString = Regex.Match(bpo, @"\d+?\t+(.*?)\n").Groups[1].Value.Trim();
+            description = Regex.Match(bpo, @"\*{5,}\s*(.*?)\s*\*{5,}").Groups[1].Value.Trim();
+            console = Regex.Match(bpo, @"-{50,}((.|\n)*?)-{50,}").Groups[1].Value.Trim();
             line = Int32.Parse(Regex.Match(bpo, @":(\d+?)\n").Groups[1].Value);
             foreach ((var value, int i) in Regex.Matches(bpo, @"\$\d+\s=\s(.*?)\n").Select((value, i) => (value, i)))
             {
-                string v = value.Groups[1].Value;
+                string v = value.Groups[1].Value.Trim();
                 if (i == 0 && bpn != 94)
                 {
                     jeffies = Int32.Parse(v);
@@ -39,10 +39,10 @@ namespace OSPresentation.DataManipulation
             }
             var mc = Regex.Match(bpo, @"#\d+\s\s((.|\s)*?)\n(-|\n|\$)");
             foreach (var v in Regex.Split(mc.Groups[1].Value, @"\n#\d+\s\s"))
-                bts.Add(v);
+                bts.Add(v.Trim());
             foreach (Match value in Regex.Matches(bpo, @"0x.*?:\t(.*?)\n"))
                 foreach (string v in Regex.Split(value.Groups[1].Value, @"\t"))
-                    stks.Add(v);
+                    stks.Add(v.Trim());
         }
         #endregion
         #region Field
