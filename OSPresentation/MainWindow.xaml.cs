@@ -26,6 +26,7 @@ using OSPresentation.TempStruct;
 using OSPresentation.DataManipulation;
 using System.Xml.Serialization;
 using System.Linq.Expressions;
+using System.ComponentModel.DataAnnotations;
 
 namespace OSPresentation
 {
@@ -41,8 +42,8 @@ namespace OSPresentation
 
             //tricks here
             //ListViewItem lvi = (ListViewItem)(KernelStackList.FindName("s1"));
-
-
+            _stackExpanderOpen = StackAnimationExpander.IsExpanded;
+            _fileExpanderOpen = FileAnimationExpander.IsExpanded;
         }
 
         #region Fields
@@ -57,14 +58,14 @@ namespace OSPresentation
         int _ajeffies=-1, _apid=-1, _acounter=-1;
 
         int _stackPointer=-1;
-
+        bool _stackExpanderOpen, _fileExpanderOpen;
         //TODO: store stack, queue, drawboard data here.
         List<ProcessStruct> processStructs = new List<ProcessStruct>();
         Stack<List<StackData>> stackDataList = new Stack<List<StackData>>();
         Stack<string> syscallNames = new Stack<string>();
 
         // global animation parameters
-        const int slightDelay=5, itv0 = 200, itv1=500, itv2=1000;
+        const int slightDelay=5, itv0 = 200, itv1=200, itv2=1000;
         #endregion
 
         #region AnimationHolders
@@ -85,6 +86,8 @@ namespace OSPresentation
             new List<BooleanAnimationUsingKeyFrames>();
         List<BooleanAnimationUsingKeyFrames> stackItemAnimations = 
             new List<BooleanAnimationUsingKeyFrames>();
+        BooleanAnimationUsingKeyFrames stackExpandeAnimation;
+        BooleanAnimationUsingKeyFrames fileExpanderAnimation;
 
         // Double
 
@@ -139,7 +142,12 @@ namespace OSPresentation
                         }
                         if (bpn != 6 &&
                             bpn != 7 &&
-                            bpn != 8)
+                            bpn != 8 &&
+                            bpn != 9 &&
+                            bpn != 10 &&
+                            bpn != 11 &&
+                            bpn != 12 &&
+                            bpn != 13)
                             continue;
                         if (6 <= bpn && bpn <= 58 && bpn != 48 && bpn != 25)
                         {
@@ -179,6 +187,8 @@ namespace OSPresentation
             OSAnimation.Stop();
             OSAnimation.Children.Clear();
             consoleText.KeyFrames.Clear();
+            stackExpandeAnimation = new BooleanAnimationUsingKeyFrames();
+            fileExpanderAnimation = new BooleanAnimationUsingKeyFrames();
 
             // refresh process
             TaskList.Items.Clear();
@@ -288,6 +298,33 @@ namespace OSPresentation
                         foreach (var sd in bp8.Stacks)
                             pushStack(sd, true);
                         break;
+                    case 9:
+                        BP9 bp9 = (BP9)bp;
+                        foreach (var sd in bp9.Stacks)
+                            pushStack(sd, true);
+                        gtime += itv0;
+                        break;
+                    case 10:
+                        BP10 bp10 = (BP10)bp;
+                        foreach (var sd in bp10.Stacks)
+                            pushStack(sd, true);
+                        break;
+                    case 11:
+                        foreach (var index in Range(1, 5))
+                            popStack(true);
+                        break;
+                    case 12:
+                        BP12 bp12 = (BP12)bp;
+                        emptyStack();
+                        syscallNames.Push(bp12.Syscall);
+                        stackDataList.Push(new List<StackData>());
+                        foreach (var sd in bp12.Stacks)
+                            pushStack(sd, true);
+                        break;
+                    case 13:
+                        foreach (var index in Range(1, 6))
+                            popStack(true);
+                        break;
                     default:
                         throw new InvalidOperationException("invalid breakpoint added");
                         //we should crash here;
@@ -312,6 +349,7 @@ namespace OSPresentation
             Storyboard.SetTargetProperty(daSlider, new PropertyPath("Value"));
             OSAnimation.Children.Add(daSlider);
 
+            //Text
             Storyboard.SetTarget(consoleText, consoleBox);
             Storyboard.SetTargetProperty(consoleText, new PropertyPath("Text"));
             consoleText.FillBehavior = FillBehavior.HoldEnd;
@@ -342,6 +380,18 @@ namespace OSPresentation
             counterText.FillBehavior = FillBehavior.HoldEnd;
             OSAnimation.Children.Add(counterText);
 
+            //Bool
+            Storyboard.SetTarget(stackExpandeAnimation, StackAnimationExpander);
+            Storyboard.SetTargetProperty(stackExpandeAnimation, new PropertyPath("IsExpanded"));
+            stackExpandeAnimation.FillBehavior = FillBehavior.HoldEnd;
+            OSAnimation.Children.Add(stackExpandeAnimation);
+
+            Storyboard.SetTarget(fileExpanderAnimation, StackAnimationExpander);
+            Storyboard.SetTargetProperty(fileExpanderAnimation, new PropertyPath("IsExpanded"));
+            fileExpanderAnimation.FillBehavior = FillBehavior.HoldEnd;
+            OSAnimation.Children.Add(fileExpanderAnimation);
+
+            // Stacks 
             foreach (var baukf in stackTooltipAnimations)
                 OSAnimation.Children.Add(baukf);
             foreach (var baukf in stackTooltipTextAnimations)
@@ -353,6 +403,8 @@ namespace OSPresentation
             foreach (var baukf in stackTextAnimations)
                 OSAnimation.Children.Add(baukf);
         }
+
+        // Text
         void changeConsole(string str)
         {
             DiscreteStringKeyFrame dsk = new DiscreteStringKeyFrame();
@@ -361,9 +413,8 @@ namespace OSPresentation
 
             consoleText.KeyFrames.Add(dsk);
 
-            gtime += itv1;
+            gtime += itv0;
         }
-
         void changeDescription(string str)
         {
             DiscreteStringKeyFrame dsk = new DiscreteStringKeyFrame();
@@ -380,7 +431,131 @@ namespace OSPresentation
 
             tbTextAnimation.KeyFrames.Add(dsk);
         }
+        void HandleJeffies(int j)
+        {
+            //start status
+            if (_ajeffies < 0)
+                _ajeffies = j - 1;
 
+            for (int i = _ajeffies; i < j;)
+            {
+                DiscreteStringKeyFrame dsk = new DiscreteStringKeyFrame();
+                dsk.Value = (++i).ToString();
+                dsk.KeyTime = TimeSpan.FromMilliseconds(gtime += itv0);
+                jeffiesText.KeyFrames.Add(dsk);
+
+                --_acounter;
+                if (_acounter < 0)
+                {
+                    //TODO: recheck preocess table with the counter
+                    Trace.WriteLine("counter is less then 0," + _apid + ", "
+                        + _ajeffies);
+                    continue;
+                }
+                DiscreteStringKeyFrame dsk2 = new DiscreteStringKeyFrame();
+                dsk2.Value = (_acounter).ToString();
+                dsk2.KeyTime = TimeSpan.FromMilliseconds(gtime);
+
+                counterText.KeyFrames.Add(dsk2);
+
+            }
+            _ajeffies = j;
+        }
+        //normally, it wont work before switching, but who knows?
+        void HandlePid(int p)
+        {
+#nullable enable
+            ProcessStruct? pnew = getProcess(p);
+            if (p != _apid)
+            {
+                DiscreteStringKeyFrame dsk = new DiscreteStringKeyFrame();
+                dsk.Value = p.ToString();
+                dsk.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                pidText.KeyFrames.Add(dsk);
+            }
+
+            string ccounter;
+            if (p != _apid && pnew == null)
+            {
+                ccounter = "???";
+            }
+            else if (p == _apid && (pnew == null || pnew.Counter == _acounter))
+            {
+                return;
+            }
+            else
+            {
+                ccounter = pnew.Counter.ToString();
+            }
+
+            _apid = p;
+            DiscreteStringKeyFrame dsk2 = new DiscreteStringKeyFrame();
+            dsk2.Value = ccounter;
+            dsk2.KeyTime = TimeSpan.FromMilliseconds(gtime);
+            counterText.KeyFrames.Add(dsk2);
+#nullable restore
+        }
+        // Bool
+        void checkStackOpen()
+        {
+            if (_stackExpanderOpen)
+                return;
+            else
+            {
+                DiscreteBooleanKeyFrame dbkf = new DiscreteBooleanKeyFrame();
+                dbkf.Value = true;
+                dbkf.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                stackExpandeAnimation.KeyFrames.Add(dbkf);
+
+                _stackExpanderOpen=true;
+                gtime += itv0;
+            }
+        }
+        void checkStackClose()
+        {
+            if (!_stackExpanderOpen)
+                return;
+            else
+            {
+                DiscreteBooleanKeyFrame dbkf = new DiscreteBooleanKeyFrame();
+                dbkf.Value = false;
+                dbkf.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                stackExpandeAnimation.KeyFrames.Add(dbkf);
+
+                _stackExpanderOpen = false;
+                gtime += itv0;
+            }
+        }
+        void checkFileOpen()
+        {
+            if (_fileExpanderOpen)
+                return;
+            else
+            {
+                DiscreteBooleanKeyFrame dbkf = new DiscreteBooleanKeyFrame();
+                dbkf.Value = true;
+                dbkf.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                stackExpandeAnimation.KeyFrames.Add(dbkf);
+
+                _stackExpanderOpen = true;
+                gtime += itv0;
+            }
+        }
+        void checkFileClose()
+        {
+            if (!_fileExpanderOpen)
+                return;
+            else
+            {
+                DiscreteBooleanKeyFrame dbkf = new DiscreteBooleanKeyFrame();
+                dbkf.Value = false;
+                dbkf.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                fileExpanderAnimation.KeyFrames.Add(dbkf);
+
+                _fileExpanderOpen = false;
+                gtime += itv0;
+            }
+        }
         // Stacks
         // We dont add new list within the functions below.
 
@@ -389,6 +564,7 @@ namespace OSPresentation
         // the pointer shoudld be placed at the right place
         void pushStack(StackData sd, bool isNew)
         {
+            checkStackOpen();
             _stackPointer += 1;
             DiscreteStringKeyFrame name = new DiscreteStringKeyFrame();
             name.Value = sd.Register;
@@ -418,7 +594,7 @@ namespace OSPresentation
                 selectItem.KeyTime = TimeSpan.FromMilliseconds(gtime + slightDelay);
                 stackItemAnimations[_stackPointer].KeyFrames.Add(selectItem);
 
-                gtime += itv1;
+                gtime += itv0;
                 DiscreteBooleanKeyFrame dttShow = new DiscreteBooleanKeyFrame();
                 dttShow.Value = false;
                 dttShow.KeyTime = TimeSpan.FromMilliseconds(gtime);
@@ -432,6 +608,7 @@ namespace OSPresentation
         }
         void popStack(bool clear)
         {
+            checkStackOpen();
             DiscreteObjectKeyFrame visibility = new DiscreteObjectKeyFrame();
             visibility.Value = Visibility.Hidden;
             visibility.KeyTime = TimeSpan.FromMilliseconds(gtime);
@@ -440,7 +617,7 @@ namespace OSPresentation
             if (clear)
             {
                 stackDataList.Peek().RemoveAt(stackDataList.Peek().Count-1);
-                gtime += itv1;
+                gtime += itv0;
             }
 
             _stackPointer -= 1;
@@ -453,79 +630,12 @@ namespace OSPresentation
                 pushStack(sd, false);
             }
         }
-
         void emptyStack()
         {
             while(_stackPointer>-1)
             {
                 popStack(false);
             }
-        }
-
-        void HandleJeffies(int j)
-        {
-            //start status
-            if (_ajeffies < 0)
-                _ajeffies = j - 1;
-
-            for (int i = _ajeffies; i < j; )
-            {
-                DiscreteStringKeyFrame dsk = new DiscreteStringKeyFrame();
-                dsk.Value = (++i).ToString();
-                dsk.KeyTime = TimeSpan.FromMilliseconds(gtime+= itv0);
-                jeffiesText.KeyFrames.Add(dsk);
-
-                --_acounter;
-                if (_acounter < 0)
-                {
-                    //TODO: recheck preocess table with the counter
-                    Trace.WriteLine("counter is less then 0,"+_apid+", "
-                        +_ajeffies);
-                    continue;
-                }
-                DiscreteStringKeyFrame dsk2 = new DiscreteStringKeyFrame();
-                dsk2.Value = (_acounter).ToString();
-                dsk2.KeyTime = TimeSpan.FromMilliseconds(gtime);
-
-                counterText.KeyFrames.Add(dsk2);
-                
-            }
-            _ajeffies = j;
-        }
-
-        //normally, it wont work before switching, but who knows?
-        void HandlePid(int p)
-        {
-#nullable enable
-            ProcessStruct? pnew = getProcess(p);
-            if (p != _apid)
-            {
-                DiscreteStringKeyFrame dsk = new DiscreteStringKeyFrame();
-                dsk.Value = p.ToString();
-                dsk.KeyTime = TimeSpan.FromMilliseconds(gtime);
-                pidText.KeyFrames.Add(dsk);
-            }
-            
-            string ccounter;
-            if(p != _apid&& pnew == null)
-            {
-                ccounter = "???";
-            }
-            else if(p == _apid && (pnew == null||pnew.Counter==_acounter))
-            {
-                return;
-            }
-            else
-            {
-                ccounter = pnew.Counter.ToString();
-            }
-
-            _apid = p;
-            DiscreteStringKeyFrame dsk2 = new DiscreteStringKeyFrame();
-            dsk2.Value = ccounter;
-            dsk2.KeyTime = TimeSpan.FromMilliseconds(gtime);
-            counterText.KeyFrames.Add(dsk2);
-#nullable restore
         }
 
         #region StructureHandlers

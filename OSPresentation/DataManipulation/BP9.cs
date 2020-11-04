@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Linq;
 
 using OSPresentation.TempStruct;
@@ -9,32 +10,30 @@ using OSPresentation.TempStruct;
 
 namespace OSPresentation.DataManipulation
 {
-    public class BP8 : BreakPoint
+    public class BP9 : BreakPoint
     {
         #region Contructor
 
-        public BP8(string bpo, int bpn) : base(bpo, bpn)
+        public BP9(string bpo, int bpn) : base(bpo, bpn)
         {
-            if (!String.IsNullOrEmpty(addresses[0]))
+            Eax = int.Parse(Regex.Match(addresses[0],@"(.*?)\s<").Groups[1].Value, NumberStyles.HexNumber);
+            if (!String.IsNullOrEmpty(addresses[1]))
                 startAddress = int.Parse(addresses[1], NumberStyles.HexNumber);
             else
             {
-                Trace.WriteLine("BP7 Start Address Parse Error!");
+                Trace.WriteLine("BreakPoint" + bpn + " StartAddress Parsing Error!");
             }
+
             Stacks = new List<StackData>();
-            // now i know
-            for (int i=2; i>=1; i--)
-            {
-                StackData sd = new StackData(startAddress + i*4, stks[i], registers[2-i]);
-                Stacks.Add(sd);
-            }
+            StackData sd = new StackData(startAddress, stks[1], "eip");
+            Stacks.Add(sd);
         }
         #endregion
         #region Field
         int startAddress = -1;
-        List<string> registers = new List<string> { "oldeip", "eax(EIP(%esp))" };
         #endregion
-            #region Properties
+        #region Properties
+        public int Eax{set;get;}
         public List<StackData> Stacks
         {
             set;get;
@@ -43,7 +42,7 @@ namespace OSPresentation.DataManipulation
         {
             get
             {
-                return "Jumped to 'sys_execve:', pushed previous EIP representing the return address in sys_call.\nCalling C function do_execve(), pushing current EIP as return address, \nwhich will not actually work because do_execve() changes the stack.";
+                return "Jumped to 'sys_fork:', pushed previous EIP representing the returning address in sys_call.\nTesting if $eax is negative. Eax: " +Eax+ "represents the new task number.";
             }
         }
             #endregion

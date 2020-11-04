@@ -51,7 +51,7 @@ namespace OSPresentation.DataManipulation
                 foreach (string v in Regex.Split(value.Groups[1].Value, @"\t"))
                     stks.Add(v.Trim());
 
-            foreach (Match value in Regex.Matches(bpo, @"0x((\d|\w)*?):"))
+            foreach (Match value in Regex.Matches(bpo, @"0x(.*?):"))
             {
                 string v = value.Groups[1].Value;
                 addresses.Add(v.Trim());

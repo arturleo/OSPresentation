@@ -18,9 +18,10 @@ namespace OSPresentation.DataManipulation
                 startAddress = int.Parse(addresses[0], NumberStyles.HexNumber);
             else
             {
-                Trace.WriteLine("BP7 Start Address Parse Error!");
+                Trace.WriteLine("BreakPoint" + bpn + " StartAddress Parsing Error!");
             }
             _callNumber = int.Parse(paras[0]);
+
             Stacks = new List<StackData>();
             // the 12th one is useless
             for(int i=10; i>=0; i--)
