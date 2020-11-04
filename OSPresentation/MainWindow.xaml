@@ -97,8 +97,8 @@
                                 </StackPanel>
                             </Grid>
                             <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Margin="0 10 0 10">Tasks</TextBlock>
-                            <ToolBarTray >
-                                <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="True">
+                            <ToolBarTray>
+                                <ToolBar Name="TaskList" Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="True">
                                     <Button Name="pid0Button"  
                                             Style="{StaticResource MaterialDesignFlatButton}">
                                         <Button.ToolTip>
@@ -400,9 +400,9 @@
                                  HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                  Margin="32" Grid.Column="2">
                     <StackPanel>
-                        <Slider Orientation="Vertical"    Minimum="20"    Maximum="100"    Height="100"    Style="{StaticResource MaterialDesignDiscreteSlider}"    ToolTip="MaterialDesignDiscreteSlider" />
+                        <Slider Orientation="Vertical"    Minimum="5"    Maximum="100"    Height="100"    Style="{StaticResource MaterialDesignDiscreteSlider}"    ToolTip="MaterialDesignDiscreteSlider" />
                         <Button Name="Load" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  ToolTip="MaterialDesignIconButton"
-                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                        Command ="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
                             <materialDesign:PackIcon Kind="Plus"/>
                         </Button>
                     </StackPanel>

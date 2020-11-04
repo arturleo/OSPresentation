@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -15,14 +16,16 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Media.Animation;
-using static System.Linq.Enumerable;
 using System.Text.RegularExpressions;
+
+using static System.Linq.Enumerable;
 
 using MaterialDesignThemes.Wpf;
 
 using OSPresentation.TempStruct;
 using OSPresentation.DataManipulation;
-using System.Windows.Controls.Primitives;
+using System.Xml.Serialization;
+using System.Linq.Expressions;
 
 namespace OSPresentation
 {
@@ -36,26 +39,10 @@ namespace OSPresentation
         {
             InitializeComponent();
 
-
-
             //tricks here
             //ListViewItem lvi = (ListViewItem)(KernelStackList.FindName("s1"));
 
-            Storyboard.SetTargetName(consoleText, consoleBox.Name);
-            Storyboard.SetTargetProperty(consoleText, new PropertyPath("Text"));
-            consoleText.FillBehavior = FillBehavior.HoldEnd;
 
-            Storyboard.SetTargetName(jeffiesText, JeffiesN.Name);
-            Storyboard.SetTargetProperty(jeffiesText, new PropertyPath("Text"));
-            jeffiesText.FillBehavior = FillBehavior.HoldEnd;
-
-            Storyboard.SetTargetName(pidText, PidN.Name);
-            Storyboard.SetTargetProperty(pidText, new PropertyPath("Text"));
-            pidText.FillBehavior = FillBehavior.HoldEnd;
-
-            Storyboard.SetTargetName(counterText, CounterN.Name);
-            Storyboard.SetTargetProperty(counterText, new PropertyPath("Text"));
-            counterText.FillBehavior = FillBehavior.HoldEnd;
         }
 
         #region Fields
@@ -66,20 +53,45 @@ namespace OSPresentation
 
         #region AnimationData
         long gtime = 0, ltime=0;
-
+        
         int _ajeffies=-1, _apid=-1, _acounter=-1;
+
+        int _stackPointer=-1;
+
         //TODO: store stack, queue, drawboard data here.
         List<ProcessStruct> processStructs = new List<ProcessStruct>();
+        Stack<List<StackData>> stackDataList = new Stack<List<StackData>>();
+        Stack<string> syscallNames = new Stack<string>();
 
-        const int itvm = 20, itv0=200, itv1=1000;
+        // global animation parameters
+        const int slightDelay=5, itv0 = 200, itv1=500, itv2=1000;
         #endregion
 
         #region AnimationHolders
         Storyboard OSAnimation = new Storyboard();
+        // Text
         StringAnimationUsingKeyFrames consoleText = new StringAnimationUsingKeyFrames();
         StringAnimationUsingKeyFrames jeffiesText = new StringAnimationUsingKeyFrames();
         StringAnimationUsingKeyFrames pidText = new StringAnimationUsingKeyFrames();
         StringAnimationUsingKeyFrames counterText = new StringAnimationUsingKeyFrames();
+        List<StringAnimationUsingKeyFrames> stackTextAnimations = 
+            new List<StringAnimationUsingKeyFrames>();
+        List<StringAnimationUsingKeyFrames> stackTooltipTextAnimations = 
+            new List<StringAnimationUsingKeyFrames>();
+        // Bool
+        List<BooleanAnimationUsingKeyFrames> stackTooltipAnimations = 
+            new List<BooleanAnimationUsingKeyFrames>();
+        List<BooleanAnimationUsingKeyFrames> stackItemAnimations = 
+            new List<BooleanAnimationUsingKeyFrames>();
+
+        // Double
+
+        // Color
+
+        // Object
+        List<ObjectAnimationUsingKeyFrames> stackVisibilityAnimations = 
+            new List<ObjectAnimationUsingKeyFrames>();
+
         #endregion
 
         #region UIStatus
@@ -123,7 +135,10 @@ namespace OSPresentation
                                 ", no match for int, skip.");
                             continue;
                         }
-                        if (bpn != 6) continue;
+                        if (bpn != 6 &&  
+                            bpn != 7 &&
+                            bpn != 8) 
+                            continue;
                         if (6 <= bpn && bpn <= 58 && bpn != 48 && bpn != 25)
                         {
                             Type bpC = Type.GetType("OSPresentation.DataManipulation.BP" + bpn);
@@ -145,7 +160,7 @@ namespace OSPresentation
                 //show on dialogue;
             }
             Trace.WriteLine("Data Manipulation succeeds");
-            addUIElementsRegisterAnimation();
+            addUIElements_RegisterAnimation();
 
 
 
@@ -156,13 +171,28 @@ namespace OSPresentation
 
         // The data are fixed here
         // There are some subfuncitons for dulplicate buttons
-        void addUIElementsRegisterAnimation()
+        // TODO
+        void addUIElements_RegisterAnimation()
         {
-            foreach (var index in Range(1, 7))
+            OSAnimation.Stop();
+            OSAnimation.Children.Clear();
+            consoleText.KeyFrames.Clear();
+
+            // refresh process
+            TaskList.Items.Clear();
+
+            // refresh stack
+            stackTooltipAnimations.Clear();
+            stackItemAnimations.Clear();
+            stackTooltipTextAnimations.Clear();
+            stackTextAnimations.Clear();
+            KernelStackList.Items.Clear();
+            foreach (var index in Range(1, 18))
                 addStackButton();
+            _stackPointer = -1;
         }
 
-        void addProcessButton()
+        void addProcessButton(int i)
         {
 
         }
@@ -183,6 +213,42 @@ namespace OSPresentation
             stackToolTips.Add(tt);
 
             KernelStackList.Items.Add(stackObject);
+
+            // register Animation
+            // ToolTip
+            BooleanAnimationUsingKeyFrames stackTooltip = new BooleanAnimationUsingKeyFrames();
+            Storyboard.SetTarget(stackTooltip, tt);
+            Storyboard.SetTargetProperty(stackTooltip, new PropertyPath("IsOpen"));
+            stackTooltip.FillBehavior = FillBehavior.HoldEnd;
+            stackTooltipAnimations.Add(stackTooltip);
+
+            //change tooltip content
+            StringAnimationUsingKeyFrames saufTT = new StringAnimationUsingKeyFrames();
+            Storyboard.SetTarget(saufTT, tt);
+            Storyboard.SetTargetProperty(saufTT, new PropertyPath("Content"));
+            saufTT.FillBehavior = FillBehavior.HoldEnd;
+            stackTooltipTextAnimations.Add(saufTT);
+
+            // stack visible
+            ObjectAnimationUsingKeyFrames oaukfStk = new ObjectAnimationUsingKeyFrames();
+            Storyboard.SetTarget(oaukfStk, stackObject);
+            Storyboard.SetTargetProperty(oaukfStk, new PropertyPath("Visibility"));
+            oaukfStk.FillBehavior = FillBehavior.HoldEnd;
+            stackVisibilityAnimations.Add(oaukfStk);
+
+            // select the stack
+            BooleanAnimationUsingKeyFrames stackItem = new BooleanAnimationUsingKeyFrames();
+            Storyboard.SetTarget(stackItem, stackObject);
+            Storyboard.SetTargetProperty(stackItem, new PropertyPath("IsSelected"));
+            stackItem.FillBehavior = FillBehavior.HoldEnd;
+            stackItemAnimations.Add(stackItem);
+
+            // change stack content
+            StringAnimationUsingKeyFrames saufStk = new StringAnimationUsingKeyFrames();
+            Storyboard.SetTarget(saufStk, stackObject);
+            Storyboard.SetTargetProperty(saufStk, new PropertyPath("Content"));
+            saufStk.FillBehavior = FillBehavior.HoldEnd;
+            stackTextAnimations.Add(saufStk);
         }
 
         void addAnimation()
@@ -204,6 +270,14 @@ namespace OSPresentation
                         BP6 bp6 = (BP6)bp;
                         changeConsole(bp6.Console);
                         break;
+                    case 7:
+                        BP7 bp7 = (BP7)bp;
+                        emptyStack();
+                        syscallNames.Push(bp7.Syscall);
+                        stackDataList.Push(new List<StackData>());
+                        foreach (var sd in bp7.Stacks)
+                            pushStack(sd, true);
+                        break;
                     default:
                         throw new InvalidOperationException("invalid breakpoint added");
                         //we should crash here;
@@ -212,34 +286,14 @@ namespace OSPresentation
                 ltime = gtime;
             };
 
-            setDurationAfterAll();
             addToStoryBoard();
-
-            ToolTip tt=(ToolTip)pid0Button.ToolTip;
-            // I have to do so due to bug in xaml
-            tt.PlacementTarget = pid0Button;
-            //temporary area
-            BooleanAnimationUsingKeyFrames pid0Mouseover = new BooleanAnimationUsingKeyFrames();
-
-            Storyboard.SetTarget(pid0Mouseover, tt);
-            Storyboard.SetTargetProperty(pid0Mouseover, new PropertyPath("IsOpen"));
-            consoleText.FillBehavior = FillBehavior.HoldEnd;
-
-            DiscreteBooleanKeyFrame dbkf = new DiscreteBooleanKeyFrame();
-            dbkf.Value = true;
-            dbkf.KeyTime = TimeSpan.FromSeconds(3);
-            pid0Mouseover.KeyFrames.Add(dbkf);
-            OSAnimation.Children.Add(pid0Mouseover);
+            OSAnimation.Completed += new EventHandler(AnimationCompleted);
 
         }
         #region AnimationMethods
-        void setDurationAfterAll()
-        {
-            consoleText.Duration = TimeSpan.FromMilliseconds(gtime);
-            jeffiesText.Duration = TimeSpan.FromMilliseconds(gtime);
-            pidText.Duration = TimeSpan.FromMilliseconds(gtime);
-            counterText.Duration = TimeSpan.FromMilliseconds(gtime);
 
+        void addToStoryBoard()
+        {
             DoubleAnimation daSlider = new DoubleAnimation();
             daSlider.From = 0;
             daSlider.To = gtime / 1000;
@@ -247,21 +301,38 @@ namespace OSPresentation
             Storyboard.SetTargetName(daSlider, AnimationSlider.Name);
             Storyboard.SetTargetProperty(daSlider, new PropertyPath("Value"));
             OSAnimation.Children.Add(daSlider);
-        }
 
-        void addToStoryBoard()
-        {
+            Storyboard.SetTargetName(consoleText, consoleBox.Name);
+            Storyboard.SetTargetProperty(consoleText, new PropertyPath("Text"));
+            consoleText.FillBehavior = FillBehavior.HoldEnd;
             OSAnimation.Children.Add(consoleText);
+
+            Storyboard.SetTargetName(jeffiesText, JeffiesN.Name);
+            Storyboard.SetTargetProperty(jeffiesText, new PropertyPath("Text"));
+            jeffiesText.FillBehavior = FillBehavior.HoldEnd;
             OSAnimation.Children.Add(pidText);
+
+            Storyboard.SetTargetName(pidText, PidN.Name);
+            Storyboard.SetTargetProperty(pidText, new PropertyPath("Text"));
+            pidText.FillBehavior = FillBehavior.HoldEnd;
             OSAnimation.Children.Add(jeffiesText);
+
+            Storyboard.SetTargetName(counterText, CounterN.Name);
+            Storyboard.SetTargetProperty(counterText, new PropertyPath("Text"));
+            counterText.FillBehavior = FillBehavior.HoldEnd;
             OSAnimation.Children.Add(counterText);
 
-            OSAnimation.Completed += new EventHandler(AnimationCompleted);
-
+            foreach (var baukf in stackTooltipAnimations)
+                OSAnimation.Children.Add(baukf);
+            foreach (var baukf in stackTooltipTextAnimations)
+                OSAnimation.Children.Add(baukf);
+            foreach (var baukf in stackVisibilityAnimations)
+                OSAnimation.Children.Add(baukf);
+            foreach (var baukf in stackItemAnimations)
+                OSAnimation.Children.Add(baukf);
+            foreach (var baukf in stackTextAnimations)
+                OSAnimation.Children.Add(baukf);
         }
-
-
-
         void changeConsole(string str)
         {
             DiscreteStringKeyFrame dsk = new DiscreteStringKeyFrame();
@@ -269,6 +340,87 @@ namespace OSPresentation
             dsk.KeyTime = TimeSpan.FromMilliseconds(gtime);
 
             consoleText.KeyFrames.Add(dsk);
+        }
+        
+        // Stacks
+        // We dont add new list within the functions below.
+
+        // new with delay and move pointer
+        // else add immediately
+        // the pointer shoudld be placed at the right place
+        void pushStack(StackData sd, bool isNew)
+        {
+            _stackPointer += 1;
+            DiscreteStringKeyFrame name = new DiscreteStringKeyFrame();
+            name.Value = sd.Register;
+            name.KeyTime = TimeSpan.FromMilliseconds(gtime);
+            stackTextAnimations[_stackPointer].KeyFrames.Add(name);
+
+            DiscreteStringKeyFrame tt = new DiscreteStringKeyFrame();
+            tt.Value = sd.Description;
+            tt.KeyTime = TimeSpan.FromMilliseconds(gtime);
+            stackTooltipTextAnimations[_stackPointer].KeyFrames.Add(tt);
+
+            DiscreteObjectKeyFrame visibility = new DiscreteObjectKeyFrame();
+            visibility.Value = Visibility.Visible;
+            visibility.KeyTime = TimeSpan.FromMilliseconds(gtime);
+            stackVisibilityAnimations[_stackPointer].KeyFrames.Add(visibility);
+            if (isNew)
+            {
+                stackDataList.Peek().Add(sd);  
+
+                DiscreteBooleanKeyFrame ttShow = new DiscreteBooleanKeyFrame();
+                ttShow.Value = true;
+                ttShow.KeyTime = TimeSpan.FromMilliseconds(gtime + slightDelay);
+                stackTooltipAnimations[_stackPointer].KeyFrames.Add(ttShow);
+
+                DiscreteBooleanKeyFrame selectItem = new DiscreteBooleanKeyFrame();
+                selectItem.Value = true;
+                selectItem.KeyTime = TimeSpan.FromMilliseconds(gtime + slightDelay);
+                stackItemAnimations[_stackPointer].KeyFrames.Add(selectItem);
+
+                gtime += itv1;
+                DiscreteBooleanKeyFrame dttShow = new DiscreteBooleanKeyFrame();
+                dttShow.Value = false;
+                dttShow.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                stackTooltipAnimations[_stackPointer].KeyFrames.Add(dttShow);
+
+                DiscreteBooleanKeyFrame dselectItem = new DiscreteBooleanKeyFrame();
+                dselectItem.Value = false;
+                dselectItem.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                stackItemAnimations[_stackPointer].KeyFrames.Add(dselectItem);
+            }
+        }
+        void popStack(bool clear)
+        {
+            DiscreteObjectKeyFrame visibility = new DiscreteObjectKeyFrame();
+            visibility.Value = Visibility.Hidden;
+            visibility.KeyTime = TimeSpan.FromMilliseconds(gtime);
+            stackVisibilityAnimations[_stackPointer].KeyFrames.Add(visibility);
+
+            if (clear)
+            {
+                stackDataList.Peek().RemoveAt(stackDataList.Peek().Count-1);
+                gtime += itv1;
+            }
+
+            _stackPointer -= 1;
+        }
+        // assume old stack is at the top
+        void restoreStack()
+        {
+            foreach(var sd in stackDataList.Peek())
+            {
+                pushStack(sd, false);
+            }
+        }
+
+        void emptyStack()
+        {
+            while(_stackPointer>-1)
+            {
+                popStack(false);
+            }
         }
 
         void HandleJeffies(int j)
@@ -281,7 +433,7 @@ namespace OSPresentation
             {
                 DiscreteStringKeyFrame dsk = new DiscreteStringKeyFrame();
                 dsk.Value = (++i).ToString();
-                dsk.KeyTime = TimeSpan.FromMilliseconds(gtime+=100);
+                dsk.KeyTime = TimeSpan.FromMilliseconds(gtime+= itv0);
                 jeffiesText.KeyFrames.Add(dsk);
 
                 --_acounter;
@@ -336,8 +488,6 @@ namespace OSPresentation
             counterText.KeyFrames.Add(dsk2);
 #nullable restore
         }
-
-
 
         #region StructureHandlers
         ProcessStruct getProcess(int pid)

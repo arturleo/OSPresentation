@@ -17,6 +17,12 @@ namespace OSPresentation.DataManipulation
         #endregion
         #region Properties
         public string Console { set => console = value; get => console; }
+        override public string Description {
+            get
+            {
+                return "The console is being written to via tty_write().";
+            }
+        }
         #endregion
         #region Methods
 

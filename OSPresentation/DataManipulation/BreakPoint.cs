@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System.Windows.Media.Animation;
+using System.Globalization;
 
 namespace OSPresentation.DataManipulation
 {
@@ -15,51 +16,63 @@ namespace OSPresentation.DataManipulation
             BPN = bpn;
             Jeffies = -1;
             Pid = -1;
-            funcitonName = Regex.Match(bpo, @",\s(.*?)\sat").Groups[1].Value.Trim();
+            functionName = Regex.Match(bpo, @",\s(.*?)\sat").Groups[1].Value.Trim();
             fileName = Regex.Match(bpo, @"at\s(.*?):").Groups[1].Value.Trim();
             lineString = Regex.Match(bpo, @"\d+?\t+(.*?)\n").Groups[1].Value.Trim();
-            description = Regex.Match(bpo, @"\*{5,}\s*(.*?)\s*\*{5,}").Groups[1].Value.Trim();
+            desp = Regex.Match(bpo, @"\*{5,}\s*(.*?)\s*\*{5,}").Groups[1].Value.Trim();
             console = Regex.Match(bpo, @"-{50,}((.|\n)*?)-{50,}").Groups[1].Value.Trim();
             line = Int32.Parse(Regex.Match(bpo, @":(\d+?)\n").Groups[1].Value);
+
+            CodeLine = "Breakpoint " + BPN + " " + functionName + " " + fileName + ":" + line + "\n" +
+    line + "\t\t" + lineString+ "\n";
+
             foreach ((var value, int i) in Regex.Matches(bpo, @"\$\d+\s=\s(.*?)\n").Select((value, i) => (value, i)))
             {
                 string v = value.Groups[1].Value.Trim();
-                if (i == 0 && bpn != 94)
-                {
-                    jeffies = Int32.Parse(v);
-                    Jeffies = jeffies;
-                }
-                else if (i == 1 && (bpn < 7 || bpn > 13) && bpn != 94)
-                {
-                    pid = Int32.Parse(v);
-                    Pid = pid;
-                }
+                if (i == 0 && bpn != 32)
+                    Jeffies = Int32.Parse(v);
+                else if (i == 1 && (bpn < 7 || bpn > 13) && bpn != 32)
+                    Pid = Int32.Parse(v);
                 else
                     paras.Add(v);
             }
+
             var mc = Regex.Match(bpo, @"#\d+\s\s((.|\s)*?)\n(-|\n|\$)");
-            foreach (var v in Regex.Split(mc.Groups[1].Value, @"\n#\d+\s\s"))
-                bts.Add(v.Trim());
+            if (mc != null)
+            {
+                foreach (var v in Regex.Split(mc.Groups[1].Value, @"\n#\d+\s\s"))
+                {
+                    bts.Add(v.Trim());
+                    CodeLine += v.Trim() + "\n";
+                }
+            }
+
             foreach (Match value in Regex.Matches(bpo, @"0x.*?:\t(.*?)\n"))
                 foreach (string v in Regex.Split(value.Groups[1].Value, @"\t"))
                     stks.Add(v.Trim());
+
+            String addr = Regex.Match(bpo, @"0x((\d|\w)*?):").Groups[1].Value;
+            if (!String.IsNullOrEmpty(addr))
+                startAddress = int.Parse(addr, NumberStyles.HexNumber);
         }
         #endregion
         #region Field
-        protected string funcitonName, fileName, lineString;
-        protected string description;
+        protected string functionName, fileName, lineString;
+        protected string desp;
         protected string console;
-        protected int jeffies, pid, line;
+        protected int startAddress;
+        protected int line;
         protected List<string> paras=new List<string>();
         protected List<string> bts = new List<string>();
         protected List<string> stks = new List<string>();
-
-        int _bpn=-1;
         #endregion
+
         #region Properties
-        public int BPN { set=>_bpn=value; get=>_bpn; }
-        public int Jeffies { set => jeffies = value; get => jeffies; }
-        public int Pid { set => pid = value; get => pid; }
+        public int BPN { set; get; }
+        public int Jeffies { set; get; }
+        public int Pid { set; get; }
+        public abstract string Description { get; }
+        public string CodeLine { set; get; }
         #endregion
         #region Methods
         #endregion
