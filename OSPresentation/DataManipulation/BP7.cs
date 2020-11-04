@@ -1,8 +1,12 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Globalization;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 
 using OSPresentation.TempStruct;
+using System.Globalization;
+
 namespace OSPresentation.DataManipulation
 {
     public class BP7 : BreakPoint
@@ -10,6 +14,12 @@ namespace OSPresentation.DataManipulation
         #region Contructor
         public BP7(string bpo, int bpn) : base(bpo, bpn)
         {
+            if (!String.IsNullOrEmpty(addresses[0]))
+                startAddress = int.Parse(addresses[0], NumberStyles.HexNumber);
+            else
+            {
+                Trace.WriteLine("BP7 Start Address Parse Error!");
+            }
             _callNumber = int.Parse(paras[0]);
             Stacks = new List<StackData>();
             // the 12th one is useless
@@ -21,9 +31,10 @@ namespace OSPresentation.DataManipulation
         }
         #endregion
         #region Field
+        int startAddress = -1;
         int _callNumber=-1;
-        List<string> registers = new List<string> { "oldss", "oldesp","eflags","cs",
-            "eip","ds","es","fs","edx","ecx","ebx" };
+        List<string> registers = new List<string> { "oldss", "oldesp", "eflags", "cs",
+            "oldeip","ds","es","fs","edx","ecx","ebx" };
         #endregion
             #region Properties
         public List<StackData> Stacks

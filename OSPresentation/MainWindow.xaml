@@ -305,14 +305,17 @@
                                         <RowDefinition />
                                         <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0" 
-                                             Padding="10"
-                                             TextWrapping="Wrap"
-                                             VerticalAlignment="Stretch"
-                                             Text="Executing function: 1&#x0a;fork() from xxxxxxx 1&#x0a; Reasons explained here."/>
+                                    <TextBlock 
+                                        Name="DescriptionBox"
+                                        Grid.Row="0" 
+                                         Padding="10"
+                                         TextWrapping="Wrap"
+                                         VerticalAlignment="Stretch"
+                                         Text="Executing function: 1&#x0a;fork() from xxxxxxx 1&#x0a; Reasons explained here."/>
                                     <Border Grid.Row="1" BorderThickness="0 1 0 0 " BorderBrush="{DynamicResource PrimaryHueMidBrush}">
                                         <TextBlock 
-                                            MinHeight="120" 
+                                            Name="TracebackBox"
+                                            MinHeight="200" 
                                             Padding="10"
                                             TextWrapping="Wrap"
                                             VerticalAlignment="Stretch"

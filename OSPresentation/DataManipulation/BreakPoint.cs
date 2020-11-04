@@ -51,17 +51,19 @@ namespace OSPresentation.DataManipulation
                 foreach (string v in Regex.Split(value.Groups[1].Value, @"\t"))
                     stks.Add(v.Trim());
 
-            String addr = Regex.Match(bpo, @"0x((\d|\w)*?):").Groups[1].Value;
-            if (!String.IsNullOrEmpty(addr))
-                startAddress = int.Parse(addr, NumberStyles.HexNumber);
+            foreach (Match value in Regex.Matches(bpo, @"0x((\d|\w)*?):"))
+            {
+                string v = value.Groups[1].Value;
+                addresses.Add(v.Trim());
+            }
         }
         #endregion
         #region Field
         protected string functionName, fileName, lineString;
         protected string desp;
         protected string console;
-        protected int startAddress;
         protected int line;
+        protected List<string> addresses = new List<string>();
         protected List<string> paras=new List<string>();
         protected List<string> bts = new List<string>();
         protected List<string> stks = new List<string>();

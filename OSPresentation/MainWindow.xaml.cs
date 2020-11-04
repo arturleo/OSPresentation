@@ -71,6 +71,8 @@ namespace OSPresentation
         Storyboard OSAnimation = new Storyboard();
         // Text
         StringAnimationUsingKeyFrames consoleText = new StringAnimationUsingKeyFrames();
+        StringAnimationUsingKeyFrames despTextAnimation = new StringAnimationUsingKeyFrames();
+        StringAnimationUsingKeyFrames tbTextAnimation = new StringAnimationUsingKeyFrames();
         StringAnimationUsingKeyFrames jeffiesText = new StringAnimationUsingKeyFrames();
         StringAnimationUsingKeyFrames pidText = new StringAnimationUsingKeyFrames();
         StringAnimationUsingKeyFrames counterText = new StringAnimationUsingKeyFrames();
@@ -135,9 +137,9 @@ namespace OSPresentation
                                 ", no match for int, skip.");
                             continue;
                         }
-                        if (bpn != 6 &&  
+                        if (bpn != 6 &&
                             bpn != 7 &&
-                            bpn != 8) 
+                            bpn != 8)
                             continue;
                         if (6 <= bpn && bpn <= 58 && bpn != 48 && bpn != 25)
                         {
@@ -263,7 +265,10 @@ namespace OSPresentation
                     HandleJeffies(bp.Jeffies);
                 if (bp.Pid >= 0)
                     HandlePid(bp.Pid);
-
+                if(!string.IsNullOrEmpty(bp.Description))
+                    changeDescription(bp.Description);
+                if (!string.IsNullOrEmpty(bp.CodeLine))
+                    changeTrace(bp.CodeLine);
                 switch (bp.BPN)
                 {
                     case 6:
@@ -276,6 +281,11 @@ namespace OSPresentation
                         syscallNames.Push(bp7.Syscall);
                         stackDataList.Push(new List<StackData>());
                         foreach (var sd in bp7.Stacks)
+                            pushStack(sd, true);
+                        break;
+                    case 8:
+                        BP8 bp8 = (BP8)bp;
+                        foreach (var sd in bp8.Stacks)
                             pushStack(sd, true);
                         break;
                     default:
@@ -302,10 +312,20 @@ namespace OSPresentation
             Storyboard.SetTargetProperty(daSlider, new PropertyPath("Value"));
             OSAnimation.Children.Add(daSlider);
 
-            Storyboard.SetTargetName(consoleText, consoleBox.Name);
+            Storyboard.SetTarget(consoleText, consoleBox);
             Storyboard.SetTargetProperty(consoleText, new PropertyPath("Text"));
             consoleText.FillBehavior = FillBehavior.HoldEnd;
             OSAnimation.Children.Add(consoleText);
+
+            Storyboard.SetTarget(despTextAnimation, DescriptionBox);
+            Storyboard.SetTargetProperty(despTextAnimation, new PropertyPath("Text"));
+            despTextAnimation.FillBehavior = FillBehavior.HoldEnd;
+            OSAnimation.Children.Add(despTextAnimation);
+
+            Storyboard.SetTarget(tbTextAnimation, TracebackBox);
+            Storyboard.SetTargetProperty(tbTextAnimation, new PropertyPath("Text"));
+            tbTextAnimation.FillBehavior = FillBehavior.HoldEnd;
+            OSAnimation.Children.Add(tbTextAnimation);
 
             Storyboard.SetTargetName(jeffiesText, JeffiesN.Name);
             Storyboard.SetTargetProperty(jeffiesText, new PropertyPath("Text"));
@@ -340,8 +360,27 @@ namespace OSPresentation
             dsk.KeyTime = TimeSpan.FromMilliseconds(gtime);
 
             consoleText.KeyFrames.Add(dsk);
+
+            gtime += itv1;
         }
-        
+
+        void changeDescription(string str)
+        {
+            DiscreteStringKeyFrame dsk = new DiscreteStringKeyFrame();
+            dsk.Value = str;
+            dsk.KeyTime = TimeSpan.FromMilliseconds(gtime);
+
+            despTextAnimation.KeyFrames.Add(dsk);
+        }
+        void changeTrace(string str)
+        {
+            DiscreteStringKeyFrame dsk = new DiscreteStringKeyFrame();
+            dsk.Value = str;
+            dsk.KeyTime = TimeSpan.FromMilliseconds(gtime);
+
+            tbTextAnimation.KeyFrames.Add(dsk);
+        }
+
         // Stacks
         // We dont add new list within the functions below.
 
