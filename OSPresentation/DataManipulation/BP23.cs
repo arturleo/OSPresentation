@@ -9,11 +9,11 @@ using OSPresentation.TempStruct;
 
 namespace OSPresentation.DataManipulation
 {
-    public class BP21 : BreakPoint
+    public class BP23 : BreakPoint
     {
         #region Contructor
 
-        public BP21(string bpo, int bpn) : base(bpo, bpn)
+        public BP23(string bpo, int bpn) : base(bpo, bpn)
         {
 
         }
@@ -22,12 +22,14 @@ namespace OSPresentation.DataManipulation
         #region Field
         #endregion
         #region Properties
-        // For simplicisity, we use the data of fixed breakpoints.
+        public int NextPid { get => int.Parse(paras[1]); }
+        public string Queue { get => paras[0]; }
         override public string Description
         {
             get
             {
-                return "Setting current process at the head of queue, \nmoving the original one to the `tmp` variable curent process pointing to. \nHowever, current queue didnt have process previously. \nAfter that, the state of current process is set to `TASK_UNINTERRUPTIBLE`";
+                return "Waking up the head process "+ NextPid+ " of the queue.\n" +
+                    "Changing the state to `RUNNING`.\nThen make the header to null \nbecause when the process is running, \nit will return to `sleep_on()` and make the next one in \n`tmp` pointer head of queue.";
             }
         }
         #endregion

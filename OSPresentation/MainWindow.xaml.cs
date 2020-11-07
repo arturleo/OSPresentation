@@ -175,13 +175,18 @@ namespace OSPresentation
                             bpn != 13 &&
                             bpn != 14 &&
                             bpn != 15 &&
-                            bpn != 14 &&
+                            bpn != 16 &&
                             bpn != 17 &&
                             bpn != 19 &&
                             bpn != 20 &&
-                            bpn != 14 &&
-                            bpn != 14 &&
-                            bpn != 14 &&
+                            bpn != 21 &&
+                            bpn != 22 &&
+                            bpn != 23 &&
+                            bpn != 24 &&
+                            bpn != 26 &&
+                            bpn != 27 &&
+                            bpn != 27 &&
+                            bpn != 32 &&
                             bpn != 14 &&
                             bpn != 14 &&
                             bpn != 14 &&
@@ -214,8 +219,6 @@ namespace OSPresentation
             }
             Trace.WriteLine("Data Manipulation succeeds");
             addUIElements_RegisterAnimation();
-
-
 
             addAnimation();
             Trace.WriteLine("Animation processing succeeds");
@@ -449,6 +452,31 @@ namespace OSPresentation
                         }
                         stackDataList.Pop();
                         break;
+                    case 16:
+                        BP16 bp16 = (BP16)bp;
+                        if (bp16.Empty == -1)
+                        {
+                            changeCN("Empty task is " + bp16.TaskN, true);
+                            DiscreteStringKeyFrame d162 = new DiscreteStringKeyFrame();
+                            d162.Value = "pid=" + bp16.LastPid;
+                            d162.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                            taskTextAnimations[bp16.TaskN].KeyFrames.Add(d162);
+                        }
+                        else
+                        {
+                            changeCN("Finding empty task");
+                        }
+                        changeSelectButton(bp16.TaskN);
+                        DiscreteBooleanKeyFrame d161 = new DiscreteBooleanKeyFrame();
+                        d161.Value = true;
+                        d161.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                        taskEnableAnimations[bp16.TaskN].KeyFrames.Add(d161);
+                        gtime += itv0;
+                        if (_current != bp16.TaskN)
+                            changeSelectButton(bp16.TaskN, false);
+                        else
+                            changeRunningTask(bp16.TaskN);
+                        break;
                     case 17:
                         BP17 bp17 = (BP17)bp;
                         ProcessStruct ps = bp17.Process();
@@ -459,7 +487,10 @@ namespace OSPresentation
                     case 19:
                         BP19 bp19 = (BP19)bp;
                         if (_taskCheckPointer >= 0)
+                        {
                             _taskCheckPointer = -1;
+                            _tmpc = -1;
+                        }
                         ProcessStruct prc19 = getProcess(bp19.ProcessPid);
                         if (_taskCounterPointer < 0)
                             _taskCounterPointer = prc19.TaskN;
@@ -467,10 +498,57 @@ namespace OSPresentation
                         break;
                     case 20:
                         _taskCheckPointer = -1;
+                        _tmpc = -1;
                         _taskCounterPointer = -1;
                         BP20 bp20 = (BP20)bp;
                         changeRunningTask(bp20.NextTask);
                         changeCN("switching to pid:"+bp20.NextPid, true);
+                        gtime += itv1;
+                        HandlePid(bp20.NextPid);
+                        break;
+                    case 21:
+                        BP21 bp21 = (BP21)bp;
+                        ProcessStruct prc21 = getProcess(bp21.Pid);
+                        prc21.State = 2;
+                        taskChangeCounter(prc21.TaskN);
+                        break;
+                    case 22:
+                        break;
+                    case 23:
+                        BP23 bp23 = (BP23)bp;
+                        if (bp23.NextPid==-1) ;
+                        else
+                        {
+                            ProcessStruct prc23 = getProcess(bp23.NextPid);
+                            prc23.State = 0;
+                            taskChangeCounter(prc23.TaskN);
+                        }
+                        break;
+                    case 24:
+                        BP24 bp24 = (BP24)bp;
+                        taskDisable(bp24.TaskN);
+                        gtime += itv2;
+                        break;
+                    case 26:
+                        gtime += itv1;
+                        break;
+                    case 27:
+                        BP27 bp27 = (BP27)bp;
+                        ProcessStruct prc27 = getProcess(bp27.Pid);
+                        prc27.State = 1;
+                        taskChangeCounter(prc27.TaskN);
+                        gtime += itv2;
+                        break;
+                    case 32:
+                        BP32 bp32 = (BP32)bp;
+                        ProcessStruct prc32 = getProcess(_apid);
+                        prc32.State = 3;
+                        taskChangeCounter(prc32.TaskN);
+                        gtime +=itv0;
+                        prc32 = getProcess(bp32.FatherPid);
+                        prc32.Signal = bp32.FatherSignal;
+                        taskChangeCounter(prc32.TaskN);
+                        gtime += itv2;
                         break;
                     default:
                         throw new InvalidOperationException("invalid breakpoint added");
@@ -605,7 +683,7 @@ namespace OSPresentation
             {
                 DiscreteStringKeyFrame dsk2 = new DiscreteStringKeyFrame();
                 dsk2.Value = "";
-                dsk2.KeyTime = TimeSpan.FromMilliseconds(gtime + 1500);
+                dsk2.KeyTime = TimeSpan.FromMilliseconds(gtime += itv1);
 
                 CNTextAnimation.KeyFrames.Add(dsk2);
             }
@@ -665,6 +743,7 @@ namespace OSPresentation
             }
             else
             {
+                _acounter = pnew.Counter;
                 ccounter = pnew.Counter.ToString();
             }
 
@@ -881,12 +960,11 @@ namespace OSPresentation
                 d.Value = true;
                 d.KeyTime = TimeSpan.FromMilliseconds(gtime);
                 taskEnableAnimations[idx].KeyFrames.Add(d);
-                //gtime += slightDelay;
             }
 
             changeSelectButton(idx);
-            changeTaskBandge(idx, ps.State);
-            if (prcs == null || prcs.ToolTipContent != ps.ToolTipContent)
+
+            if (prcs == null || prcs.ToolTipContent != ps.ToolTipContent || ps.Counter > _tmpc && ps.State == 0)
             {
                 DiscreteBooleanKeyFrame d1 = new DiscreteBooleanKeyFrame();
                 d1.Value = true;
@@ -914,6 +992,7 @@ namespace OSPresentation
                 changeSelectButton(idx, false);
             else
                 changeRunningTask(idx);
+            changeTaskBandge(idx, ps.State);
 
             processStructs[idx] = ps;
         }
@@ -921,17 +1000,11 @@ namespace OSPresentation
         {
             ProcessStruct? prcs = processStructs[idx];
 
-            //DiscreteBooleanKeyFrame d = new DiscreteBooleanKeyFrame();
-            //d.Value = false;
-            //d.KeyTime = TimeSpan.FromMilliseconds(gtime);
-            //taskEnableAnimations[idx].KeyFrames.Add(d);
-            //gtime += slightDelay;
             changeSelectButton(idx);
-
-            if (prcs != null && prcs.Pid == -1) ;
+            
+            if (prcs == null || prcs.Pid == -1) ;
             else
             {
-                changeTaskBandge(idx);
                 DiscreteStringKeyFrame d2 = new DiscreteStringKeyFrame();
                 d2.Value = "???";
                 d2.KeyTime = TimeSpan.FromMilliseconds(gtime);
@@ -940,15 +1013,20 @@ namespace OSPresentation
                 d3.Value = idx.ToString();
                 d3.KeyTime = TimeSpan.FromMilliseconds(gtime);
                 taskTextAnimations[idx].KeyFrames.Add(d3);
+
+                DiscreteBooleanKeyFrame d = new DiscreteBooleanKeyFrame();
+                d.Value = false;
+                d.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                taskEnableAnimations[idx].KeyFrames.Add(d);
             }
 
+            if (prcs == null || prcs.Pid == -1) ;
+            else
+            {
+                changeTaskBandge(idx);
+            }
             gtime += itv0;
             changeSelectButton(idx, false);
-            //gtime += slightDelay;
-            //DiscreteBooleanKeyFrame d1 = new DiscreteBooleanKeyFrame();
-            //d1.Value = false;
-            //d1.KeyTime = TimeSpan.FromMilliseconds(gtime);
-            //taskEnableAnimations[idx].KeyFrames.Add(d1);
 
             if (prcs == null)
                 prcs = new ProcessStruct(idx);
@@ -958,6 +1036,11 @@ namespace OSPresentation
         }
         void taskChangeCounter(int idx)
         {
+            if (processStructs[idx] == null || processStructs[idx].Pid == -1)
+            {
+                Trace.WriteLine("Target process is empty when changing process.");
+                return;
+            }
             changeSelectButton(idx);
 
             DiscreteBooleanKeyFrame d1 = new DiscreteBooleanKeyFrame();
@@ -982,6 +1065,7 @@ namespace OSPresentation
                 changeSelectButton(idx, false);
             else
                 changeRunningTask(idx);
+            changeTaskBandge(idx, processStructs[idx].State);
         }
         void changAndShowTask(ProcessStruct ps, int index=-1)
         {
@@ -999,7 +1083,7 @@ namespace OSPresentation
         }
         void changeRunningTask(int idx)
         {
-            if (_current<0);
+            if (_current<0||_current==idx);
             else
             {
                 changeTaskButton(_current, false);
@@ -1063,7 +1147,7 @@ namespace OSPresentation
         {
             Button button = taskButtons[idx];
             buttonForeBackgroundAnimation(button, To);
-            buttonForeBackgroundAnimation(button, To, false);
+            buttonForeBackgroundAnimation(button, To, true);
         }
         void changeSelectButton(int idx, bool To= true)
         {

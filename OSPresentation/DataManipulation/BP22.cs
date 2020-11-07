@@ -9,11 +9,11 @@ using OSPresentation.TempStruct;
 
 namespace OSPresentation.DataManipulation
 {
-    public class BP21 : BreakPoint
+    public class BP22 : BreakPoint
     {
         #region Contructor
 
-        public BP21(string bpo, int bpn) : base(bpo, bpn)
+        public BP22(string bpo, int bpn) : base(bpo, bpn)
         {
 
         }
@@ -27,7 +27,7 @@ namespace OSPresentation.DataManipulation
         {
             get
             {
-                return "Setting current process at the head of queue, \nmoving the original one to the `tmp` variable curent process pointing to. \nHowever, current queue didnt have process previously. \nAfter that, the state of current process is set to `TASK_UNINTERRUPTIBLE`";
+                return "Returning from `schedule()` in sleep_on().\nThe `tmp` pointer points to the next process in queue.\nNext process is to be set at the head of queue and state should be `RUNNING`.\nHowever, next process is empty.";
             }
         }
         #endregion

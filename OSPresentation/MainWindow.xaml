@@ -233,7 +233,7 @@
 
                 <Grid Grid.Column="2">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8">
-                        <Expander Name="FileAnimationExpander" ExpandDirection="Right" IsExpanded="True">
+                        <Expander Name="FileAnimationExpander" ExpandDirection="Right" IsExpanded="False">
                             <Expander.Header>
                                 <TextBlock Text="Animation" Style="{StaticResource MaterialDesignHeadline6TextBlock}" RenderTransformOrigin=".5,.5">
                                     <TextBlock.LayoutTransform>
@@ -256,7 +256,7 @@
                                 </Canvas>
                             </Grid>
                         </Expander>
-                        <Expander Name="StackAnimationExpander" ExpandDirection="Right" IsExpanded="False">
+                        <Expander Name="StackAnimationExpander" ExpandDirection="Right" IsExpanded="True">
                             <Expander.Header>
                                 <TextBlock Text="Stacks" Style="{StaticResource MaterialDesignHeadline6TextBlock}" RenderTransformOrigin=".5,.5">
                                     <TextBlock.LayoutTransform>

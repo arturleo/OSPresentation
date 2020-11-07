@@ -9,11 +9,12 @@ using OSPresentation.TempStruct;
 
 namespace OSPresentation.DataManipulation
 {
-    public class BP21 : BreakPoint
+    //TODO 
+    public class BP16 : BreakPoint
     {
         #region Contructor
 
-        public BP21(string bpo, int bpn) : base(bpo, bpn)
+        public BP16(string bpo, int bpn) : base(bpo, bpn)
         {
 
         }
@@ -22,12 +23,15 @@ namespace OSPresentation.DataManipulation
         #region Field
         #endregion
         #region Properties
-        // For simplicisity, we use the data of fixed breakpoints.
+        public int LastPid { get => int.Parse(paras[2]); }
+        public int Empty { get => int.Parse(paras[1]); }
+        public int TaskN { get => int.Parse(paras[0]); }
+
         override public string Description
         {
             get
             {
-                return "Setting current process at the head of queue, \nmoving the original one to the `tmp` variable curent process pointing to. \nHowever, current queue didnt have process previously. \nAfter that, the state of current process is set to `TASK_UNINTERRUPTIBLE`";
+                return "Iterating over all tasks to find the find empty process\n for the new process.";
             }
         }
         #endregion
