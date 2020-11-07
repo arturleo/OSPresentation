@@ -23,22 +23,22 @@ namespace OSPresentation.DataManipulation
         {
             get
             {
-                return "";
+                return "Checking from the greatest task number to find the running process with the greatest counter.";
             }
         }
 
         #endregion
         #region Methods
-        public ProcessStruct Refresh()
+        public ProcessStruct Process()
         {
-            return new ProcessStruct(paras[3], paras[4],
-                paras[5], paras[6], paras[7], paras[8], paras[9]);
+            return new ProcessStruct(paras[0], paras[1], paras[2], paras[3], paras[4],
+                paras[5], paras[6], paras[7]);
         }
 
         public ProcessStruct Refresh(ProcessStruct ps)
         {
-            ps.update(paras[3], paras[4],
-                paras[5], paras[6], paras[7], paras[8], paras[9]);
+            ps.Update(paras[0], paras[1], paras[2], paras[3], paras[4],
+                paras[5], paras[6], paras[7]);
             return ps;
         }
         #endregion

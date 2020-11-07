@@ -44,6 +44,12 @@ namespace OSPresentation
             //ListViewItem lvi = (ListViewItem)(KernelStackList.FindName("s1"));
             _stackExpanderOpen = StackAnimationExpander.IsExpanded;
             _fileExpanderOpen = FileAnimationExpander.IsExpanded;
+
+            buttonDefaultStyle = FindResource("MaterialDesignFlatButton") as Style;
+            buttonSelectedStyle= FindResource("MaterialDesignFlatLightBgButton") as Style;
+            buttonZombieStyle= FindResource("MaterialDesignOutlinedButton") as Style; 
+            buttonSleepStyle = FindResource("MaterialDesignFlatDarkBgButton") as Style;
+            buttonActionStyle = FindResource("MaterialDesignFlatAccentBgButton") as Style;
         }
 
         #region Fields
@@ -56,8 +62,11 @@ namespace OSPresentation
         long gtime = 0, ltime=0;
         
         int _ajeffies=-1, _apid=-1, _acounter=-1;
+        int _tmpc = -1, _tmpnext = -1;
+        int _current=-1;
 
         int _stackPointer=-1;
+        int _taskCheckPointer = -1, _taskCounterPointer = -1;
         bool _stackExpanderOpen, _fileExpanderOpen;
         //TODO: store stack, queue, drawboard data here.
         List<ProcessStruct> processStructs = new List<ProcessStruct>();
@@ -65,7 +74,7 @@ namespace OSPresentation
         Stack<string> syscallNames = new Stack<string>();
 
         // global animation parameters
-        const int slightDelay=5, itv0 = 200, itv1=200, itv2=1000;
+        const int slightDelay=2, itv0 = 200, itv1=500, itv2=1000;
         #endregion
 
         #region AnimationHolders
@@ -75,17 +84,30 @@ namespace OSPresentation
         StringAnimationUsingKeyFrames despTextAnimation = new StringAnimationUsingKeyFrames();
         StringAnimationUsingKeyFrames tbTextAnimation = new StringAnimationUsingKeyFrames();
         StringAnimationUsingKeyFrames jeffiesText = new StringAnimationUsingKeyFrames();
+        StringAnimationUsingKeyFrames CNTextAnimation = new StringAnimationUsingKeyFrames();
         StringAnimationUsingKeyFrames pidText = new StringAnimationUsingKeyFrames();
         StringAnimationUsingKeyFrames counterText = new StringAnimationUsingKeyFrames();
         List<StringAnimationUsingKeyFrames> stackTextAnimations = 
             new List<StringAnimationUsingKeyFrames>();
         List<StringAnimationUsingKeyFrames> stackTooltipTextAnimations = 
             new List<StringAnimationUsingKeyFrames>();
+        List<StringAnimationUsingKeyFrames> taskTooltipTextAnimations = 
+            new List<StringAnimationUsingKeyFrames>();
+        List<StringAnimationUsingKeyFrames> taskTextAnimations =
+            new List<StringAnimationUsingKeyFrames>();
+        List<StringAnimationUsingKeyFrames> bandageTextAnimations =
+            new List<StringAnimationUsingKeyFrames>();
+
         // Bool
         List<BooleanAnimationUsingKeyFrames> stackTooltipAnimations = 
             new List<BooleanAnimationUsingKeyFrames>();
         List<BooleanAnimationUsingKeyFrames> stackItemAnimations = 
             new List<BooleanAnimationUsingKeyFrames>();
+        List<BooleanAnimationUsingKeyFrames> taskTooltipShowAnimations =
+            new List<BooleanAnimationUsingKeyFrames>();
+        List<BooleanAnimationUsingKeyFrames> taskEnableAnimations =
+            new List<BooleanAnimationUsingKeyFrames>();
+
         BooleanAnimationUsingKeyFrames stackExpandeAnimation;
         BooleanAnimationUsingKeyFrames fileExpanderAnimation;
 
@@ -96,7 +118,6 @@ namespace OSPresentation
         // Object
         List<ObjectAnimationUsingKeyFrames> stackVisibilityAnimations = 
             new List<ObjectAnimationUsingKeyFrames>();
-
         #endregion
 
         #region UIStatus
@@ -104,12 +125,16 @@ namespace OSPresentation
         #endregion
 
         #region ElementList
+        //Style 
+        Style buttonDefaultStyle, buttonSelectedStyle, buttonZombieStyle, buttonSleepStyle, buttonActionStyle;
         //Buttons
-        List<Button> processButtons = new List<Button>();
+        List<Button> taskButtons = new List<Button>();
         List<ListViewItem> stackButtons = new List<ListViewItem>();
         List<List<Button>> fileButtons = new List<List<Button>>();
+        // Bandges
+        List<Badged> taskBadges = new List<Badged>();
         //Tooltips
-        List<ToolTip> processToolTips=new List<ToolTip>();
+        List<ToolTip> taskToolTips=new List<ToolTip>();
         List<ToolTip> stackToolTips = new List<ToolTip>();
         List<List<ToolTip>> fileToolTips = new List<List<ToolTip>>();
         #endregion
@@ -147,7 +172,25 @@ namespace OSPresentation
                             bpn != 10 &&
                             bpn != 11 &&
                             bpn != 12 &&
-                            bpn != 13)
+                            bpn != 13 &&
+                            bpn != 14 &&
+                            bpn != 15 &&
+                            bpn != 14 &&
+                            bpn != 17 &&
+                            bpn != 19 &&
+                            bpn != 20 &&
+                            bpn != 14 &&
+                            bpn != 14 &&
+                            bpn != 14 &&
+                            bpn != 14 &&
+                            bpn != 14 &&
+                            bpn != 14 &&
+                            bpn != 14 &&
+                            bpn != 14 &&
+                            bpn != 14 &&
+                            bpn != 14 &&
+                            bpn != 14 &&
+                            bpn != 14)
                             continue;
                         if (6 <= bpn && bpn <= 58 && bpn != 48 && bpn != 25)
                         {
@@ -179,14 +222,13 @@ namespace OSPresentation
             intializeUI();
         }
 
-        // The data are fixed here
-        // There are some subfuncitons for dulplicate buttons
         // TODO
         void addUIElements_RegisterAnimation()
         {
             OSAnimation.Stop();
             OSAnimation.Children.Clear();
             consoleText.KeyFrames.Clear();
+            CNTextAnimation.KeyFrames.Clear();
             stackExpandeAnimation = new BooleanAnimationUsingKeyFrames();
             fileExpanderAnimation = new BooleanAnimationUsingKeyFrames();
 
@@ -201,14 +243,80 @@ namespace OSPresentation
             KernelStackList.Items.Clear();
             foreach (var index in Range(1, 18))
                 addStackButton();
+            addProcessButton(0, true) ;
+            foreach (var index in Range(1, 63))
+                addProcessButton(index);
             _stackPointer = -1;
+            // Task
+            processStructs.Clear();
+            processStructs.Add(new ProcessStruct(0, 0, 1, 0, 0, -1, -1, -1));
+            foreach (var ind in Range(0, 63))
+                processStructs.Add(null);
         }
-
-        void addProcessButton(int i)
+        void addProcessButton(int i, bool pid0=false)
         {
+            Button button = new Button();
+            button.Style = buttonDefaultStyle;
+            button.Content = i.ToString();
+            button.IsEnabled = false;
+            taskButtons.Add(button);
 
+            var badge = new Badged();
+            badge.Badge = "";
+            badge.Content = button;
+            taskBadges.Add(badge);
+
+            ToolTip tt = new ToolTip();
+            tt.PlacementTarget = button;
+            tt.Placement = PlacementMode.Bottom;
+            tt.VerticalOffset = 15;
+            tt.Content = "???";
+            taskToolTips.Add(tt);
+
+            TaskList.Items.Add(badge);
+            // Register Animation
+            // ToolTip show
+            BooleanAnimationUsingKeyFrames taskTooltip = new BooleanAnimationUsingKeyFrames();
+            Storyboard.SetTarget(taskTooltip, tt);
+            Storyboard.SetTargetProperty(taskTooltip, new PropertyPath("IsOpen"));
+            taskTooltip.FillBehavior = FillBehavior.HoldEnd;
+            taskTooltipShowAnimations.Add(taskTooltip);
+
+            //change tooltip content
+            StringAnimationUsingKeyFrames saufTT = new StringAnimationUsingKeyFrames();
+            Storyboard.SetTarget(saufTT, tt);
+            Storyboard.SetTargetProperty(saufTT, new PropertyPath("Content"));
+            saufTT.FillBehavior = FillBehavior.HoldEnd;
+            taskTooltipTextAnimations.Add(saufTT);
+
+            //change button content
+            StringAnimationUsingKeyFrames saufTsk = new StringAnimationUsingKeyFrames();
+            Storyboard.SetTarget(saufTsk, button);
+            Storyboard.SetTargetProperty(saufTsk, new PropertyPath("Content"));
+            saufTsk.FillBehavior = FillBehavior.HoldEnd;
+            taskTextAnimations.Add(saufTsk);
+
+            // enable button
+            BooleanAnimationUsingKeyFrames baukfTsk = new BooleanAnimationUsingKeyFrames();
+            Storyboard.SetTarget(baukfTsk, button);
+            Storyboard.SetTargetProperty(baukfTsk, new PropertyPath("IsEnabled"));
+            baukfTsk.FillBehavior = FillBehavior.HoldEnd;
+            taskEnableAnimations.Add(baukfTsk);
+
+            // bandge animation
+            StringAnimationUsingKeyFrames saufBdg = new StringAnimationUsingKeyFrames();
+            Storyboard.SetTarget(saufBdg, badge);
+            Storyboard.SetTargetProperty(saufBdg, new PropertyPath("Badge"));
+            saufBdg.FillBehavior = FillBehavior.HoldEnd;
+            bandageTextAnimations.Add(saufBdg);
+
+            if (pid0)
+            {
+                button.Content = "pid=0";
+                button.IsEnabled = true;
+                tt.Content = "state: TASK_INTERRUPTIBLE\n???: ???";
+            }
         }
-
         void addStackButton()
         {
             ListViewItem stackObject = new ListViewItem();
@@ -226,7 +334,7 @@ namespace OSPresentation
 
             KernelStackList.Items.Add(stackObject);
 
-            // register Animation
+            // Register Animation
             // ToolTip
             BooleanAnimationUsingKeyFrames stackTooltip = new BooleanAnimationUsingKeyFrames();
             Storyboard.SetTarget(stackTooltip, tt);
@@ -265,8 +373,8 @@ namespace OSPresentation
 
         void addAnimation()
         {
+            //temp data
             gtime=0;
-
 
             for (int ind=0;ind<breakPoints.Count;)
             {
@@ -302,7 +410,7 @@ namespace OSPresentation
                         BP9 bp9 = (BP9)bp;
                         foreach (var sd in bp9.Stacks)
                             pushStack(sd, true);
-                        gtime += itv0;
+                        gtime += itv1;
                         break;
                     case 10:
                         BP10 bp10 = (BP10)bp;
@@ -324,6 +432,45 @@ namespace OSPresentation
                     case 13:
                         foreach (var index in Range(1, 6))
                             popStack(true);
+                        stackDataList.Pop();
+                        break;
+                    case 14:
+                        gtime += itv1;
+                        break;
+                    case 15:
+                        BP15 bp15 = (BP15)bp;
+                        restoreStack();
+                        changeStackContent(4, bp15.EIP);
+                        changeStackContent(1, bp15.ESP);
+                        gtime += itv1;
+                        while (_stackPointer > -1)
+                        {
+                            popStack(true);
+                        }
+                        stackDataList.Pop();
+                        break;
+                    case 17:
+                        BP17 bp17 = (BP17)bp;
+                        ProcessStruct ps = bp17.Process();
+                        if (_taskCheckPointer == -1)
+                            _taskCheckPointer = ps.TaskN;
+                        changAndShowTask(ps);
+                        break;
+                    case 19:
+                        BP19 bp19 = (BP19)bp;
+                        if (_taskCheckPointer >= 0)
+                            _taskCheckPointer = -1;
+                        ProcessStruct prc19 = getProcess(bp19.ProcessPid);
+                        if (_taskCounterPointer < 0)
+                            _taskCounterPointer = prc19.TaskN;
+                        changAndShowTaskCounter(bp19.ProcessCounter, prc19.TaskN);
+                        break;
+                    case 20:
+                        _taskCheckPointer = -1;
+                        _taskCounterPointer = -1;
+                        BP20 bp20 = (BP20)bp;
+                        changeRunningTask(bp20.NextTask);
+                        changeCN("switching to pid:"+bp20.NextPid, true);
                         break;
                     default:
                         throw new InvalidOperationException("invalid breakpoint added");
@@ -338,7 +485,6 @@ namespace OSPresentation
 
         }
         #region AnimationMethods
-
         void addToStoryBoard()
         {
             DoubleAnimation daSlider = new DoubleAnimation();
@@ -364,6 +510,11 @@ namespace OSPresentation
             Storyboard.SetTargetProperty(tbTextAnimation, new PropertyPath("Text"));
             tbTextAnimation.FillBehavior = FillBehavior.HoldEnd;
             OSAnimation.Children.Add(tbTextAnimation);
+
+            Storyboard.SetTarget(CNTextAnimation, CNText);
+            Storyboard.SetTargetProperty(CNTextAnimation, new PropertyPath("Text"));
+            CNTextAnimation.FillBehavior = FillBehavior.HoldEnd;
+            OSAnimation.Children.Add(CNTextAnimation);
 
             Storyboard.SetTargetName(jeffiesText, JeffiesN.Name);
             Storyboard.SetTargetProperty(jeffiesText, new PropertyPath("Text"));
@@ -402,6 +553,18 @@ namespace OSPresentation
                 OSAnimation.Children.Add(baukf);
             foreach (var baukf in stackTextAnimations)
                 OSAnimation.Children.Add(baukf);
+            //Tasks
+
+            foreach (var baukf in bandageTextAnimations)
+                OSAnimation.Children.Add(baukf);
+            foreach (var baukf in taskTooltipShowAnimations)
+                OSAnimation.Children.Add(baukf);
+            foreach (var baukf in taskTooltipTextAnimations)
+                OSAnimation.Children.Add(baukf);
+            foreach (var baukf in taskTextAnimations)
+                OSAnimation.Children.Add(baukf);
+            foreach (var baukf in taskEnableAnimations)
+                OSAnimation.Children.Add(baukf);
         }
 
         // Text
@@ -413,7 +576,7 @@ namespace OSPresentation
 
             consoleText.KeyFrames.Add(dsk);
 
-            gtime += itv0;
+            gtime += itv1;
         }
         void changeDescription(string str)
         {
@@ -430,6 +593,23 @@ namespace OSPresentation
             dsk.KeyTime = TimeSpan.FromMilliseconds(gtime);
 
             tbTextAnimation.KeyFrames.Add(dsk);
+        }
+        void changeCN(string str, bool clear=false)
+        {
+            DiscreteStringKeyFrame dsk = new DiscreteStringKeyFrame();
+            dsk.Value = str;
+            dsk.KeyTime = TimeSpan.FromMilliseconds(gtime);
+
+            CNTextAnimation.KeyFrames.Add(dsk);
+            if (clear)
+            {
+                DiscreteStringKeyFrame dsk2 = new DiscreteStringKeyFrame();
+                dsk2.Value = "";
+                dsk2.KeyTime = TimeSpan.FromMilliseconds(gtime + 1500);
+
+                CNTextAnimation.KeyFrames.Add(dsk2);
+            }
+
         }
         void HandleJeffies(int j)
         {
@@ -508,7 +688,7 @@ namespace OSPresentation
                 stackExpandeAnimation.KeyFrames.Add(dbkf);
 
                 _stackExpanderOpen=true;
-                gtime += itv0;
+                gtime += itv1;
             }
         }
         void checkStackClose()
@@ -622,13 +802,16 @@ namespace OSPresentation
 
             _stackPointer -= 1;
         }
-        // assume old stack is at the top
+        // assume old stack is at the top of the list
         void restoreStack()
         {
+            if (_stackPointer >= 0)
+                return;
             foreach(var sd in stackDataList.Peek())
             {
                 pushStack(sd, false);
             }
+            gtime += slightDelay;
         }
         void emptyStack()
         {
@@ -637,13 +820,263 @@ namespace OSPresentation
                 popStack(false);
             }
         }
+        void changeStackContent(int index, string content)
+        {
+            var sd = stackDataList.Peek()[index];
+            sd.Content = content;
 
+            DiscreteBooleanKeyFrame ttShow = new DiscreteBooleanKeyFrame();
+            ttShow.Value = true;
+            ttShow.KeyTime = TimeSpan.FromMilliseconds(gtime + slightDelay);
+            stackTooltipAnimations[index].KeyFrames.Add(ttShow);
+
+            DiscreteBooleanKeyFrame selectItem = new DiscreteBooleanKeyFrame();
+            selectItem.Value = true;
+            selectItem.KeyTime = TimeSpan.FromMilliseconds(gtime + slightDelay);
+            stackItemAnimations[index].KeyFrames.Add(selectItem);
+
+            gtime += itv0;
+            DiscreteStringKeyFrame tt = new DiscreteStringKeyFrame();
+            tt.Value = sd.Description;
+            tt.KeyTime = TimeSpan.FromMilliseconds(gtime);
+            stackTooltipTextAnimations[index].KeyFrames.Add(tt);
+
+            gtime += itv1;
+
+            DiscreteBooleanKeyFrame dttShow = new DiscreteBooleanKeyFrame();
+            dttShow.Value = false;
+            dttShow.KeyTime = TimeSpan.FromMilliseconds(gtime);
+            stackTooltipAnimations[index].KeyFrames.Add(dttShow);
+
+            DiscreteBooleanKeyFrame dselectItem = new DiscreteBooleanKeyFrame();
+            dselectItem.Value = false;
+            dselectItem.KeyTime = TimeSpan.FromMilliseconds(gtime);
+            stackItemAnimations[index].KeyFrames.Add(dselectItem);
+        }
+        // Tasks
+        // We refresh task simutaneously
+        void taskChangeFocus(int idx, ProcessStruct ps)
+        {
+#nullable enable
+            ProcessStruct? prcs = processStructs[idx];
+
+            if (ps.Counter > _tmpc && ps.State==0)
+            {
+                changeCN(ps.PrintGreaterCounter(_tmpc, _tmpnext));
+                _tmpc = ps.Counter;
+                _tmpnext = ps.TaskN;
+            }
+
+            if (prcs == null || prcs.PidContent != ps.PidContent)
+            {
+                DiscreteStringKeyFrame d3 = new DiscreteStringKeyFrame();
+                d3.Value = ps.PidContent;
+                d3.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                taskTextAnimations[idx].KeyFrames.Add(d3);
+            }
+
+            if (prcs == null || prcs.Pid == -1)
+            {
+                DiscreteBooleanKeyFrame d = new DiscreteBooleanKeyFrame();
+                d.Value = true;
+                d.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                taskEnableAnimations[idx].KeyFrames.Add(d);
+                //gtime += slightDelay;
+            }
+
+            changeSelectButton(idx);
+            changeTaskBandge(idx, ps.State);
+            if (prcs == null || prcs.ToolTipContent != ps.ToolTipContent)
+            {
+                DiscreteBooleanKeyFrame d1 = new DiscreteBooleanKeyFrame();
+                d1.Value = true;
+                d1.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                taskTooltipShowAnimations[idx].KeyFrames.Add(d1);
+
+                gtime += itv0;
+                DiscreteStringKeyFrame d = new DiscreteStringKeyFrame();
+                d.Value = ps.ToolTipContent;
+                d.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                taskTooltipTextAnimations[idx].KeyFrames.Add(d);
+
+                gtime += itv1;
+                DiscreteBooleanKeyFrame d2 = new DiscreteBooleanKeyFrame();
+                d2.Value = false;
+                d2.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                taskTooltipShowAnimations[idx].KeyFrames.Add(d2);
+            }
+            else
+            {
+                gtime += itv0;
+            }
+
+            if (_current != idx)
+                changeSelectButton(idx, false);
+            else
+                changeRunningTask(idx);
+
+            processStructs[idx] = ps;
+        }
+        void taskDisable(int idx)
+        {
+            ProcessStruct? prcs = processStructs[idx];
+
+            //DiscreteBooleanKeyFrame d = new DiscreteBooleanKeyFrame();
+            //d.Value = false;
+            //d.KeyTime = TimeSpan.FromMilliseconds(gtime);
+            //taskEnableAnimations[idx].KeyFrames.Add(d);
+            //gtime += slightDelay;
+            changeSelectButton(idx);
+
+            if (prcs != null && prcs.Pid == -1) ;
+            else
+            {
+                changeTaskBandge(idx);
+                DiscreteStringKeyFrame d2 = new DiscreteStringKeyFrame();
+                d2.Value = "???";
+                d2.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                taskTooltipTextAnimations[idx].KeyFrames.Add(d2);
+                DiscreteStringKeyFrame d3 = new DiscreteStringKeyFrame();
+                d3.Value = idx.ToString();
+                d3.KeyTime = TimeSpan.FromMilliseconds(gtime);
+                taskTextAnimations[idx].KeyFrames.Add(d3);
+            }
+
+            gtime += itv0;
+            changeSelectButton(idx, false);
+            //gtime += slightDelay;
+            //DiscreteBooleanKeyFrame d1 = new DiscreteBooleanKeyFrame();
+            //d1.Value = false;
+            //d1.KeyTime = TimeSpan.FromMilliseconds(gtime);
+            //taskEnableAnimations[idx].KeyFrames.Add(d1);
+
+            if (prcs == null)
+                prcs = new ProcessStruct(idx);
+            else
+                prcs.SetToDefault();
+#nullable restore
+        }
+        void taskChangeCounter(int idx)
+        {
+            changeSelectButton(idx);
+
+            DiscreteBooleanKeyFrame d1 = new DiscreteBooleanKeyFrame();
+            d1.Value = true;
+            d1.KeyTime = TimeSpan.FromMilliseconds(gtime);
+            taskTooltipShowAnimations[idx].KeyFrames.Add(d1);
+
+            gtime += itv0;
+            
+            DiscreteStringKeyFrame d = new DiscreteStringKeyFrame();
+            d.Value = processStructs[idx].ToolTipContent;
+            d.KeyTime = TimeSpan.FromMilliseconds(gtime);
+            taskTooltipTextAnimations[idx].KeyFrames.Add(d);
+
+            gtime += itv1;
+            DiscreteBooleanKeyFrame d2 = new DiscreteBooleanKeyFrame();
+            d2.Value = false;
+            d2.KeyTime = TimeSpan.FromMilliseconds(gtime);
+            taskTooltipShowAnimations[idx].KeyFrames.Add(d2);
+
+            if (_current != idx)
+                changeSelectButton(idx, false);
+            else
+                changeRunningTask(idx);
+        }
+        void changAndShowTask(ProcessStruct ps, int index=-1)
+        {
+            while (index >= 0 && _taskCheckPointer > index)
+            {
+                taskDisable(_taskCheckPointer);
+                _taskCheckPointer--;
+            }
+
+            if(_taskCheckPointer >= 0&&(_taskCheckPointer == index||index<0))
+            {
+                taskChangeFocus(_taskCheckPointer,ps);
+                _taskCheckPointer--;
+            }
+        }
+        void changeRunningTask(int idx)
+        {
+            if (_current<0);
+            else
+            {
+                changeTaskButton(_current, false);
+            }
+            changeTaskButton(idx,true);
+            _current = idx;
+        }
+        void changAndShowTaskCounter(int c, int index = -1)
+        {
+            while (index >= 0 && _taskCounterPointer > index)
+            {
+                taskDisable(_taskCounterPointer);
+                _taskCounterPointer--;
+            }
+
+            if (_taskCounterPointer >= 0 && (_taskCounterPointer == index || index < 0))
+            {
+                processStructs[_taskCounterPointer].Counter = c;
+                taskChangeCounter(_taskCounterPointer);
+                _taskCounterPointer--;
+            }
+        }
+        void changeBandge(int idx, string str)
+        {
+            DiscreteStringKeyFrame v = new DiscreteStringKeyFrame();
+            v.Value =  str;
+            v.KeyTime = TimeSpan.FromMilliseconds(gtime);
+            bandageTextAnimations[idx].KeyFrames.Add(v);
+        }
+        void changeTaskBandge(int idx,int state=-1)
+        {
+            string str= state == 1 ? "INTERRUPTIBLE" : (state == 2 ? "UNINTERRUPTIBLE" : (state == 3 ? "ZOMBIE" : (state == 4 ? "STOPPED" : "")));
+            changeBandge(idx, str);
+        }
+        ColorAnimation buttonForeBackgroundAnimation(Button button, bool changeTo = true, bool isFore = false, bool selected=false)
+        {
+            ColorAnimation cc = new ColorAnimation();
+            if (changeTo && !isFore && !selected)
+                cc.To = Color.FromArgb(0xff, 0xae, 0xea, 00);
+            else if (!changeTo && !isFore )
+                cc.To = Colors.Transparent;
+            else if (changeTo && isFore && !selected)
+                cc.To = Colors.Black;
+            else if (!changeTo && isFore || selected && changeTo && !isFore)
+                cc.To = Color.FromArgb(0xff, 0x67, 0x3a, 0xb7);
+            else if (selected && changeTo && isFore)
+                cc.To = Colors.White;
+
+
+            cc.Duration = TimeSpan.FromMilliseconds(100);
+            cc.BeginTime = TimeSpan.FromMilliseconds(gtime);
+            Storyboard.SetTarget(cc, button);
+            if (isFore)
+                Storyboard.SetTargetProperty(cc, new PropertyPath("(Foreground).(SolidColorBrush.Color)"));
+            else
+                Storyboard.SetTargetProperty(cc, new PropertyPath("(Background).(SolidColorBrush.Color)"));
+            OSAnimation.Children.Add(cc);
+            return cc;
+        }
+        void changeTaskButton(int idx, bool To = true)
+        {
+            Button button = taskButtons[idx];
+            buttonForeBackgroundAnimation(button, To);
+            buttonForeBackgroundAnimation(button, To, false);
+        }
+        void changeSelectButton(int idx, bool To= true)
+        {
+            Button button = taskButtons[idx];
+            buttonForeBackgroundAnimation(button, To, true, true);
+            buttonForeBackgroundAnimation(button, To, false, true);
+        }
         #region StructureHandlers
         ProcessStruct getProcess(int pid)
         {
             foreach(var ps in processStructs)
             {
-                if (ps.Pid == pid)
+                if (ps != null&& ps.Pid == pid)
                     return ps;
             }
             return null;

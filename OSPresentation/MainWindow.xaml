@@ -88,6 +88,7 @@
                                     <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="0 0 0 10">Process Queue</TextBlock>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Name="CNText" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Padding="10 0" Margin="0 5">c: next:</TextBlock>
                                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Padding="10 0" Margin="0 5">Jeffies:</TextBlock>
                                     <TextBlock Name="JeffiesN" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Padding="5 0" Margin="0 7 0 5">4</TextBlock>
                                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Padding="10 0" Margin="0 5">Pid:</TextBlock>
@@ -97,157 +98,16 @@
                                 </StackPanel>
                             </Grid>
                             <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Margin="0 10 0 10">Tasks</TextBlock>
+                            
                             <ToolBarTray>
-                                <ToolBar Name="TaskList" Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="True">
-                                    <Button Name="pid0Button"  
-                                            Style="{StaticResource MaterialDesignFlatButton}">
-                                        <Button.ToolTip>
-                                            <ToolTip ToolTip.Placement="Bottom"
-                                                     ToolTip.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                                     VerticalOffset="15">
-                                                TASK_INTERRUPTABLE
-                                            </ToolTip>
-                                        </Button.ToolTip>
-                                        0
-                                    </Button>
-                                    <Button Name="pid1Button"  
-                                            Style="{StaticResource MaterialDesignFlatButton}">
-                                        <Button.ToolTip>
-                                            <ToolTip ToolTip.Placement="Bottom"
-                                                     ToolTip.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                                     VerticalOffset="15">
-                                                TASK_INTERRUPTABLE
-                                            </ToolTip>
-                                        </Button.ToolTip>
-                                        1
-                                    </Button>
-                                    <Button Name="pid2Button"  
-                                            Style="{StaticResource MaterialDesignFlatButton}">
-                                        <Button.ToolTip>
-                                            <ToolTip ToolTip.Placement="Bottom"
-                                                     ToolTip.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                                     VerticalOffset="15">
-                                                TASK_INTERRUPTABLE
-                                            </ToolTip>
-                                        </Button.ToolTip>
-                                        2
-                                    </Button>
-                                    <Button Name="pid3Button"  
-                                            Style="{StaticResource MaterialDesignFlatButton}">
-                                        <Button.ToolTip>
-                                            <ToolTip ToolTip.Placement="Bottom"
-                                                     ToolTip.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                                     VerticalOffset="15">
-                                                TASK_INTERRUPTABLE
-                                            </ToolTip>
-                                        </Button.ToolTip>
-                                        3
-                                    </Button>
-                                    <Button Name="pid4Button"  
-                                            Style="{StaticResource MaterialDesignFlatButton}">
-                                        <Button.ToolTip>
-                                            <ToolTip ToolTip.Placement="Bottom"
-                                                     ToolTip.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                                     VerticalOffset="15">
-                                                TASK_INTERRUPTABLE
-                                            </ToolTip>
-                                        </Button.ToolTip>
-                                        4
-                                    </Button>
-                                    <Button Name="pid5Button"  
-                                            Style="{StaticResource MaterialDesignFlatButton}">
-                                        <Button.ToolTip>
-                                            <ToolTip ToolTip.Placement="Bottom"
-                                                     ToolTip.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                                     VerticalOffset="15">
-                                                TASK_INTERRUPTABLE
-                                            </ToolTip>
-                                        </Button.ToolTip>
-                                        5
-                                    </Button>
-                                    <Button Name="pid6Button"  
-                                            Style="{StaticResource MaterialDesignFlatButton}">
-                                        <Button.ToolTip>
-                                            <ToolTip ToolTip.Placement="Bottom"
-                                                     ToolTip.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                                     VerticalOffset="15">
-                                                TASK_INTERRUPTABLE
-                                            </ToolTip>
-                                        </Button.ToolTip>
-                                        6
-                                    </Button>
-                                    <Button Name="pid7Button"  
-                                            Style="{StaticResource MaterialDesignFlatButton}">
-                                        <Button.ToolTip>
-                                            <ToolTip ToolTip.Placement="Bottom"
-                                                     ToolTip.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                                     VerticalOffset="15">
-                                                TASK_INTERRUPTABLE
-                                            </ToolTip>
-                                        </Button.ToolTip>
-                                        7
-                                    </Button>
-                                    <Button Name="pid8Button"  
-                                            Style="{StaticResource MaterialDesignFlatButton}">
-                                        <Button.ToolTip>
-                                            <ToolTip ToolTip.Placement="Bottom"
-                                                     ToolTip.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                                     VerticalOffset="15">
-                                                TASK_INTERRUPTABLE
-                                            </ToolTip>
-                                        </Button.ToolTip>
-                                        8
-                                    </Button>
-                                    <Button Name="pid9Button"  
-                                            Style="{StaticResource MaterialDesignFlatButton}">
-                                        <Button.ToolTip>
-                                            <ToolTip ToolTip.Placement="Bottom"
-                                                     ToolTip.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                                     VerticalOffset="15">
-                                                TASK_INTERRUPTABLE
-                                            </ToolTip>
-                                        </Button.ToolTip>
-                                        9
-                                    </Button>
-                                    <Button Name="pid10Button"  
-                                            Style="{StaticResource MaterialDesignFlatButton}">
-                                        <Button.ToolTip>
-                                            <ToolTip ToolTip.Placement="Bottom"
-                                                     ToolTip.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                                     VerticalOffset="15">
-                                                TASK_INTERRUPTABLE
-                                            </ToolTip>
-                                        </Button.ToolTip>
-                                        10
-                                    </Button>
-                                    <Button Name="pid11Button"  
-                                            Style="{StaticResource MaterialDesignFlatButton}">
-                                        <Button.ToolTip>
-                                            <ToolTip ToolTip.Placement="Bottom"
-                                                     ToolTip.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                                     VerticalOffset="15">
-                                                TASK_INTERRUPTABLE
-                                            </ToolTip>
-                                        </Button.ToolTip>
-                                        11
-                                    </Button>
-                                    <Button Name="pid12Button"  
-                                            Style="{StaticResource MaterialDesignFlatButton}">
-                                        <Button.ToolTip>
-                                            <ToolTip ToolTip.Placement="Bottom"
-                                                     ToolTip.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                                     VerticalOffset="15">
-                                                TASK_INTERRUPTABLE
-                                            </ToolTip>
-                                        </Button.ToolTip>
-                                        12
-                                    </Button>
+                                <ToolBar Name="TaskList" Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
                                 </ToolBar>
                             </ToolBarTray>
                             <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Margin="0 10 0 10">Disk Blocking Queue</TextBlock>
                             <ToolBarTray>
-                                <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="True">
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}" ToolTip="TASK_RUNNING">
+                                <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}" 
+                                            ToolTip="TASK_RUNNING">
                                         pid=1
                                     </Button>
                                 </ToolBar>
@@ -255,8 +115,16 @@
                             <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="0 0 0 10">Disk Queue</TextBlock>
                             <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Margin="0 10 0 10">Disk Blocking Queue</TextBlock>
                             <ToolBarTray>
-                                <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="True">
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}" ToolTip="TASK_RUNNING">
+                                <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
+                                    <materialDesign:Badged
+  Badge="">
+                                        <Button 
+    ToolTip="MaterialDesignFlatButton">
+                                            ACCEPT
+                                        </Button>
+                                    </materialDesign:Badged>
+                                    <Button  Background="#aeea00" Foreground="Black"  Focusable="False"
+                                        Style="{StaticResource MaterialDesignFlatButton}" ToolTip="TASK_RUNNING">
                                         pid=1
                                     </Button>
                                 </ToolBar>
@@ -311,7 +179,7 @@
                                          Padding="10"
                                          TextWrapping="Wrap"
                                          VerticalAlignment="Stretch"
-                                         Text="Executing function: 1&#x0a;fork() from xxxxxxx 1&#x0a; Reasons explained here."/>
+                                         Text=""/>
                                     <Border Grid.Row="1" BorderThickness="0 1 0 0 " BorderBrush="{DynamicResource PrimaryHueMidBrush}">
                                         <TextBlock 
                                             Name="TracebackBox"
@@ -319,7 +187,7 @@
                                             Padding="10"
                                             TextWrapping="Wrap"
                                             VerticalAlignment="Stretch"
-                                            Text="Executing function: 1&#x0a;fork() from xxxxxxx 1&#x0a; Reasons explained here."/>
+                                            Text=""/>
                                     </Border>
                                 </Grid>
                                 
@@ -365,21 +233,30 @@
 
                 <Grid Grid.Column="2">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8">
-                        <Expander Name="FileAnimationExpander" ExpandDirection="Right" IsExpanded="False">
+                        <Expander Name="FileAnimationExpander" ExpandDirection="Right" IsExpanded="True">
                             <Expander.Header>
-                                <TextBlock Text="File System" Style="{StaticResource MaterialDesignHeadline6TextBlock}" RenderTransformOrigin=".5,.5">
+                                <TextBlock Text="Animation" Style="{StaticResource MaterialDesignHeadline6TextBlock}" RenderTransformOrigin=".5,.5">
                                     <TextBlock.LayoutTransform>
                                         <RotateTransform Angle="270" />
                                     </TextBlock.LayoutTransform>
                                 </TextBlock>
                             </Expander.Header>
-                            <StackPanel Width="500" Orientation="Horizontal" VerticalAlignment="Stretch">
-                                <Rectangle Width="200">
+                            <Grid MinWidth="600">
+                                <Canvas>
+                                    <Grid>
+                                        <Rectangle  Opacity="1" Stroke="Black" Width="200" Height="100">
 
-                                </Rectangle>
-                            </StackPanel>
+                                        </Rectangle>
+                                        <TextBlock Text="Hi there" Margin="5"/>
+                                    </Grid>
+                                    
+                                </Canvas>
+                                <Canvas>
+
+                                </Canvas>
+                            </Grid>
                         </Expander>
-                        <Expander Name="StackAnimationExpander" ExpandDirection="Right" IsExpanded="True">
+                        <Expander Name="StackAnimationExpander" ExpandDirection="Right" IsExpanded="False">
                             <Expander.Header>
                                 <TextBlock Text="Stacks" Style="{StaticResource MaterialDesignHeadline6TextBlock}" RenderTransformOrigin=".5,.5">
                                     <TextBlock.LayoutTransform>
