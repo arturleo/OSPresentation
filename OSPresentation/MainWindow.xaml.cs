@@ -27,6 +27,7 @@ using OSPresentation.DataManipulation;
 using System.Xml.Serialization;
 using System.Linq.Expressions;
 using System.ComponentModel.DataAnnotations;
+using System.Numerics;
 
 namespace OSPresentation
 {
@@ -35,7 +36,6 @@ namespace OSPresentation
     /// </summary>
     public partial class MainWindow : Window
     {
-        
         public MainWindow()
         {
             InitializeComponent();
@@ -50,6 +50,19 @@ namespace OSPresentation
             buttonZombieStyle= FindResource("MaterialDesignOutlinedButton") as Style; 
             buttonSleepStyle = FindResource("MaterialDesignFlatDarkBgButton") as Style;
             buttonActionStyle = FindResource("MaterialDesignFlatAccentBgButton") as Style;
+
+            List<ListView> fsl0 = new List<ListView>();
+            fsLists.Add(fsl0);
+            List<ListView> fsl1 = new List<ListView>();
+            fsl1.Add(PcsCntList1);
+            fsl1.Add(PcsFlipsList1);
+            fsl1.Add(PcsFlipList1);
+            fsl1.Add(PcsBHList1);
+            fsl1.Add(ReqList1);
+            fsLists.Add(fsl1);
+            List<ListView> fsl2 = new List<ListView>();
+            fsLists.Add(fsl2);
+
         }
 
         #region Fields
@@ -68,6 +81,9 @@ namespace OSPresentation
         int _stackPointer=-1;
         int _taskCheckPointer = -1, _taskCounterPointer = -1;
         bool _stackExpanderOpen, _fileExpanderOpen;
+        List<int> _fsStates = new List<int>();
+
+        bool _nxFpFlag = false;
         //TODO: store stack, queue, drawboard data here.
         List<ProcessStruct> processStructs = new List<ProcessStruct>();
         Stack<List<StackData>> stackDataList = new Stack<List<StackData>>();
@@ -85,6 +101,7 @@ namespace OSPresentation
         StringAnimationUsingKeyFrames tbTextAnimation = new StringAnimationUsingKeyFrames();
         StringAnimationUsingKeyFrames jeffiesText = new StringAnimationUsingKeyFrames();
         StringAnimationUsingKeyFrames CNTextAnimation = new StringAnimationUsingKeyFrames();
+        StringAnimationUsingKeyFrames flTextAnimation = new StringAnimationUsingKeyFrames();
         StringAnimationUsingKeyFrames pidText = new StringAnimationUsingKeyFrames();
         StringAnimationUsingKeyFrames counterText = new StringAnimationUsingKeyFrames();
         List<StringAnimationUsingKeyFrames> stackTextAnimations = 
@@ -97,6 +114,8 @@ namespace OSPresentation
             new List<StringAnimationUsingKeyFrames>();
         List<StringAnimationUsingKeyFrames> bandageTextAnimations =
             new List<StringAnimationUsingKeyFrames>();
+        List<List<List<StringAnimationUsingKeyFrames>>> fsListAnimations =
+            new List<List<List<StringAnimationUsingKeyFrames>>>();
 
         // Bool
         List<BooleanAnimationUsingKeyFrames> stackTooltipAnimations = 
@@ -136,9 +155,9 @@ namespace OSPresentation
         //Tooltips
         List<ToolTip> taskToolTips=new List<ToolTip>();
         List<ToolTip> stackToolTips = new List<ToolTip>();
-        List<List<ToolTip>> fileToolTips = new List<List<ToolTip>>();
+        // FS obj
+        List<List<ListView>> fsLists = new List<List<ListView>>();
         #endregion
-
         #endregion
 
         #region Methods
@@ -187,6 +206,24 @@ namespace OSPresentation
                             bpn != 27 &&
                             bpn != 27 &&
                             bpn != 32 &&
+                            bpn != 33 &&
+                            bpn != 35 &&
+                            bpn != 36 &&
+                            bpn != 37 &&
+                            bpn != 38 &&
+                            bpn != 44 &&
+                            bpn != 49 &&
+                            bpn != 52 &&
+                            bpn != 50 &&
+                            bpn != 51 &&
+                            bpn != 54 &&
+                            bpn != 55 &&
+                            bpn != 56 &&
+                            bpn != 57 &&
+                            bpn != 58 &&
+                            bpn != 47 &&
+                            bpn != 45 &&
+                            bpn != 42 &&
                             bpn != 14 &&
                             bpn != 14 &&
                             bpn != 14 &&
@@ -232,11 +269,14 @@ namespace OSPresentation
             OSAnimation.Children.Clear();
             consoleText.KeyFrames.Clear();
             CNTextAnimation.KeyFrames.Clear();
+            flTextAnimation.KeyFrames.Clear();
             stackExpandeAnimation = new BooleanAnimationUsingKeyFrames();
             fileExpanderAnimation = new BooleanAnimationUsingKeyFrames();
 
             // refresh process
             TaskList.Items.Clear();
+            _fsStates.Clear();
+            _fsStates.AddRange(Enumerable.Repeat(0, 3).ToList());
 
             // refresh stack
             stackTooltipAnimations.Clear();
@@ -255,6 +295,22 @@ namespace OSPresentation
             processStructs.Add(new ProcessStruct(0, 0, 1, 0, 0, -1, -1, -1));
             foreach (var ind in Range(0, 63))
                 processStructs.Add(null);
+            // FS
+            foreach (var v1 in fsLists)
+            {
+                List<List<StringAnimationUsingKeyFrames>> l = 
+                    new List<List<StringAnimationUsingKeyFrames>>();
+                fsListAnimations.Add(l);
+                foreach (var v2 in v1)
+                {
+                    List<StringAnimationUsingKeyFrames> ll = new List<StringAnimationUsingKeyFrames>();
+                    l.Add(ll);
+                    foreach (ListViewItem v3 in v2.Items)
+                    {
+                        addStringAUKF(v3, ll);
+                    }
+                }
+            }
         }
         void addProcessButton(int i, bool pid0=false)
         {
@@ -373,7 +429,14 @@ namespace OSPresentation
             saufStk.FillBehavior = FillBehavior.HoldEnd;
             stackTextAnimations.Add(saufStk);
         }
-
+        void addStringAUKF(Control c, List<StringAnimationUsingKeyFrames> sl)
+        {
+            StringAnimationUsingKeyFrames saufStk = new StringAnimationUsingKeyFrames();
+            Storyboard.SetTarget(saufStk, c);
+            Storyboard.SetTargetProperty(saufStk, new PropertyPath("Content"));
+            saufStk.FillBehavior = FillBehavior.HoldEnd;
+            sl.Add(saufStk);
+        }
         void addAnimation()
         {
             //temp data
@@ -397,6 +460,8 @@ namespace OSPresentation
                         changeConsole(bp6.Console);
                         break;
                     case 7:
+                        checkFileClose();
+                        checkStackOpen();
                         BP7 bp7 = (BP7)bp;
                         emptyStack();
                         syscallNames.Push(bp7.Syscall);
@@ -492,6 +557,7 @@ namespace OSPresentation
                             _tmpc = -1;
                         }
                         ProcessStruct prc19 = getProcess(bp19.ProcessPid);
+                        changeCN("Changing Counter");
                         if (_taskCounterPointer < 0)
                             _taskCounterPointer = prc19.TaskN;
                         changAndShowTaskCounter(bp19.ProcessCounter, prc19.TaskN);
@@ -502,7 +568,7 @@ namespace OSPresentation
                         _taskCounterPointer = -1;
                         BP20 bp20 = (BP20)bp;
                         changeRunningTask(bp20.NextTask);
-                        changeCN("switching to pid:"+bp20.NextPid, true);
+                        changeCN("Switching to pid:" + bp20.NextPid, true);
                         gtime += itv1;
                         HandlePid(bp20.NextPid);
                         break;
@@ -516,7 +582,7 @@ namespace OSPresentation
                         break;
                     case 23:
                         BP23 bp23 = (BP23)bp;
-                        if (bp23.NextPid==-1) ;
+                        if (bp23.NextPid == -1) ;
                         else
                         {
                             ProcessStruct prc23 = getProcess(bp23.NextPid);
@@ -544,11 +610,367 @@ namespace OSPresentation
                         ProcessStruct prc32 = getProcess(_apid);
                         prc32.State = 3;
                         taskChangeCounter(prc32.TaskN);
-                        gtime +=itv0;
+                        gtime += itv0;
                         prc32 = getProcess(bp32.FatherPid);
                         prc32.Signal = bp32.FatherSignal;
                         taskChangeCounter(prc32.TaskN);
                         gtime += itv2;
+                        break;
+                    case 33:
+                        BP33 bp33 = (BP33)bp;
+                        if (bp33.Pid != 11)
+                        {
+                            Trace.WriteLine("33," + bp33.Pid);
+                            break;
+                        }
+                        ProcessStruct prc33 = getProcess(bp33.Pid);
+                        int id33 = bp33.Pid == 11 ? 1 : bp33.Pid == 10 ? 2 : 0;
+                        checkStackClose();
+                        checkFileOpen();
+                        if (_fsStates[id33] == 0)
+                        {
+                            setFSOpacity(fsObj101);
+                            gtime += itv1;
+                            setFSListString(id33, 0, 0, "pid=" + prc33.Pid);
+                            setFSListString(id33, 0, 1, "flips");
+                            setFSListString(id33, 0, 2, "state=" + prc33.State);
+                            setFSListString(id33, 0, 3, "counter=" + prc33.Counter);
+                            setFSListString(id33, 0, 4, "priority=" + prc33.Priority);
+                            setFSListString(id33, 0, 5, "father=" + prc33.Father);
+                            setFSListString(id33, 0, 6, "exitcode=" + prc33.ExitCode);
+                            setFSListString(id33, 0, 7, "signal=" + prc33.Signal);
+                            gtime += itv1;
+                            setFSOpacity(fsObj102);
+                            gtime += itv1;
+                            setFSOpacity(fsObj103);
+                            _fsStates[id33] = 1;
+                        }
+                        else
+                            ;
+
+                        if (id33 == 1 || id33 == 2)
+                        {
+                            setFSListString(id33, 1, bp33.FD, "flip[" + bp33.FD + "]");
+                            gtime += itv1;
+                            if (bp33.IsNew)
+                                gtime += itv2;
+                        }
+                        else
+                        {
+                            Trace.WriteLine("bp33: wrong pid");
+                        }
+                        break;
+                    case 35:
+                        BP35 bp35 = (BP35)bp;
+                        if (bp35.Pid != 11)
+                        {
+                            Trace.WriteLine("35," + bp35.Pid);
+                            break;
+                        }
+                        int id35 = bp35.Pid == 11 ? 1 : bp35.Pid == 10 ? 2 : 0;
+                        checkStackClose();
+                        checkFileOpen();
+                        setFSOpacity(fsObj104);
+                        gtime += itv1;
+                        setFSOpacity(fsObj105);
+                        gtime += itv1;
+                        setFSListString(id35, 2, 0, bp35.Mode);
+                        gtime += itv1;
+                        setFSListString(id35, 2, 1, bp35.Flags);
+                        gtime += itv1;
+                        setFSListString(id35, 2, 2, bp35.Count);
+                        gtime += itv1;
+                        setFSListString(id35, 2, 3, bp35.Inode);
+                        gtime += itv1;
+                        setFSListString(id35, 2, 4, bp35.Pos);
+                        gtime += itv1;
+                        _fsStates[id35] = 2;
+                        break;
+                    case 36:
+                        if (_apid != 11)
+                        {
+                            Trace.WriteLine("36," + _apid);
+                            break;
+                        }
+                        checkStackClose();
+                        checkFileOpen();
+                        setCardSelected(fsObj109);
+                        setFSOpacity(fsObj109);
+                        gtime += itv1;
+                        setFSOpacity(fsObj110);
+                        setFSOpacity(fsObj119);
+                        gtime += itv1;
+                        setCardSelected(fsObj109, false);
+                        gtime += itv0 / 2;
+                        setCardSelected(fsObj111);
+                        setFSOpacity(fsObj111);
+                        gtime += itv1;
+                        break;
+                    case 37:
+                        gtime += itv1;
+                        break;
+                    case 38:
+                        gtime += itv1;
+                        break;
+                    case 44:
+                        if (_apid != 11)
+                        {
+                            Trace.WriteLine("44," + _apid);
+                            break;
+                        }
+                        BP44 bp44 = (BP44)bp;
+                        fsObj121.Text = "dev=" + bp44.Dev + " block=" + bp44.Block;
+                        checkStackClose();
+                        checkFileOpen();
+                        setFSOpacity(fsObj150);
+                        setFSOpacity(fsObj151);
+                        gtime += itv1;
+                        setFSOpacity(fsObj123);
+                        gtime += itv1;
+                        setFSOpacity(fsObj121);
+                        setFSOpacity(fsObj124);
+                        gtime += itv1;
+                        setFSOpacity(fsObj112);
+                        gtime += itv1;
+                        setCardSelected(fsObj111, false);
+                        gtime += itv0 / 2;
+                        setCardSelected(fsObj113);
+                        setFSOpacity(fsObj113);
+                        gtime += itv1;
+                        setFSOpacity(fsObj130);
+                        gtime += itv1;
+                        setFSOpacity(fsObj135);
+                        gtime += itv1;
+                        setFSOpacity(fsObj135, false);
+                        gtime += itv1;
+                        break;
+                    case 42:
+                        BP42 bp42 = (BP42)bp;
+                        if (_apid == 11)
+                        {
+                            checkStackClose();
+                            checkFileOpen();
+                            setFSOpacity(fsObj140);
+                            gtime += itv1;
+                            setCardSelected(fsObj117, false);
+                            gtime += itv0 / 2;
+                            setCardSelected(fsObj115);
+                            setFSOpacity(fsObj141);
+                            gtime += itv1;
+                            setCardSelected(fsObj115, false);
+                            gtime += itv0 / 2;
+                            setCardSelected(fsObj113);
+                            setFSOpacity(fsObj142);
+                            gtime += itv1;
+                            setCardSelected(fsObj113, false);
+                            gtime += itv0 / 2;
+                            setCardSelected(fsObj111);
+                            gtime += itv0 / 2;
+                            setFSOpacity(fsObj135);
+                            gtime += itv1;
+                            setFSOpacity(fsObj135, false);
+                        }
+                        else
+                        {
+                            Trace.WriteLine("42," + _apid);
+                        }
+                        break;
+                    case 45:
+                        BP45 bp45 = (BP45)bp;
+                        if (_apid == 11)
+                        {
+                            setFSOpacity(fsObj135);
+                            gtime += itv1;
+                            setFSOpacity(fsObj135, false);
+                            gtime += itv1;
+                        }
+                        else
+                        {
+                            Trace.WriteLine("45," + _apid);
+                        }
+                        break;
+                    case 47:
+                        BP47 bp47 = (BP47)bp;
+                        if (_apid == 11)
+                        {
+                            checkStackClose();
+                            checkFileOpen();
+                            setFSOpacity(fsObj140);
+                            gtime += itv1;
+                            setCardSelected(fsObj117, false);
+                            gtime += itv0 / 2;
+                            setCardSelected(fsObj115);
+                            setFSOpacity(fsObj141);
+                            gtime += itv1;
+                            setCardSelected(fsObj115, false);
+                            gtime += itv0 / 2;
+                            setCardSelected(fsObj113);
+                            setFSOpacity(fsObj142);
+                            gtime += itv1;
+                            setCardSelected(fsObj113, false);
+                            gtime += itv0 / 2;
+                            setCardSelected(fsObj111);
+                            gtime += itv0 / 2;
+                            setFSOpacity(fsObj135);
+                            gtime += itv1;
+                            setFSOpacity(fsObj135, false);
+                        }
+                        else
+                        {
+                            Trace.WriteLine("47," + _apid);
+                        }
+                        break;
+                    case 49:
+                        if (_apid != 11)
+                        {
+                            Trace.WriteLine("48," + _apid);
+                            break;
+                        }
+                        BP49 bp48 = (BP49)bp;
+                        int id48 = bp48.Pid == 11 ? 1 : bp48.Pid == 10 ? 2 : 0;
+                        checkStackClose();
+                        checkFileOpen();
+                        setFSOpacity(fsObj131);
+                        gtime += itv1;
+                        setFSOpacity(fsObj114);
+                        gtime += itv1;
+                        setCardSelected(fsObj113, false);
+                        gtime += itv0 / 2;
+                        setCardSelected(fsObj115);
+                        setFSOpacity(fsObj115);
+                        gtime += itv1;
+                        setFSOpacity(fsObj136);
+                        gtime += itv1;
+                        setFSListString(id48, 3, 1, "b_lock=1");
+                        gtime += itv0;
+                        setFSOpacity(fsObj136, false);
+                        gtime += itv1;
+                        break;
+                    case 50:
+                        if (_apid != 11)
+                        {
+                            Trace.WriteLine("50," + _apid);
+                            break;
+                        }
+                        BP50 bp50 = (BP50)bp;
+                        int id50 = bp50.Pid == 11 ? 1 : bp50.Pid == 10 ? 2 : 0;
+                        setFSOpacity(fsObj116);
+                        gtime += itv1;
+                        setCardSelected(fsObj115, false);
+                        gtime += itv0 / 2;
+                        setCardSelected(fsObj117);
+                        setFSOpacity(fsObj117);
+                        gtime += itv1;
+                        break;
+                    case 51:
+                        //TODO
+                        break;
+                    case 52:
+                        if (_apid != 11)
+                        {
+                            Trace.WriteLine("52," + _apid);
+                            break;
+                        }
+                        BP52 bp52 = (BP52)bp;
+                        int id52 = bp52.Pid == 11 ? 1 : bp52.Pid == 10 ? 2 : 0;
+                        checkStackClose();
+                        checkFileOpen();
+                        setFSOpacity(fsObj132);
+                        gtime += itv0;
+                        setFSListString(id52, 4, 0, bp52.Dev);
+                        gtime += itv0;
+                        setFSListString(id52, 4, 1, bp52.Cmd);
+                        gtime += itv0;
+                        setFSListString(id52, 4, 2, bp52.Errors);
+                        gtime += itv0;
+                        setFSListString(id52, 4, 3, bp52.Sector);
+                        gtime += itv0;
+                        setFSListString(id52, 4, 4, bp52.Nr_sectors);
+                        gtime += itv0;
+                        setFSListString(id52, 4, 5, bp52.Buffer);
+                        gtime += itv0;
+                        setFSListString(id52, 4, 6, bp52.Waiting);
+                        gtime += itv0;
+                        setFSListString(id52, 4, 7, bp52.Bh);
+                        gtime += itv0;
+                        setFSListString(id52, 4, 8, bp52.Next);
+                        gtime += itv0;
+                        setFSOpacity(fsObj133);
+                        setFSOpacity(fsObj134);
+                        gtime += itv1;
+                        break;
+                    case 54:
+                        BP54 bp54 = (BP54)bp;
+                        if(_apid == 11 && _fsStates[2] == 0)
+                        {
+                            checkStackClose();
+                            checkFileOpen();
+                            setFSOpacity(fsObj118);
+                            gtime += itv1;
+                            setFSOpacity(fsObj117);
+                            gtime += itv1;
+                            setButtonRunning();
+                        }
+                        else if (_apid == 0 && _fsStates[1] > 0)
+                        {
+                            if (_nxFpFlag)
+                            {
+                                checkStackClose();
+                                checkFileOpen();
+                                setFSOpacity(fsObj147);
+                                gtime += itv1;
+                                setButtonRunning();
+                                gtime += itv1;
+                                _nxFpFlag = false;
+                            }
+                            else
+                            {
+                                Trace.WriteLine("54, error");
+                            }
+                        }
+                        else
+                        {
+                            Trace.WriteLine("54," + _apid);
+                        }
+                        break;
+                    case 55:
+                        BP55 bp55 = (BP55)bp;
+                        if (_apid == 0 && _fsStates[1] > 0)
+                        {
+                            checkStackClose();
+                            checkFileOpen();
+                            setFSOpacity(fsObj145);
+                            setFSOpacity(fsObj146);
+                            gtime += itv1;
+                            setButtonRunning(false);
+                            setFSListString(1, 3, 0, "b_uptodate=1");
+                            gtime += itv0;
+                            setFSListString(1, 3, 1, "b_lock=0");
+                            gtime += itv0;
+                        }
+                        else
+                        {
+                            Trace.WriteLine("55," + _apid);
+                            break;
+                        }
+                        break;
+                    case 56:
+                        checkStackClose();
+                        checkFileOpen();
+                        gtime += itv2;
+                        break;
+                    case 57:
+                        checkStackClose();
+                        checkFileOpen();
+                        gtime += itv2;
+                        break;
+                    case 58:
+                        checkStackClose();
+                        checkFileOpen();
+                        BP58 bp58 = (BP58)bp;
+                        gtime += itv2;
+                        if (bp58.Next != "0x0")
+                            _nxFpFlag = true;
                         break;
                     default:
                         throw new InvalidOperationException("invalid breakpoint added");
@@ -594,6 +1016,11 @@ namespace OSPresentation
             CNTextAnimation.FillBehavior = FillBehavior.HoldEnd;
             OSAnimation.Children.Add(CNTextAnimation);
 
+            Storyboard.SetTarget(flTextAnimation, FLText);
+            Storyboard.SetTargetProperty(flTextAnimation, new PropertyPath("Text"));
+            flTextAnimation.FillBehavior = FillBehavior.HoldEnd;
+            OSAnimation.Children.Add(flTextAnimation);
+
             Storyboard.SetTargetName(jeffiesText, JeffiesN.Name);
             Storyboard.SetTargetProperty(jeffiesText, new PropertyPath("Text"));
             jeffiesText.FillBehavior = FillBehavior.HoldEnd;
@@ -615,7 +1042,7 @@ namespace OSPresentation
             stackExpandeAnimation.FillBehavior = FillBehavior.HoldEnd;
             OSAnimation.Children.Add(stackExpandeAnimation);
 
-            Storyboard.SetTarget(fileExpanderAnimation, StackAnimationExpander);
+            Storyboard.SetTarget(fileExpanderAnimation, FileAnimationExpander);
             Storyboard.SetTargetProperty(fileExpanderAnimation, new PropertyPath("IsExpanded"));
             fileExpanderAnimation.FillBehavior = FillBehavior.HoldEnd;
             OSAnimation.Children.Add(fileExpanderAnimation);
@@ -643,6 +1070,17 @@ namespace OSPresentation
                 OSAnimation.Children.Add(baukf);
             foreach (var baukf in taskEnableAnimations)
                 OSAnimation.Children.Add(baukf);
+            // FS
+            foreach (var v1 in fsListAnimations)
+            {
+                foreach (var v2 in v1)
+                {
+                    foreach (var v3 in v2)
+                    {
+                        OSAnimation.Children.Add(v3);
+                    }
+                }
+            }
         }
 
         // Text
@@ -688,6 +1126,14 @@ namespace OSPresentation
                 CNTextAnimation.KeyFrames.Add(dsk2);
             }
 
+        }
+        void changeTL(bool clear=false)
+        {
+            DiscreteStringKeyFrame dsk = new DiscreteStringKeyFrame();
+            dsk.Value = clear?"":"Floppy Loading...";
+            dsk.KeyTime = TimeSpan.FromMilliseconds(gtime);
+
+            flTextAnimation.KeyFrames.Add(dsk);
         }
         void HandleJeffies(int j)
         {
@@ -782,7 +1228,7 @@ namespace OSPresentation
                 stackExpandeAnimation.KeyFrames.Add(dbkf);
 
                 _stackExpanderOpen = false;
-                gtime += itv0;
+                gtime += itv1;
             }
         }
         void checkFileOpen()
@@ -794,10 +1240,10 @@ namespace OSPresentation
                 DiscreteBooleanKeyFrame dbkf = new DiscreteBooleanKeyFrame();
                 dbkf.Value = true;
                 dbkf.KeyTime = TimeSpan.FromMilliseconds(gtime);
-                stackExpandeAnimation.KeyFrames.Add(dbkf);
+                fileExpanderAnimation.KeyFrames.Add(dbkf);
 
-                _stackExpanderOpen = true;
-                gtime += itv0;
+                _fileExpanderOpen = true;
+                gtime += itv1;
             }
         }
         void checkFileClose()
@@ -812,7 +1258,7 @@ namespace OSPresentation
                 fileExpanderAnimation.KeyFrames.Add(dbkf);
 
                 _fileExpanderOpen = false;
-                gtime += itv0;
+                gtime += itv1;
             }
         }
         // Stacks
@@ -1133,7 +1579,7 @@ namespace OSPresentation
                 cc.To = Colors.White;
 
 
-            cc.Duration = TimeSpan.FromMilliseconds(100);
+            cc.Duration = TimeSpan.FromMilliseconds(itv0/2);
             cc.BeginTime = TimeSpan.FromMilliseconds(gtime);
             Storyboard.SetTarget(cc, button);
             if (isFore)
@@ -1148,12 +1594,62 @@ namespace OSPresentation
             Button button = taskButtons[idx];
             buttonForeBackgroundAnimation(button, To);
             buttonForeBackgroundAnimation(button, To, true);
+            gtime += itv0 / 2;
         }
         void changeSelectButton(int idx, bool To= true)
         {
             Button button = taskButtons[idx];
             buttonForeBackgroundAnimation(button, To, true, true);
             buttonForeBackgroundAnimation(button, To, false, true);
+            gtime += itv0 / 2;
+        }
+        // FS
+        // change list string
+        void setFSListString(int cvs, int lt, int it, string str)
+        {
+            DiscreteStringKeyFrame dsk = new DiscreteStringKeyFrame();
+            dsk.Value = str;
+            dsk.KeyTime = TimeSpan.FromMilliseconds(gtime);
+
+            fsListAnimations[cvs][lt][it].KeyFrames.Add(dsk);
+        }
+        void setFSOpacity(object obj, bool show = true)
+        {
+            DoubleAnimation da = new DoubleAnimation();
+            da.Duration = TimeSpan.FromMilliseconds(itv0) ;
+            da.BeginTime = TimeSpan.FromMilliseconds(gtime);
+            Storyboard.SetTarget(da, (DependencyObject)obj);
+            Storyboard.SetTargetProperty(da, new PropertyPath("Opacity"));
+            if (show)
+            {
+                da.To = 1;
+            }
+            else
+            {
+                da.To = 0;
+            }
+            
+            OSAnimation.Children.Add(da);
+        }
+        void setCardSelected(Card c, bool to=true)
+        {
+            ColorAnimation cc = new ColorAnimation();
+            if (to)
+                cc.To = Color.FromArgb(0xff, 0xae, 0xea, 00);
+            else 
+                cc.To = Colors.White;
+
+            cc.Duration = TimeSpan.FromMilliseconds(itv0/2);
+            cc.BeginTime = TimeSpan.FromMilliseconds(gtime);
+            Storyboard.SetTarget(cc, c);
+            Storyboard.SetTargetProperty(cc, new PropertyPath("(Background).(SolidColorBrush.Color)"));
+            OSAnimation.Children.Add(cc);
+        }
+        void setButtonRunning(bool to=true)
+        {
+            setFSOpacity(FlpStateButton11,to);
+            setFSOpacity(FlpStateButton12,!to);
+            changeTL(!to);
         }
         #region StructureHandlers
         ProcessStruct getProcess(int pid)

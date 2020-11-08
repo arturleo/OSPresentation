@@ -91,7 +91,6 @@ namespace OSPresentation.TempStruct
             }
         }
         #endregion
-
         #region Methods
         public void SetToDefault()
         {
