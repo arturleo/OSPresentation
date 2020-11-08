@@ -12,7 +12,7 @@
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         xmlns:local="clr-namespace:OSPresentation"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="900" MinWidth="1500">
+        Title="OSPresentation" MinHeight="900" MinWidth="1500">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -41,8 +41,11 @@
                                     <TreeViewItem Name="TVBlk" Header="blk.h"/>
                                     <TreeViewItem Name="TVLl_rw_blk" Header="ll_rw_blk.c"/>
                                 </TreeViewItem>
+                                <TreeViewItem Header="chr_drv" IsExpanded="True">
+                                    <TreeViewItem Name="TVTtyio" Header="tty_io.c"/>
+                                </TreeViewItem>
                                 <TreeViewItem Name="TVFork" Header="fork.c"/>
-                                <TreeViewItem Name="TVShed" Header="shed.c"/>
+                                <TreeViewItem Name="TVSched" Header="sched.c"/>
                                 <TreeViewItem Name="TVSystem_call" Header="system_call.s"/>
                                 <TreeViewItem Name="TVExit" Header="exit.c"/>
                             </TreeViewItem>
@@ -53,8 +56,6 @@
                                 <TreeViewItem Name="TVChar_dev" Header="char_dev.c"/>
                                 <TreeViewItem Name="TVRead_write" Header="read_write.c"/>
                                 <TreeViewItem Name="TVOpen" Header="open.c"/>
-
-
                             </TreeViewItem>
                         </TreeView>
                     </StackPanel>
@@ -95,7 +96,7 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                     <TextBlock Name="FLText" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Padding="10 0"></TextBlock>
-                            </StackPanel>
+                                </StackPanel>
                             </Grid>
                             <ToolBarTray>
                                 <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
@@ -197,13 +198,6 @@
                                         Style="{StaticResource MaterialDesignIconButton}" >
                                     <materialDesign:PackIcon Kind="PlayPause" />
                                 </Button>
-                                <Button Name="ReplayAnimationButton" 
-                                        Click="ReplayAnimation"
-                                        IsEnabled="False"
-                                        ToolTip="Replay"
-                                        Style="{StaticResource MaterialDesignIconButton}"  >
-                                    <materialDesign:PackIcon Kind="Restart" />
-                                </Button>
                             </StackPanel>
                         </Grid>
                         <Grid Grid.Column="1">
@@ -222,7 +216,7 @@
 
                 <Grid Grid.Column="2">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8">
-                        <Expander Name="FileAnimationExpander" ExpandDirection="Right" IsExpanded="True">
+                        <Expander Name="FileAnimationExpander" ExpandDirection="Right" IsExpanded="False">
                             <Expander.Header>
                                 <TextBlock Text="File System" Style="{StaticResource MaterialDesignHeadline6TextBlock}" RenderTransformOrigin=".5,.5">
                                     <TextBlock.LayoutTransform>
@@ -231,7 +225,430 @@
                                 </TextBlock>
                             </Expander.Header>
                             <Grid MinWidth="700">
-                                <Canvas Name="FSPid10Canvas">
+                                <Canvas Name="FSPid00Canvas" Opacity="0">
+                                    <Canvas   Canvas.Left="70" >
+                                        <materialDesign:Card 
+                                                Opacity="0"
+                                                x:Name="fsObj013" 
+                                                Width="150"
+                                                Height="50"
+                                                Canvas.Top="200">
+                                            <TextBlock 
+                                                    Text="     bread()" 
+                                                    Margin="15"
+                                                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                                        </materialDesign:Card>
+                                        <Path
+                                                Opacity="0"
+                                                x:Name="fsObj014" 
+                                                Stretch="Fill" 
+                                                  Fill="{DynamicResource PrimaryHueMidBrush}"
+                                                  Data="M
+                                                  0,115   95,115   
+                                                  65,90   85,90   
+                                                  120,120          
+                                                          85,150  65,150 
+                                                          95,125  0,125  
+                                                  Z"  
+                                                  Width="48" Height="25" 
+                                                  Canvas.Left="60" Canvas.Top="260"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <Path 
+                                                Opacity="0"
+                                                x:Name="fsObj042" 
+                                                Stretch="Fill" 
+                                                  Fill="{DynamicResource PrimaryHueMidBrush}"
+                                                  Data="M
+                                                  0,115   95,115   
+                                                  65,90   85,90   
+                                                  120,120          
+                                                          85,150  65,150 
+                                                          95,125  0,125  
+                                                  Z"  
+                                                  Width="48" Height="25" 
+                                                  Canvas.Left="40" Canvas.Top="260"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="270"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <materialDesign:Card 
+                                                Opacity="0"
+                                                x:Name="fsObj015" 
+                                                Width="150"
+                                                Height="50"
+                                                Canvas.Top="300">
+                                            <TextBlock 
+                                                    Text=" ll_rw_block()" 
+                                                    Margin="15"
+                                                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                                        </materialDesign:Card>
+                                        <Path 
+                                                Opacity="0"
+                                                x:Name="fsObj016" 
+                                                Stretch="Fill" 
+                                                  Fill="{DynamicResource PrimaryHueMidBrush}"
+                                                  Data="M
+                                                  0,115   95,115   
+                                                  65,90   85,90   
+                                                  120,120          
+                                                          85,150  65,150 
+                                                          95,125  0,125  
+                                                  Z"  
+                                                  Width="48" Height="25" 
+                                                  Canvas.Left="60" Canvas.Top="360"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <Path 
+                                                Opacity="0"
+                                                x:Name="fsObj041" 
+                                                Stretch="Fill" 
+                                                  Fill="{DynamicResource PrimaryHueMidBrush}"
+                                                  Data="M
+                                                  0,115   95,115   
+                                                  65,90   85,90   
+                                                  120,120          
+                                                          85,150  65,150 
+                                                          95,125  0,125  
+                                                  Z"  
+                                                  Width="48" Height="25" 
+                                                  Canvas.Left="40" Canvas.Top="360"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="270"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <materialDesign:Card 
+                                                Opacity="0"
+                                                x:Name="fsObj017" 
+                                                Width="150"
+                                                Height="50"
+                                                Canvas.Top="400">
+                                            <TextBlock 
+                                                    Text=" add to queue" 
+                                                    Margin="10 15"
+                                                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                                        </materialDesign:Card>
+                                        <Path 
+                                                Opacity="0"
+                                                x:Name="fsObj018" 
+                                                Stretch="Fill" 
+                                                  Fill="{DynamicResource PrimaryHueMidBrush}"
+                                                  Data="M
+                                                  0,115   95,115   
+                                                  65,90   85,90   
+                                                  120,120          
+                                                          85,150  65,150 
+                                                          95,125  0,125  
+                                                  Z"  
+                                                  Width="48" Height="25" 
+                                                  Canvas.Left="60" Canvas.Top="460"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <Path 
+                                                Opacity="0"
+                                                x:Name="fsObj040" 
+                                                Stretch="Fill" 
+                                                  Fill="{DynamicResource PrimaryHueMidBrush}"
+                                                  Data="M
+                                                  0,115   95,115   
+                                                  65,90   85,90   
+                                                  120,120          
+                                                          85,150  65,150 
+                                                          95,125  0,125  
+                                                  Z"  
+                                                  Width="48" Height="25" 
+                                                  Canvas.Left="40" Canvas.Top="460"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="270"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <materialDesign:Card 
+                                                Opacity="0"
+                                                Background="{DynamicResource PrimaryHueMidBrush}"
+                                                x:Name="fsObj023" 
+                                                Width="140"
+                                                Height="50"
+                                                Canvas.Left="250"
+                                                Canvas.Top="130">
+                                            <TextBlock 
+                                                    x:Name="fsObj025"
+                                                    Foreground="White"
+                                                    Text="block: 0 in dev" 
+                                                    Margin="2 15"
+                                                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                                        </materialDesign:Card>
+                                        <Path 
+                                                Opacity="0"
+                                                x:Name="fsObj024" 
+                                                Stretch="Fill" 
+                                                  Fill="{DynamicResource PrimaryHueMidBrush}"
+                                                  Data="M
+                                                  -50,500  -50,115   95,115   
+                                                  65,90   85,90   
+                                                  120,120          
+                                                          85,150  65,150 
+                                                          95,125  -40,125 -40,500 
+                                                  Z"  
+                                                  Width="49" Height="191" 
+                                                  Canvas.Left="130.668" Canvas.Top="78.333"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform ScaleX="-1"/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="-90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+
+                                        <materialDesign:Card 
+                                                Opacity="0"
+                                                x:Name="fsObj030" 
+                                                Canvas.Left="201"
+                                                    Canvas.Top="265">
+                                            <StackPanel Margin="10"
+                                                    Orientation="Vertical">
+                                                <TextBlock Text="  bh          " Style="{StaticResource MaterialDesignHeadline6TextBlock}" />
+                                                <ListView Name="PcsBHList0">
+                                                    <ListViewItem Content="b_uptodate=0"/>
+                                                    <ListViewItem Content="b_lock=0"/>
+                                                </ListView>
+                                            </StackPanel>
+                                        </materialDesign:Card>
+                                        <Path 
+                                                Opacity="0"
+                                                x:Name="fsObj031" 
+                                                Stretch="Fill" 
+                                                  Fill="{DynamicResource PrimaryHueMidBrush}"
+                                                  Data="M
+                                                  -100,115   95,115   
+                                                  65,90   85,90   
+                                                  120,120          
+                                                          85,150  65,150 
+                                                          95,125  -100,125  
+                                                  Z"  
+                                                  Width="102" Height="25" 
+                                                  Canvas.Left="98" Canvas.Top="272.333"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="180"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+
+                                        <materialDesign:Card 
+                                                Opacity="0"
+                                                x:Name="fsObj032" 
+                                                Width="200"
+                                                Canvas.Left="400"
+                                                Canvas.Top="370">
+                                            <StackPanel Margin="10"
+                                                    Orientation="Vertical">
+                                                <TextBlock Text="  req          " Style="{StaticResource MaterialDesignHeadline6TextBlock}" />
+                                                <ListView Name="ReqList0">
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                </ListView>
+                                            </StackPanel>
+                                        </materialDesign:Card>
+                                        <Path 
+                                                Opacity="0"
+                                                x:Name="fsObj033" 
+                                                Stretch="Fill" 
+                                                  Fill="{DynamicResource PrimaryHueMidBrush}"
+                                                  Data="M                                               
+                                                        -500,115   95,115           
+                                                        65,90   85,90                               
+                                                        120,120                      
+                                                        85,150  65,150                         
+                                                        95,125  -500,125                                      
+                                                        Z"  
+                                                  Width="302" Height="25" 
+                                                  Canvas.Left="98" Canvas.Top="368"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="180"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <TextBlock
+                                                Opacity="0"
+                                                x:Name="fsObj034" 
+                                                Style="{StaticResource MaterialDesignSubtitle1TextBlock}" 
+                                                Text="add_request()" 
+                                                Canvas.Left="201" 
+                                                Canvas.Top="386"/>
+                                        <Path 
+                                                Opacity="0"
+                                                x:Name="fsObj035" 
+                                                Stretch="Fill" 
+                                                  Fill="{DynamicResource PrimaryHueMidBrush}"
+                                                  Data="M
+                                                  -140,400  -140,115   95,115   
+                                                  65,90   85,90   
+                                                  120,120          
+                                                          85,150  65,150 
+                                                          95,125  -130,125 -130,400 
+                                                  Z"  
+                                                  Width="84" Height="118" 
+                                                  Canvas.Left="167.165" Canvas.Top="211.289"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <Path 
+                                                Opacity="0"
+                                                x:Name="fsObj036" 
+                                                Stretch="Fill" 
+                                                  Fill="{DynamicResource PrimaryHueMidBrush}"
+                                                  Data="M
+                                                  -40,115   95,115   
+                                                  65,90   85,90   
+                                                  120,120          
+                                                          85,150  65,150 
+                                                          95,125  -40,125  
+                                                  Z"  
+                                                  Width="64" Height="25" 
+                                                  Canvas.Left="150" Canvas.Top="334.2"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="0"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <Grid
+                                                Canvas.Left="22"
+                                                Canvas.Top="478"
+                                                Width="400">
+                                            <Button
+                                                    Name="FlpStateButton01"
+                                                    Opacity="0"
+                                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                                materialDesign:ButtonProgressAssist.Value="-1"
+                                                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                                                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                                                Content="add_timer(ticks_to_floppy_on,floppy_on_interrupt)"
+                                                Margin="-27,16,31,-16" />
+                                            <Button
+                                                    Name="FlpStateButton02"
+                                                    Opacity="0"
+                                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                                Content="add_timer(ticks_to_floppy_on,floppy_on_interrupt)"
+                                                Margin="-27,16,31,-16" />
+                                        </Grid>
+                                        <Path 
+                                                Opacity="0"
+                                                x:Name="fsObj045" 
+                                                Stretch="Fill" 
+                                                  Fill="{DynamicResource PrimaryHueMidBrush}"
+                                                  Data="M
+                                                  -200,115   95,115   
+                                                  65,90   85,90   
+                                                  120,120          
+                                                          85,150  65,150 
+                                                          95,125  -200,125  
+                                                  Z"  
+                                                  Width="121" Height="25" 
+                                                  Canvas.Left="198.888" Canvas.Top="420.556"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="270"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <TextBlock
+                                                Opacity="0"
+                                                x:Name="fsObj046" 
+                                                Style="{StaticResource MaterialDesignSubtitle1TextBlock}" 
+                                                Text="end_request()&#10;unlock_buffer()" 
+                                                Canvas.Left="272" 
+                                                Canvas.Top="425"/>
+                                        <Path 
+                                                Opacity="0"
+                                                x:Name="fsObj047" 
+                                                Stretch="Fill" 
+                                                  Fill="{DynamicResource PrimaryHueMidBrush}"
+                                                  Data="M
+                                                  -200,115   95,115   
+                                                  65,90   85,90   
+                                                  120,120          
+                                                          85,150  65,150 
+                                                          95,125  -200,125  
+                                                  Z"  
+                                                  Width="121" Height="25" 
+                                                  Canvas.Left="180" Canvas.Top="420.556"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                    </Canvas>
+                                </Canvas>
+                                <Canvas Name="FSPid10Canvas" Opacity="0">
                                     <Canvas Canvas.Left="20">
                                         <materialDesign:Card
                                             Opacity="0"
@@ -389,7 +806,7 @@
                                             Canvas.Left="100" 
                                             Canvas.Top="60"/>
                                         <Path 
-                                            Opacity="1"
+                                            Opacity="0"
                                             x:Name="fsObj144" 
                                             Stretch="Fill" 
                                               Fill="{DynamicResource PrimaryHueMidBrush}"
@@ -446,8 +863,14 @@
                                                 </TransformGroup>
                                             </Path.RenderTransform>
                                         </Path>
+                                        <TextBlock
+                                            Opacity="0"
+                                            x:Name="fsObj149" 
+                                            Style="{StaticResource MaterialDesignSubtitle1TextBlock}" 
+                                            Text="" 
+                                            Canvas.Top="170"/>
                                         <Path 
-                                            Opacity="1"
+                                            Opacity="0"
                                             x:Name="fsObj143" 
                                             Stretch="Fill" 
                                               Fill="{DynamicResource PrimaryHueMidBrush}"
@@ -511,7 +934,7 @@
                                             </Path.RenderTransform>
                                         </Path>
                                         <Path 
-                                            Opacity="1"
+                                            Opacity="0"
                                             x:Name="fsObj142" 
                                             Stretch="Fill" 
                                               Fill="{DynamicResource PrimaryHueMidBrush}"
@@ -568,7 +991,7 @@
                                             </Path.RenderTransform>
                                         </Path>
                                         <Path 
-                                            Opacity="1"
+                                            Opacity="0"
                                             x:Name="fsObj141" 
                                             Stretch="Fill" 
                                               Fill="{DynamicResource PrimaryHueMidBrush}"
@@ -625,7 +1048,7 @@
                                             </Path.RenderTransform>
                                         </Path>
                                         <Path 
-                                            Opacity="1"
+                                            Opacity="0"
                                             x:Name="fsObj140" 
                                             Stretch="Fill" 
                                               Fill="{DynamicResource PrimaryHueMidBrush}"
@@ -837,7 +1260,7 @@
                                             Margin="-27,16,31,-16" />
                                             <Button
                                                 Name="FlpStateButton12"
-                                                Opacity="1"
+                                                Opacity="0"
                                             Style="{StaticResource MaterialDesignRaisedButton}"
                                             Content="add_timer(ticks_to_floppy_on,floppy_on_interrupt)"
                                             Margin="-27,16,31,-16" />
@@ -897,6 +1320,678 @@
                                         </Path>
                                     </Canvas>
                                 </Canvas>
+                                <Canvas Name="FSPid20Canvas" Opacity="0">
+                                    <Canvas Canvas.Left="20">
+                                        <materialDesign:Card
+                                            Opacity="0"
+                                            Name="fsObj201"
+                                            Canvas.Left="50"
+                                                Canvas.Top="10">
+                                            <StackPanel Margin="10"
+                                                Orientation="Vertical">
+                                                <TextBlock Text="Process  " 
+                                                           Style="{StaticResource MaterialDesignHeadline6TextBlock}" />
+                                                <ListView Name="PcsCntList2">
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                </ListView>
+                                            </StackPanel>
+                                        </materialDesign:Card>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj202" 
+                                              Stretch="Fill" Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              0,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  0,125  
+                                              Z"  
+                                              Width="51" Height="26" 
+                                              Canvas.Left="148.88" Canvas.Top="83.333"/>
+                                        <materialDesign:Card 
+                                            Opacity="0"
+                                            x:Name="fsObj203" 
+                                            Canvas.Left="200"
+                                                Canvas.Top="79">
+                                            <StackPanel Margin="10"
+                                                Orientation="Vertical">
+                                                <TextBlock Text="  Flips        " Style="{StaticResource MaterialDesignHeadline6TextBlock}" />
+                                                <ListView
+                                                    Name="PcsFlipsList2">
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                </ListView>
+                                            </StackPanel>
+                                        </materialDesign:Card>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj204" 
+                                            Stretch="Fill" Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              0,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  0,125  
+                                              Z"  
+                                              Width="48" Height="26" 
+                                              Canvas.Left="315" Canvas.Top="214.666" RenderTransformOrigin="0.893,0.489"/>
+                                        <materialDesign:Card 
+                                            Opacity="0"
+                                            x:Name="fsObj205" 
+                                            Canvas.Left="366"
+                                                Canvas.Top="200">
+                                            <StackPanel Margin="10"
+                                                Orientation="Vertical">
+                                                <TextBlock Text="   flip[3]        " Style="{StaticResource MaterialDesignHeadline6TextBlock}" />
+                                                <ListView Name="PcsFlipList2">
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                </ListView>
+                                            </StackPanel>
+                                        </materialDesign:Card>
+
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj250" 
+                                            Panel.ZIndex="99"
+                                            Stretch="Fill" Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              -150,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  -150,125  
+                                              Z"  
+                                              Width="94" Height="26" 
+                                              Canvas.Left="298.284" Canvas.Top="458.716" RenderTransformOrigin="0.893,0.489">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <TextBlock
+                                            Opacity="0"
+                                            x:Name="fsObj251" 
+                                            Style="{StaticResource MaterialDesignSubtitle1TextBlock}" 
+                                            Text="pos=0" 
+                                            Canvas.Left="388" 
+                                            Canvas.Top="424"/>
+                                    </Canvas>
+                                    <Canvas Name="FSPid20TBCanvas" Canvas.Left="50" Canvas.Top="350">
+                                        <materialDesign:Card
+                                            Opacity="0"
+                                            x:Name="fsObj209" 
+                                            Width="150"
+                                            Height="50">
+                                            <TextBlock 
+                                                Text="   sys_read()" 
+                                                Margin="15"
+                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                                        </materialDesign:Card>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj210" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              0,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  0,125  
+                                              Z"  
+                                              Width="48" Height="25" 
+                                              Canvas.Left="60" Canvas.Top="60"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <TextBlock
+                                            Opacity="0"
+                                            x:Name="fsObj219" 
+                                            Style="{StaticResource MaterialDesignSubtitle1TextBlock}" 
+                                            Text="S_ISBLK(inode->i_mode)==1" 
+                                            Canvas.Left="100" 
+                                            Canvas.Top="60"/>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj244" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              0,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  0,125  
+                                              Z"  
+                                              Width="48" Height="25" 
+                                              Canvas.Left="40" Canvas.Top="60"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="270"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+
+                                        <materialDesign:Card 
+                                            Opacity="0"
+                                            x:Name="fsObj211" 
+                                            Width="150"
+                                            Height="50"
+                                            Canvas.Top="100">
+                                            <TextBlock 
+                                                Text="   file_read()" 
+                                                Margin="15"
+                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                                        </materialDesign:Card>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj212" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              0,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  0,125  
+                                              Z"  
+                                              Width="48" Height="25" 
+                                              Canvas.Left="60" Canvas.Top="160"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <TextBlock
+                                            Opacity="0"
+                                            x:Name="fsObj249" 
+                                            Style="{StaticResource MaterialDesignSubtitle1TextBlock}" 
+                                            Text="" 
+                                            Canvas.Top="170"/>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj243" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              0,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  0,125  
+                                              Z"  
+                                              Width="48" Height="25" 
+                                              Canvas.Left="40" Canvas.Top="160"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="270"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <TextBlock
+                                            Opacity="0"
+                                            x:Name="fsObj221" 
+                                            Style="{StaticResource MaterialDesignSubtitle1TextBlock}" 
+                                            Text="dev=541, block=659" 
+                                            Canvas.Left="100" 
+                                            Canvas.Top="170"/>
+                                        <materialDesign:Card 
+                                            Opacity="0"
+                                            x:Name="fsObj213" 
+                                            Width="150"
+                                            Height="50"
+                                            Canvas.Top="200">
+                                            <TextBlock 
+                                                Text="     bread()" 
+                                                Margin="15"
+                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                                        </materialDesign:Card>
+                                        <Path
+                                            Opacity="0"
+                                            x:Name="fsObj214" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              0,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  0,125  
+                                              Z"  
+                                              Width="48" Height="25" 
+                                              Canvas.Left="60" Canvas.Top="260"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj242" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              0,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  0,125  
+                                              Z"  
+                                              Width="48" Height="25" 
+                                              Canvas.Left="40" Canvas.Top="260"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="270"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <materialDesign:Card 
+                                            Opacity="0"
+                                            x:Name="fsObj215" 
+                                            Width="150"
+                                            Height="50"
+                                            Canvas.Top="300">
+                                            <TextBlock 
+                                                Text=" ll_rw_block()" 
+                                                Margin="15"
+                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                                        </materialDesign:Card>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj216" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              0,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  0,125  
+                                              Z"  
+                                              Width="48" Height="25" 
+                                              Canvas.Left="60" Canvas.Top="360"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj241" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              0,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  0,125  
+                                              Z"  
+                                              Width="48" Height="25" 
+                                              Canvas.Left="40" Canvas.Top="360"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="270"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <materialDesign:Card 
+                                            Opacity="0"
+                                            x:Name="fsObj217" 
+                                            Width="150"
+                                            Height="50"
+                                            Canvas.Top="400">
+                                            <TextBlock 
+                                                Text=" add to queue" 
+                                                Margin="10 15"
+                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                                        </materialDesign:Card>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj218" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              0,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  0,125  
+                                              Z"  
+                                              Width="48" Height="25" 
+                                              Canvas.Left="60" Canvas.Top="460"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj240" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              0,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  0,125  
+                                              Z"  
+                                              Width="48" Height="25" 
+                                              Canvas.Left="40" Canvas.Top="460"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="270"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <materialDesign:Card 
+                                            Opacity="0"
+                                            Background="{DynamicResource PrimaryHueMidBrush}"
+                                            x:Name="fsObj223" 
+                                            Width="140"
+                                            Height="50"
+                                            Canvas.Left="250"
+                                            Canvas.Top="130">
+                                            <TextBlock 
+                                                x:Name="fsObj225"
+                                                Foreground="White"
+                                                Text="block: 0 in dev" 
+                                                Margin="2 15"
+                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                                        </materialDesign:Card>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj224" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              -250,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  -250,125  
+                                              Z"  
+                                              Width="154" Height="25" 
+                                              Canvas.Left="98" Canvas.Top="145"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="180"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+
+                                        <materialDesign:Card 
+                                            Opacity="0"
+                                            x:Name="fsObj230" 
+                                            Canvas.Left="201"
+                                                Canvas.Top="265">
+                                            <StackPanel Margin="10"
+                                                Orientation="Vertical">
+                                                <TextBlock Text="  bh          " Style="{StaticResource MaterialDesignHeadline6TextBlock}" />
+                                                <ListView Name="PcsBHList2">
+                                                    <ListViewItem Content="b_uptodate=0"/>
+                                                    <ListViewItem Content="b_lock=0"/>
+                                                </ListView>
+                                            </StackPanel>
+                                        </materialDesign:Card>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj231" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              -100,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  -100,125  
+                                              Z"  
+                                              Width="102" Height="25" 
+                                              Canvas.Left="98" Canvas.Top="272.333"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="180"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+
+                                        <materialDesign:Card 
+                                            Opacity="0"
+                                            x:Name="fsObj232" 
+                                            Width="200"
+                                            Canvas.Left="400"
+                                            Canvas.Top="170">
+                                            <StackPanel Margin="10"
+                                                Orientation="Vertical">
+                                                <TextBlock Text="  req          " Style="{StaticResource MaterialDesignHeadline6TextBlock}" />
+                                                <ListView Name="ReqList2">
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                    <ListViewItem Content=""/>
+                                                </ListView>
+                                            </StackPanel>
+                                        </materialDesign:Card>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj233" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M                                               
+                                                    -500,115   95,115           
+                                                    65,90   85,90                               
+                                                    120,120                      
+                                                    85,150  65,150                         
+                                                    95,125  -500,125                                      
+                                                    Z"  
+                                              Width="302" Height="25" 
+                                              Canvas.Left="98" Canvas.Top="368"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="180"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <TextBlock
+                                            Opacity="0"
+                                            x:Name="fsObj234" 
+                                            Style="{StaticResource MaterialDesignSubtitle1TextBlock}" 
+                                            Text="add_request()" 
+                                            Canvas.Left="201" 
+                                            Canvas.Top="386"/>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj235" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              -140,400  -140,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  -130,125 -130,400 
+                                              Z"  
+                                              Width="84" Height="118" 
+                                              Canvas.Left="167.165" Canvas.Top="211.289"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj236" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              -40,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  -40,125  
+                                              Z"  
+                                              Width="64" Height="25" 
+                                              Canvas.Left="150" Canvas.Top="334.2"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="0"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <Grid
+                                            Canvas.Left="22"
+                                            Canvas.Top="478"
+                                            Width="400">
+                                            <Button
+                                                Name="FlpStateButton21"
+                                                Opacity="0"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
+                                            materialDesign:ButtonProgressAssist.Value="-1"
+                                            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                                            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                                            Content="add_timer(ticks_to_floppy_on,floppy_on_interrupt)"
+                                            Margin="-27,16,31,-16" />
+                                            <Button
+                                                Name="FlpStateButton22"
+                                                Opacity="0"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
+                                            Content="add_timer(ticks_to_floppy_on,floppy_on_interrupt)"
+                                            Margin="-27,16,31,-16" />
+                                        </Grid>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj245" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              -200,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  -200,125  
+                                              Z"  
+                                              Width="121" Height="25" 
+                                              Canvas.Left="198.888" Canvas.Top="420.556"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="270"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                        <TextBlock
+                                            Opacity="0"
+                                            x:Name="fsObj246" 
+                                            Style="{StaticResource MaterialDesignSubtitle1TextBlock}" 
+                                            Text="end_request()&#10;unlock_buffer()" 
+                                            Canvas.Left="272" 
+                                            Canvas.Top="425"/>
+                                        <Path 
+                                            Opacity="0"
+                                            x:Name="fsObj247" 
+                                            Stretch="Fill" 
+                                              Fill="{DynamicResource PrimaryHueMidBrush}"
+                                              Data="M
+                                              -200,115   95,115   
+                                              65,90   85,90   
+                                              120,120          
+                                                      85,150  65,150 
+                                                      95,125  -200,125  
+                                              Z"  
+                                              Width="121" Height="25" 
+                                              Canvas.Left="180" Canvas.Top="420.556"                             RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                    </Canvas>
+                                </Canvas>
                             </Grid>
                         </Expander>
                         <Expander Name="StackAnimationExpander" ExpandDirection="Right" IsExpanded="True">
@@ -926,9 +2021,20 @@
                     Margin="32" 
                     Grid.Column="2">
                     <StackPanel>
-                        <Slider Orientation="Vertical"    Minimum="5"    Maximum="100"    Height="100"    Style="{StaticResource MaterialDesignDiscreteSlider}"    ToolTip="MaterialDesignDiscreteSlider" />
-                        <Button Name="Load" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  ToolTip="MaterialDesignIconButton"
-                        Command ="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                        <Slider Name="SpeedSlider" 
+                                Orientation="Vertical"  
+                                Value="10"  
+                                Minimum="1"    
+                                Maximum="100"    
+                                Height="100" 
+                                Thumb.DragStarted="SpeedSlider_DragStarted"
+                                Thumb.DragCompleted="SpeedSlider_DragCompleted"
+                                Style="{StaticResource MaterialDesignDiscreteSlider}"    
+                                ToolTip="Adjust playing speed." />
+                        <Button Name="Load" 
+                                Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  
+                                ToolTip="Read a breakpoint file."
+                                Command ="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
                             <materialDesign:PackIcon Kind="Plus"/>
                         </Button>
                     </StackPanel>
@@ -937,10 +2043,10 @@
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
                     <TextBlock>Input the file path here.</TextBlock>
-                    <TextBox Text="./Data/output_all_m.txt"  Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="bpFileBox" />
+                    <TextBox Text=""  Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="bpFileBox" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                         <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                        IsDefault="True"
+                                        IsDefault="False"
                                         Margin="0 8 8 0"
                                         Command="materialDesign:DialogHost.CloseDialogCommand">
                             <Button.CommandParameter>

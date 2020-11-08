@@ -70,6 +70,7 @@ namespace OSPresentation.DataManipulation
         #endregion
 
         #region Properties
+        public string FileName { get => fileName; }
         public int BPN { set; get; }
         public int Jeffies { set; get; }
         public int Pid { set; get; }
