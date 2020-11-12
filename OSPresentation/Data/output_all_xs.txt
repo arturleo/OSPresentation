@@ -1,0 +1,5252 @@
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$1294 = 2799
+$1295 = 0
+$1296 = 3
+$1297 = 3
+$1298 = 1
+$1299 = 27
+$1300 = 15
+$1301 = 1
+$1302 = 0
+$1303 = 0
+$1304 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$1305 = 2799
+$1306 = 0
+$1307 = 2
+$1308 = 4
+$1309 = 0
+$1310 = 5
+$1311 = 15
+$1312 = 1
+$1313 = 0
+$1314 = 0
+$1315 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$1316 = 2799
+$1317 = 0
+$1318 = 2
+$1319 = 5
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$1320 = 2799
+$1321 = 0
+$1322 = 1
+$1323 = 1
+$1324 = 1
+$1325 = 27
+$1326 = 15
+$1327 = 0
+$1328 = 0
+$1329 = 0
+$1330 = 5
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$1331 = 2799
+$1332 = 0
+#0  schedule () at sched.c:141
+#1  0x00007978 in system_call () at system_call.s:100
+#2  0x00000000 in ?? ()
+$1333 = 2
+$1334 = 4
+
+
+Breakpoint 23, wake_up (p=0x23d1c <tty_table+2140>) at sched.c:191
+191		if (p && *p) {
+$1335 = 2799
+$1336 = 4
+#0  wake_up (p=0x23d1c <tty_table+2140>) at sched.c:191
+#1  0x00016d87 in copy_to_cooked (tty=0x234c0 <tty_table>) at tty_io.c:227
+#2  0x000173aa in do_tty_interrupt (tty=0) at tty_io.c:345
+#3  0x00018937 in e0_e1 () at kb.S:69
+#4  0x00000000 in ?? ()
+$1337 = (struct task_struct **) 0x23d1c <tty_table+2140>
+$1338 = -1
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$1339 = 2799
+$1340 = 4
+0xffcfd4:	0x00000002	0x0004840c	0x00000001	0xffff0017
+0xffcfe4:	0x00000017	0x00000017	0x0003978c	0x0000000f
+0xffcff4:	0x00000293	0x03fff50c	0x00000017	0x00000065
+
+
+Breakpoint 6, tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+326		return (b-buf);
+$1341 = 2799
+$1342 = 4
+#0  tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+#1  0x0000f0e3 in rw_ttyx (rw=1, minor=0, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:23
+#2  0x0000f31e in rw_char (rw=1, dev=1024, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:103
+#3  0x0000c65f in sys_write (fd=2, buf=0x4840c "", count=1) at read_write.c:96
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000002 in startup_32 () at head.s:19
+--------------------------------------------------------------------------------
+                                                                                
+Bochs VBE Display Adapter enabled                                               
+                                                                                
+Bochs BIOS - build: 09/02/12                                                    
+$Revision: 11318 $ $Date: 2012-08-06 19:59:54 +0200 (Mo, 06. Aug 2012) $        
+Options: apmbios pcibios pnpbios eltorito rombios32                             
+                                                                                
+                                                                                
+Press F12 for boot menu.                                                        
+                                                                                
+Booting from Floppy...                                                          
+                                                                                
+Loading system ...                                                              
+                                                                                
+Ram disk: 1049600 bytes, starting at 0x400000                                   
+Insert root floppy and press ENTER                                              
+6/1440 free blocks                                                              
+400/480 free inodes                                                             
+3423 buffers = 3505152 bytes buffer space                                       
+Free mem: 11533312 bytes                                                        
+=== Ok.                                                                         
+syscal[/usr/root]#                                                              
+l[/usr/root]# syscall                                                           
+Hello, Linux 0.11                                                               
+[/usr/root]# p                                                                  
+--------------------------------------------------------------------------------
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$1343 = 2799
+$1344 = 3
+0xffcfd4:	0x00000000	0x03fff58c	0x00000001	0xffff0017
+0xffcfe4:	0x00000017	0x00000017	0x00039638	0x0000000f
+0xffcff4:	0x00000212	0x03fff578	0x00000017	0x00000065
+
+
+Breakpoint 23, wake_up (p=0x23d1c <tty_table+2140>) at sched.c:191
+191		if (p && *p) {
+$1433 = 2799
+$1434 = 4
+#0  wake_up (p=0x23d1c <tty_table+2140>) at sched.c:191
+#1  0x00016d87 in copy_to_cooked (tty=0x234c0 <tty_table>) at tty_io.c:227
+#2  0x000173aa in do_tty_interrupt (tty=0) at tty_io.c:345
+#3  0x00018937 in e0_e1 () at kb.S:69
+#4  0x00000000 in ?? ()
+$1435 = (struct task_struct **) 0x23d1c <tty_table+2140>
+$1436 = -1
+
+
+Breakpoint 6, tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+326		return (b-buf);
+$1437 = 2799
+$1438 = 4
+#0  tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+#1  0x0000f0e3 in rw_ttyx (rw=1, minor=0, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:23
+#2  0x0000f31e in rw_char (rw=1, dev=1024, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:103
+#3  0x0000c65f in sys_write (fd=2, buf=0x4840c "", count=1) at read_write.c:96
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000002 in startup_32 () at head.s:19
+--------------------------------------------------------------------------------
+                                                                                
+Bochs VBE Display Adapter enabled                                               
+                                                                                
+Bochs BIOS - build: 09/02/12                                                    
+$Revision: 11318 $ $Date: 2012-08-06 19:59:54 +0200 (Mo, 06. Aug 2012) $        
+Options: apmbios pcibios pnpbios eltorito rombios32                             
+                                                                                
+                                                                                
+Press F12 for boot menu.                                                        
+                                                                                
+Booting from Floppy...                                                          
+                                                                                
+Loading system ...                                                              
+                                                                                
+Ram disk: 1049600 bytes, starting at 0x400000                                   
+Insert root floppy and press ENTER                                              
+6/1440 free blocks                                                              
+400/480 free inodes                                                             
+3423 buffers = 3505152 bytes buffer space                                       
+Free mem: 11533312 bytes                                                        
+=== Ok.                                                                         
+syscal[/usr/root]#                                                              
+l[/usr/root]# syscall                                                           
+Hello, Linux 0.11                                                               
+[/usr/root]# pr                                                                 
+--------------------------------------------------------------------------------
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$1439 = 2799
+$1440 = 3
+0xffcfd4:	0x00000000	0x03fff58c	0x00000001	0xffff0017
+0xffcfe4:	0x00000017	0x00000017	0x00039638	0x0000000f
+0xffcff4:	0x00000212	0x03fff578	0x00000017	0x00000065
+
+
+Breakpoint 23, wake_up (p=0x23d1c <tty_table+2140>) at sched.c:191
+191		if (p && *p) {
+$1441 = 2799
+$1442 = 4
+#0  wake_up (p=0x23d1c <tty_table+2140>) at sched.c:191
+#1  0x00016d87 in copy_to_cooked (tty=0x234c0 <tty_table>) at tty_io.c:227
+#2  0x000173aa in do_tty_interrupt (tty=0) at tty_io.c:345
+#3  0x00018937 in e0_e1 () at kb.S:69
+#4  0x00000000 in ?? ()
+$1443 = (struct task_struct **) 0x23d1c <tty_table+2140>
+$1444 = -1
+
+
+Breakpoint 6, tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+326		return (b-buf);
+$1447 = 2799
+$1448 = 4
+#0  tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+#1  0x0000f0e3 in rw_ttyx (rw=1, minor=0, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:23
+#2  0x0000f31e in rw_char (rw=1, dev=1024, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:103
+#3  0x0000c65f in sys_write (fd=2, buf=0x4840c "", count=1) at read_write.c:96
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000002 in startup_32 () at head.s:19
+--------------------------------------------------------------------------------
+                                                                                
+Bochs VBE Display Adapter enabled                                               
+                                                                                
+Bochs BIOS - build: 09/02/12                                                    
+$Revision: 11318 $ $Date: 2012-08-06 19:59:54 +0200 (Mo, 06. Aug 2012) $        
+Options: apmbios pcibios pnpbios eltorito rombios32                             
+                                                                                
+                                                                                
+Press F12 for boot menu.                                                        
+                                                                                
+Booting from Floppy...                                                          
+                                                                                
+Loading system ...                                                              
+                                                                                
+Ram disk: 1049600 bytes, starting at 0x400000                                   
+Insert root floppy and press ENTER                                              
+6/1440 free blocks                                                              
+400/480 free inodes                                                             
+3423 buffers = 3505152 bytes buffer space                                       
+Free mem: 11533312 bytes                                                        
+=== Ok.                                                                         
+syscal[/usr/root]#                                                              
+l[/usr/root]# syscall                                                           
+Hello, Linux 0.11                                                               
+[/usr/root]# pro                                                                
+--------------------------------------------------------------------------------
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$1449 = 2799
+$1450 = 3
+0xffcfd4:	0x00000000	0x03fff58c	0x00000001	0x00000017
+0xffcfe4:	0x00000017	0x00000017	0x00039638	0x0000000f
+0xffcff4:	0x00000212	0x03fff578	0x00000017	0x00000065
+
+Breakpoint 6, tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+326		return (b-buf);
+$1539 = 2799
+$1540 = 4
+#0  tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+#1  0x0000f0e3 in rw_ttyx (rw=1, minor=0, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:23
+#2  0x0000f31e in rw_char (rw=1, dev=1024, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:103
+#3  0x0000c65f in sys_write (fd=2, buf=0x4840c "", count=1) at read_write.c:96
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000002 in startup_32 () at head.s:19
+--------------------------------------------------------------------------------
+                                                                                
+Bochs VBE Display Adapter enabled                                               
+                                                                                
+Bochs BIOS - build: 09/02/12                                                    
+$Revision: 11318 $ $Date: 2012-08-06 19:59:54 +0200 (Mo, 06. Aug 2012) $        
+Options: apmbios pcibios pnpbios eltorito rombios32                             
+                                                                                
+                                                                                
+Press F12 for boot menu.                                                        
+                                                                                
+Booting from Floppy...                                                          
+                                                                                
+Loading system ...                                                              
+                                                                                
+Ram disk: 1049600 bytes, starting at 0x400000                                   
+Insert root floppy and press ENTER                                              
+6/1440 free blocks                                                              
+400/480 free inodes                                                             
+3423 buffers = 3505152 bytes buffer space                                       
+Free mem: 11533312 bytes                                                        
+=== Ok.                                                                         
+syscal[/usr/root]#                                                              
+l[/usr/root]# syscall                                                           
+Hello, Linux 0.11                                                               
+[/usr/root]# proc                                                               
+--------------------------------------------------------------------------------
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$1541 = 2799
+$1542 = 3
+0xffcfd4:	0x00000000	0x03fff58c	0x00000001	0x00050017
+0xffcfe4:	0x00000017	0x00050017	0x00039638	0x0000000f
+0xffcff4:	0x00000212	0x03fff578	0x00000017	0x00000065
+
+
+Breakpoint 6, tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+326		return (b-buf);
+$1549 = 2799
+$1550 = 4
+#0  tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+#1  0x0000f0e3 in rw_ttyx (rw=1, minor=0, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:23
+#2  0x0000f31e in rw_char (rw=1, dev=1024, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:103
+#3  0x0000c65f in sys_write (fd=2, buf=0x4840c "", count=1) at read_write.c:96
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000002 in startup_32 () at head.s:19
+--------------------------------------------------------------------------------
+                                                                                
+Bochs VBE Display Adapter enabled                                               
+                                                                                
+Bochs BIOS - build: 09/02/12                                                    
+$Revision: 11318 $ $Date: 2012-08-06 19:59:54 +0200 (Mo, 06. Aug 2012) $        
+Options: apmbios pcibios pnpbios eltorito rombios32                             
+                                                                                
+                                                                                
+Press F12 for boot menu.                                                        
+                                                                                
+Booting from Floppy...                                                          
+                                                                                
+Loading system ...                                                              
+                                                                                
+Ram disk: 1049600 bytes, starting at 0x400000                                   
+Insert root floppy and press ENTER                                              
+6/1440 free blocks                                                              
+400/480 free inodes                                                             
+3423 buffers = 3505152 bytes buffer space                                       
+Free mem: 11533312 bytes                                                        
+=== Ok.                                                                         
+syscal[/usr/root]#                                                              
+l[/usr/root]# syscall                                                           
+Hello, Linux 0.11                                                               
+[/usr/root]# proce                                                              
+--------------------------------------------------------------------------------
+
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$1643 = 2800
+$1644 = 4
+0xffcfd4:	0x00000002	0x0004840c	0x00000001	0x00050017
+0xffcfe4:	0x00000017	0x00000017	0x0003978c	0x0000000f
+0xffcff4:	0x00000293	0x03fff50c	0x00000017	0x00000065
+
+
+Breakpoint 6, tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+326		return (b-buf);
+$1645 = 2800
+$1646 = 4
+#0  tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+#1  0x0000f0e3 in rw_ttyx (rw=1, minor=0, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:23
+#2  0x0000f31e in rw_char (rw=1, dev=1024, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:103
+#3  0x0000c65f in sys_write (fd=2, buf=0x4840c "", count=1) at read_write.c:96
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000002 in startup_32 () at head.s:19
+--------------------------------------------------------------------------------
+                                                                                
+Bochs VBE Display Adapter enabled                                               
+                                                                                
+Bochs BIOS - build: 09/02/12                                                    
+$Revision: 11318 $ $Date: 2012-08-06 19:59:54 +0200 (Mo, 06. Aug 2012) $        
+Options: apmbios pcibios pnpbios eltorito rombios32                             
+                                                                                
+                                                                                
+Press F12 for boot menu.                                                        
+                                                                                
+Booting from Floppy...                                                          
+                                                                                
+Loading system ...                                                              
+                                                                                
+Ram disk: 1049600 bytes, starting at 0x400000                                   
+Insert root floppy and press ENTER                                              
+6/1440 free blocks                                                              
+400/480 free inodes                                                             
+3423 buffers = 3505152 bytes buffer space                                       
+Free mem: 11533312 bytes                                                        
+=== Ok.                                                                         
+syscal[/usr/root]#                                                              
+l[/usr/root]# syscall                                                           
+Hello, Linux 0.11                                                               
+[/usr/root]# proces                                                             
+--------------------------------------------------------------------------------
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$1735 = 2800
+$1736 = 4
+0xffcfd4:	0x00000002	0x0004840c	0x00000001	0x00050017
+0xffcfe4:	0x00000017	0x00000017	0x0003978c	0x0000000f
+0xffcff4:	0x00000293	0x03fff50c	0x00000017	0x00000065
+
+
+Breakpoint 6, tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+326		return (b-buf);
+$1737 = 2800
+$1738 = 4
+#0  tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+#1  0x0000f0e3 in rw_ttyx (rw=1, minor=0, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:23
+#2  0x0000f31e in rw_char (rw=1, dev=1024, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:103
+#3  0x0000c65f in sys_write (fd=2, buf=0x4840c "", count=1) at read_write.c:96
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000002 in startup_32 () at head.s:19
+--------------------------------------------------------------------------------
+                                                                                
+Bochs VBE Display Adapter enabled                                               
+                                                                                
+Bochs BIOS - build: 09/02/12                                                    
+$Revision: 11318 $ $Date: 2012-08-06 19:59:54 +0200 (Mo, 06. Aug 2012) $        
+Options: apmbios pcibios pnpbios eltorito rombios32                             
+                                                                                
+                                                                                
+Press F12 for boot menu.                                                        
+                                                                                
+Booting from Floppy...                                                          
+                                                                                
+Loading system ...                                                              
+                                                                                
+Ram disk: 1049600 bytes, starting at 0x400000                                   
+Insert root floppy and press ENTER                                              
+6/1440 free blocks                                                              
+400/480 free inodes                                                             
+3423 buffers = 3505152 bytes buffer space                                       
+Free mem: 11533312 bytes                                                        
+=== Ok.                                                                         
+syscal[/usr/root]#                                                              
+l[/usr/root]# syscall                                                           
+Hello, Linux 0.11                                                               
+[/usr/root]# process                                                            
+--------------------------------------------------------------------------------
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$2119 = 2800
+$2120 = 4
+0xffcfd4:	0x00000002	0x0004840c	0x00000001	0x00050017
+0xffcfe4:	0x00000017	0x00000017	0x0003978c	0x0000000f
+0xffcff4:	0x00000293	0x03fff504	0x00000017	0x00000065
+
+
+Breakpoint 6, tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+326		return (b-buf);
+$2121 = 2800
+$2122 = 4
+#0  tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+#1  0x0000f0e3 in rw_ttyx (rw=1, minor=0, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:23
+#2  0x0000f31e in rw_char (rw=1, dev=1024, buf=0x4840c "", count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:103
+#3  0x0000c65f in sys_write (fd=2, buf=0x4840c "", count=1) at read_write.c:96
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000002 in startup_32 () at head.s:19
+--------------------------------------------------------------------------------
+Bochs VBE Display Adapter enabled                                               
+                                                                                
+Bochs BIOS - build: 09/02/12                                                    
+$Revision: 11318 $ $Date: 2012-08-06 19:59:54 +0200 (Mo, 06. Aug 2012) $        
+Options: apmbios pcibios pnpbios eltorito rombios32                             
+                                                                                
+                                                                                
+Press F12 for boot menu.                                                        
+                                                                                
+Booting from Floppy...                                                          
+                                                                                
+Loading system ...                                                              
+                                                                                
+Ram disk: 1049600 bytes, starting at 0x400000                                   
+Insert root floppy and press ENTER                                              
+6/1440 free blocks                                                              
+400/480 free inodes                                                             
+3423 buffers = 3505152 bytes buffer space                                       
+Free mem: 11533312 bytes                                                        
+=== Ok.                                                                         
+syscal[/usr/root]#                                                              
+l[/usr/root]# syscall                                                           
+Hello, Linux 0.11                                                               
+[/usr/root]# process                                                            
+                                                                                
+--------------------------------------------------------------------------------
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$2123 = 2800
+$2124 = 4
+0xffcfd4:	0x00000002	0x0004840c	0x00000000	0x00050017
+0xffcfe4:	0x00000017	0x00000017	0x0003978c	0x0000000f
+0xffcff4:	0x00000293	0x03fff524	0x00000017	0x00000065
+
+
+Breakpoint 23, wake_up (p=0x23d1c <tty_table+2140>) at sched.c:191
+191		if (p && *p) {
+$2125 = 2800
+$2126 = 4
+#0  wake_up (p=0x23d1c <tty_table+2140>) at sched.c:191
+#1  0x00016d87 in copy_to_cooked (tty=0x234c0 <tty_table>) at tty_io.c:227
+#2  0x000173aa in do_tty_interrupt (tty=0) at tty_io.c:345
+#3  0x00018937 in e0_e1 () at kb.S:69
+#4  0x00000000 in ?? ()
+$2127 = (struct task_struct **) 0x23d1c <tty_table+2140>
+$2128 = -1
+
+
+Breakpoint 30, do_exit (code=508711204) at exit.c:131
+131		tell_father(current->father);
+$2129 = 2800
+$2130 = 4
+$2131 = 508711204
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$2180 = 2801
+$2181 = 2
+0xffcfd4:	0x00000014	0x00000008	0x000567a0	0x00040017
+0xffcfe4:	0x00000017	0x00050017	0x000394a3	0x0000000f
+0xffcff4:	0x00000246	0x03fffdd8	0x00000017	0x00000065
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$2182 = 2801
+$2183 = 4
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x00000014 in startup_32 () at head.s:24
+$2184 = 1
+$2185 = 1
+$2186 = 9
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$2187 = 2801
+$2188 = 4
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x00000014 in startup_32 () at head.s:24
+$2189 = 2
+$2190 = 4
+$2191 = 9
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$2192 = 2801
+$2193 = 4
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x00000014 in startup_32 () at head.s:24
+$2194 = 3
+$2195 = 3
+$2196 = 9
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$2197 = 2801
+$2198 = 4
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x00000014 in startup_32 () at head.s:24
+$2199 = 4
+$2200 = -1
+$2201 = 9
+
+
+Breakpoint 9, sys_fork () at system_call.s:210
+210		testl %eax,%eax
+$2202 = 2801
+0x4 <startup_32+4>:	0x00002027
+0xffcfd0:	0x00007967	0x00000014	0x00000008	0x000567a0
+0xffcfe0:	0x00040017	0x00000017	0x00050017	0x000394a3
+0xffcff0:	0x0000000f	0x00000246	0x03fffdd8	0x00000017
+0xffd000:	0x00000065
+
+
+Breakpoint 10, sys_fork () at system_call.s:217
+217		call copy_process
+$2203 = 2801
+0xffcfbc:	0x00000004	0x03fffde4	0x00000ffc	0x00000001
+0xffcfcc:	0x00000017	0x00007967	0x00000014	0x00000008
+0xffcfdc:	0x000567a0	0x00040017	0x00000017	0x00050017
+0xffcfec:	0x000394a3	0x0000000f	0x00000246	0x03fffdd8
+0xffcffc:	0x00000017	0x00000065
+
+
+Breakpoint 11, sys_fork () at system_call.s:218
+218		addl $20,%esp
+$2204 = 2802
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$2205 = 2802
+$2206 = 7
+0xffcfd4:	0x00000009	0x03fffe5c	0x00000000	0x00040017
+0xffcfe4:	0x00000017	0x00040017	0x0003973c	0x0000000f
+0xffcff4:	0x00000216	0x03fffe48	0x00000017	0x00000065
+
+
+Breakpoint 27,    at exit.c:179
+179					flag=1;
+$2207 = 2802
+$2208 = 4
+$2209 = 9
+
+
+Breakpoint 28,    at exit.c:186
+186			current->state=TASK_INTERRUPTIBLE;
+$2210 = 2802
+$2211 = 4
+$2212 = 0
+$2213 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$2214 = 2802
+$2215 = 4
+$2216 = 4
+$2217 = 9
+$2218 = 0
+$2219 = 15
+$2220 = 15
+$2221 = 4
+$2222 = 0
+$2223 = 0
+$2224 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$2225 = 2802
+$2226 = 4
+$2227 = 4
+$2228 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$2229 = 2802
+$2230 = 4
+$2231 = 3
+$2232 = 3
+$2233 = 1
+$2234 = 27
+$2235 = 15
+$2236 = 1
+$2237 = 0
+$2238 = 0
+$2239 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$2240 = 2802
+$2241 = 4
+$2242 = 2
+$2243 = 4
+$2244 = 1
+$2245 = 3
+$2246 = 15
+$2247 = 1
+$2248 = 0
+$2249 = 0
+$2250 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$2251 = 2802
+$2252 = 4
+$2253 = 1
+$2254 = 1
+$2255 = 1
+$2256 = 27
+$2257 = 15
+$2258 = 0
+$2259 = 0
+$2260 = 0
+$2261 = 15
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$2262 = 2802
+$2263 = 4
+#0  schedule () at sched.c:141
+#1  0x0000a720 in sys_waitpid (pid=9, stat_addr=0x3fffe5c, options=0)
+    at exit.c:187
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x00000009 in startup_32 () at head.s:21
+$2264 = 4
+$2265 = 9
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$2266 = 2802
+$2267 = 11
+0xfd3fd4:	0x000565ec	0x0005678c	0x0004b14c	0x00000017
+0xfd3fe4:	0x00050017	0x00000017	0x00039460	0x0000000f
+0xfd3ff4:	0x00000202	0x03fffd1c	0x00000017	0x00f47d83
+
+
+Breakpoint 8, sys_execve () at system_call.s:203
+203		call do_execve
+$2268 = 2802
+0xfd3fec:	0x00039460
+0xfd3fcc:	0x00fd3fec	0x00007967
+
+
+Breakpoint 23, wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+191		if (p && *p) {
+$2269 = 2802
+$2270 = 9
+#0  wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+#1  0x0000de0d in brelse (buf=0x2bffc) at buffer.c:263
+#2  0x00011875 in get_dir (pathname=0x565ee "") at namei.c:265
+#3  0x000118ce in dir_namei (pathname=0x565ec "", namelen=0xfd3a88, 
+    name=0xfd3a8c) at namei.c:285
+#4  0x0001196b in namei (pathname=0x565ec "") at namei.c:311
+#5  0x00010031 in do_execve (eip=0xfd3fec, tmp=31079, filename=0x565ec "", 
+    argv=0x5678c, envp=0x4b14c) at exec.c:199
+#6  0x00007a5c in sys_execve () at system_call.s:203
+#7  0x00fd3fec in ?? ()
+$2271 = (struct task_struct **) 0x27ce8 <buffer_wait>
+$2272 = -1
+
+
+Breakpoint 23, wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+191		if (p && *p) {
+$2273 = 2803
+$2274 = 9
+#0  wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+#1  0x0000de0d in brelse (buf=0x2bffc) at buffer.c:263
+#2  0x000119ff in namei (pathname=0x565ec "") at namei.c:322
+#3  0x00010031 in do_execve (eip=0xfd3fec, tmp=31079, filename=0x565ec "", 
+    argv=0x5678c, envp=0x4b14c) at exec.c:199
+#4  0x00007a5c in sys_execve () at system_call.s:203
+#5  0x00fd3fec in ?? ()
+$2275 = (struct task_struct **) 0x27ce8 <buffer_wait>
+$2276 = -1
+
+
+Breakpoint 14,   argv=0x5678c, envp=0x4b14c) at exec.c:221
+221		if (!(bh = bread(inode->i_dev,inode->i_zone[0]))) {
+$2277 = 2803
+$2278 = 9
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2c554) at buffer.c:40
+40	{
+$2279 = 2803
+$2280 = 9
+#0  wait_on_buffer (bh=0x2c554) at buffer.c:40
+#1  0x0000dce6 in getblk (dev=541, block=1219) at buffer.c:231
+#2  0x0000de37 in bread (dev=541, block=1219) at buffer.c:274
+#3  0x000101ef in do_execve (eip=0xfd3fec, tmp=31079, filename=0x565ec "", 
+    argv=0x5678c, envp=0x4b14c) at exec.c:221
+#4  0x00007a5c in sys_execve () at system_call.s:203
+#5  0x00fd3fec in ?? ()
+$2281 = 0 '\000'
+
+
+Breakpoint 44, bread (dev=541, block=1219) at buffer.c:278
+278		ll_rw_block(READ,bh);
+$2282 = 2803
+$2283 = 9
+#0  bread (dev=541, block=1219) at buffer.c:278
+#1  0x000101ef in do_execve (eip=0xfd3fec, tmp=31079, filename=0x565ec "", 
+    argv=0x5678c, envp=0x4b14c) at exec.c:221
+#2  0x00007a5c in sys_execve () at system_call.s:203
+#3  0x00fd3fec in ?? ()
+$2284 = 0 '\000'
+
+
+Breakpoint 49, lock_buffer (bh=0x2c554) at ll_rw_blk.c:48
+48		sti();
+$2285 = 2803
+$2286 = 9
+
+
+Breakpoint 52, make_request (major=2, rw=0, bh=0x2c554) at ll_rw_blk.c:142
+142		add_request(major+blk_dev,req);
+$2287 = 2803
+$2288 = 9
+$2289 = 541
+$2290 = 0
+$2291 = 0
+$2292 = 2438
+$2293 = 2
+$2294 = 0x3bd400 ""
+$2295 = (struct task_struct *) 0x0 <startup_32>
+$2296 = (struct buffer_head *) 0x2c554
+$2297 = (struct request *) 0x0 <startup_32>
+
+
+Breakpoint 50,    req=0x29fbc <request+1116>) at ll_rw_blk.c:75
+75			(dev->request_fn)();
+$2298 = 2803
+$2299 = 9
+
+
+Breakpoint 54, do_fd_request () at floppy.c:455
+455		add_timer(ticks_to_floppy_on(current_drive),&floppy_on_interrupt);
+$2300 = 2803
+$2301 = 9
+#0  do_fd_request () at floppy.c:455
+#1  0x00013e1f in add_request (dev=0x27d30 <blk_dev+16>, 
+    req=0x29fbc <request+1116>) at ll_rw_blk.c:75
+#2  0x0001416a in make_request (major=2, rw=0, bh=0x2c554) at ll_rw_blk.c:142
+#3  0x000141d7 in ll_rw_block (rw=0, bh=0x2c554) at ll_rw_blk.c:154
+#4  0x0000de77 in bread (dev=541, block=1219) at buffer.c:278
+#5  0x000101ef in do_execve (eip=0xfd3fec, tmp=31079, filename=0x565ec "", 
+    argv=0x5678c, envp=0x4b14c) at exec.c:221
+#6  0x00007a5c in sys_execve () at system_call.s:203
+#7  0x00fd3fec in ?? ()
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2c554) at buffer.c:40
+40	{
+$2302 = 2803
+$2303 = 9
+#0  wait_on_buffer (bh=0x2c554) at buffer.c:40
+#1  0x0000de86 in bread (dev=541, block=1219) at buffer.c:279
+#2  0x000101ef in do_execve (eip=0xfd3fec, tmp=31079, filename=0x565ec "", 
+    argv=0x5678c, envp=0x4b14c) at exec.c:221
+#3  0x00007a5c in sys_execve () at system_call.s:203
+#4  0x00fd3fec in ?? ()
+$2304 = 1 '\001'
+
+
+Breakpoint 47, wait_on_buffer (bh=0x2c554) at buffer.c:43
+43			sleep_on(&bh->b_wait);
+$2305 = 2803
+$2306 = 9
+#0  wait_on_buffer (bh=0x2c554) at buffer.c:43
+#1  0x0000de86 in bread (dev=541, block=1219) at buffer.c:279
+#2  0x000101ef in do_execve (eip=0xfd3fec, tmp=31079, filename=0x565ec "", 
+    argv=0x5678c, envp=0x4b14c) at exec.c:221
+#3  0x00007a5c in sys_execve () at system_call.s:203
+#4  0x00fd3fec in ?? ()
+
+
+Breakpoint 21, sleep_on (p=0x2c564) at sched.c:159
+159		tmp = *p;
+$2307 = 2803
+$2308 = 9
+#0  sleep_on (p=0x2c564) at sched.c:159
+#1  0x0000d5d4 in wait_on_buffer (bh=0x2c554) at buffer.c:43
+#2  0x0000de86 in bread (dev=541, block=1219) at buffer.c:279
+#3  0x000101ef in do_execve (eip=0xfd3fec, tmp=31079, filename=0x565ec "", 
+    argv=0x5678c, envp=0x4b14c) at exec.c:221
+#4  0x00007a5c in sys_execve () at system_call.s:203
+#5  0x00fd3fec in ?? ()
+$2309 = 317395140
+$2310 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$2311 = 2803
+$2312 = 9
+$2313 = 4
+$2314 = 9
+$2315 = 2
+$2316 = 14
+$2317 = 15
+$2318 = 4
+$2319 = 0
+$2320 = 0
+$2321 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$2322 = 2803
+$2323 = 9
+$2324 = 3
+$2325 = 3
+$2326 = 1
+$2327 = 27
+$2328 = 15
+$2329 = 1
+$2330 = 0
+$2331 = 0
+$2332 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$2333 = 2803
+$2334 = 9
+$2335 = 2
+$2336 = 4
+$2337 = 1
+$2338 = 3
+$2339 = 15
+$2340 = 1
+$2341 = 0
+$2342 = 0
+$2343 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$2344 = 2803
+$2345 = 9
+$2346 = 1
+$2347 = 1
+$2348 = 1
+$2349 = 27
+$2350 = 15
+$2351 = 0
+$2352 = 0
+$2353 = 0
+$2354 = -1
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$2355 = 2803
+$2356 = 9
+#0  schedule () at sched.c:141
+#1  0x00006fbe in sleep_on (p=0x2c564) at sched.c:162
+#2  0x0000d5d4 in wait_on_buffer (bh=0x2c554) at buffer.c:43
+#3  0x0000de86 in bread (dev=541, block=1219) at buffer.c:279
+#4  0x000101ef in do_execve (eip=0xfd3fec, tmp=31079, filename=0x565ec "", 
+    argv=0x5678c, envp=0x4b14c) at exec.c:221
+#5  0x00007a5c in sys_execve () at system_call.s:203
+#6  0x00fd3fec in ?? ()
+$2357 = 0
+$2358 = 0
+
+
+Breakpoint 12, floppy_interrupt () at system_call.s:259
+259		movl $0x10,%eax
+$5767 = 2805
+0x14761 <rw_interrupt>:	0xe8535657
+0x231a4 <init_task+3972>:	0x00020017	0x00000010	0x00000010	0x00000000
+0x231b4 <init_task+3988>:	0x00000000
+
+
+Breakpoint 23, wake_up (p=0x27d60 <wait_on_floppy_select>) at sched.c:191
+191		if (p && *p) {
+$5768 = 2805
+$5769 = 0
+#0  wake_up (p=0x27d60 <wait_on_floppy_select>) at sched.c:191
+#1  0x000143de in floppy_deselect (nr=1) at floppy.c:130
+#2  0x00014862 in rw_interrupt () at floppy.c:264
+#3  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#4  0x00000000 in ?? ()
+$5770 = (struct task_struct **) 0x27d60 <wait_on_floppy_select>
+$5771 = -1
+
+
+Breakpoint 53, rw_interrupt () at floppy.c:265
+265		end_request(1);
+$5772 = 2805
+$5773 = 0
+#0  rw_interrupt () at floppy.c:265
+#1  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#2  0x00000000 in ?? ()
+
+
+Breakpoint 55, unlock_buffer (bh=0x2c554) at blk.h:106
+106		wake_up(&bh->b_wait);
+$5774 = 2805
+$5775 = 0
+$5776 = (struct task_struct **) 0x2c564
+
+
+Breakpoint 23, wake_up (p=0x2c564) at sched.c:191
+191		if (p && *p) {
+$5777 = 2805
+$5778 = 0
+#0  wake_up (p=0x2c564) at sched.c:191
+#1  0x0001428a in unlock_buffer (bh=0x2c554) at blk.h:106
+#2  0x000142f4 in end_request (uptodate=1) at blk.h:114
+#3  0x0001486f in rw_interrupt () at floppy.c:265
+#4  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#5  0x00000000 in ?? ()
+$5779 = (struct task_struct **) 0x2c564
+$5780 = 9
+
+
+Breakpoint 56, end_request (uptodate=1) at blk.h:121
+121		wake_up(&CURRENT->waiting);
+$5781 = 2805
+$5782 = 0
+$5783 = (struct task_struct **) 0x29fd4 <request+1140>
+
+
+Breakpoint 23, wake_up (p=0x29fd4 <request+1140>) at sched.c:191
+191		if (p && *p) {
+$5784 = 2805
+$5785 = 0
+#0  wake_up (p=0x29fd4 <request+1140>) at sched.c:191
+#1  0x00014353 in end_request (uptodate=1) at blk.h:121
+#2  0x0001486f in rw_interrupt () at floppy.c:265
+#3  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#4  0x00000000 in ?? ()
+$5786 = (struct task_struct **) 0x29fd4 <request+1140>
+$5787 = -1
+
+
+Breakpoint 57, end_request (uptodate=1) at blk.h:122
+122		wake_up(&wait_for_request);
+$5788 = 2805
+$5789 = 0
+$5790 = (struct task_struct **) 0x27d00 <wait_for_request>
+
+
+Breakpoint 23, wake_up (p=0x27d00 <wait_for_request>) at sched.c:191
+191		if (p && *p) {
+$5791 = 2805
+$5792 = 0
+#0  wake_up (p=0x27d00 <wait_for_request>) at sched.c:191
+#1  0x00014365 in end_request (uptodate=1) at blk.h:122
+#2  0x0001486f in rw_interrupt () at floppy.c:265
+#3  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#4  0x00000000 in ?? ()
+$5793 = (struct task_struct **) 0x27d00 <wait_for_request>
+$5794 = -1
+
+
+Breakpoint 58, end_request (uptodate=1) at blk.h:124
+124		CURRENT = CURRENT->next;
+$5795 = 2805
+$5796 = 0
+$5797 = -1
+$5798 = (struct request *) 0x0 <startup_32>
+
+
+Breakpoint 13, floppy_interrupt () at system_call.s:272
+272		pop %fs
+$5799 = 2805
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$5800 = 2805
+$5801 = 0
+$5802 = 4
+$5803 = 9
+$5804 = 0
+$5805 = 14
+$5806 = 15
+$5807 = 4
+$5808 = 0
+$5809 = 0
+$5810 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$5811 = 2805
+$5812 = 0
+$5813 = 4
+$5814 = 14
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$5815 = 2805
+$5816 = 0
+$5817 = 3
+$5818 = 3
+$5819 = 1
+$5820 = 27
+$5821 = 15
+$5822 = 1
+$5823 = 0
+$5824 = 0
+$5825 = 14
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$5826 = 2805
+$5827 = 0
+$5828 = 2
+$5829 = 4
+$5830 = 1
+$5831 = 3
+$5832 = 15
+$5833 = 1
+$5834 = 0
+$5835 = 0
+$5836 = 14
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$5837 = 2805
+$5838 = 0
+$5839 = 1
+$5840 = 1
+$5841 = 1
+$5842 = 27
+$5843 = 15
+$5844 = 0
+$5845 = 0
+$5846 = 0
+$5847 = 14
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$5848 = 2805
+$5849 = 0
+#0  schedule () at sched.c:141
+#1  0x00006f59 in sys_pause () at sched.c:147
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x00022000 in ?? ()
+$5850 = 4
+$5851 = 9
+
+
+Breakpoint 22, sleep_on (p=0x2c564) at sched.c:164
+164		if (tmp)
+$5852 = 2805
+$5853 = 9
+$5854 = -1
+
+
+Breakpoint 45, bread (dev=541, block=1219) at buffer.c:280
+280		if (bh->b_uptodate)
+$5855 = 2805
+$5856 = 9
+$5857 = 1 '\001'
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2c554) at buffer.c:40
+40	{
+$5858 = 2805
+$5859 = 9
+#0  wait_on_buffer (bh=0x2c554) at buffer.c:40
+#1  0x0000ddd3 in brelse (buf=0x2c554) at buffer.c:260
+#2  0x000105f2 in do_execve (eip=0xfd3fec, tmp=31079, filename=0x565ec "", 
+    argv=0x5678c, envp=0x4b14c) at exec.c:298
+#3  0x00007a5c in sys_execve () at system_call.s:203
+#4  0x00fd3fec in ?? ()
+$5860 = 0 '\000'
+
+
+Breakpoint 23, wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+191		if (p && *p) {
+$5861 = 2805
+$5862 = 9
+#0  wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+#1  0x0000de0d in brelse (buf=0x2c554) at buffer.c:263
+#2  0x000105f2 in do_execve (eip=0xfd3fec, tmp=31079, filename=0x565ec "", 
+    argv=0x5678c, envp=0x4b14c) at exec.c:298
+#3  0x00007a5c in sys_execve () at system_call.s:203
+#4  0x00fd3fec in ?? ()
+$5863 = (struct task_struct **) 0x27ce8 <buffer_wait>
+$5864 = -1
+
+
+Breakpoint 15,    argv=0x5678c, envp=0x4b14c) at exec.c:348
+348		return 0;
+$5865 = 2806
+$5866 = 9
+0x0 <startup_32>:	0x00001027
+0x3fffefc:	0x03fffefc
+0x10a46 <do_execve+2727>:	0x000000b8	0x8352eb00	0xb4ff0cec	0x0004f824
+0x10a56 <do_execve+2743>:	0xc31de800
+
+
+Breakpoint 21, sleep_on (p=0x2c588) at sched.c:159
+159		tmp = *p;
+$5867 = 2806
+$5868 = 9
+#0  sleep_on (p=0x2c588) at sched.c:159
+#1  0x0000d5d4 in wait_on_buffer (bh=0x2c578) at buffer.c:43
+#2  0x0000df8d in bread_page (address=16441344, dev=541, b=0xfd3f9c)
+    at buffer.c:313
+#3  0x0000b7bd in do_no_page (error_code=4, address=268435456) at memory.c:387
+#4  0x0000b9f7 in page_fault () at page.s:30
+#5  0x00000004 in startup_32 () at head.s:19
+$5869 = 317395140
+$5870 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$5871 = 2806
+$5872 = 9
+$5873 = 4
+$5874 = 9
+$5875 = 2
+$5876 = 13
+$5877 = 15
+$5878 = 4
+$5879 = 0
+$5880 = 0
+$5881 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$5882 = 2806
+$5883 = 9
+$5884 = 3
+$5885 = 3
+$5886 = 1
+$5887 = 27
+$5888 = 15
+$5889 = 1
+$5890 = 0
+$5891 = 0
+$5892 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$5893 = 2806
+$5894 = 9
+$5895 = 2
+$5896 = 4
+$5897 = 1
+$5898 = 3
+$5899 = 15
+$5900 = 1
+$5901 = 0
+$5902 = 0
+$5903 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$5904 = 2806
+$5905 = 9
+$5906 = 1
+$5907 = 1
+$5908 = 1
+$5909 = 27
+$5910 = 15
+$5911 = 0
+$5912 = 0
+$5913 = 0
+$5914 = -1
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$5915 = 2806
+$5916 = 9
+#0  schedule () at sched.c:141
+#1  0x00006fbe in sleep_on (p=0x2c588) at sched.c:162
+#2  0x0000d5d4 in wait_on_buffer (bh=0x2c578) at buffer.c:43
+#3  0x0000df8d in bread_page (address=16441344, dev=541, b=0xfd3f9c)
+    at buffer.c:313
+#4  0x0000b7bd in do_no_page (error_code=4, address=268435456) at memory.c:387
+#5  0x0000b9f7 in page_fault () at page.s:30
+#6  0x00000004 in startup_32 () at head.s:19
+$5917 = 0
+$5918 = 0
+
+
+Breakpoint 12, floppy_interrupt () at system_call.s:259
+259		movl $0x10,%eax
+$51985 = 2836
+0x14761 <rw_interrupt>:	0xe8535657
+0x231a4 <init_task+3972>:	0x00000017	0x00020010	0x00000010	0x00000000
+0x231b4 <init_task+3988>:	0x00000000
+
+
+Breakpoint 23, wake_up (p=0x27d60 <wait_on_floppy_select>) at sched.c:191
+191		if (p && *p) {
+$51986 = 2836
+$51987 = 0
+#0  wake_up (p=0x27d60 <wait_on_floppy_select>) at sched.c:191
+#1  0x000143de in floppy_deselect (nr=1) at floppy.c:130
+#2  0x00014862 in rw_interrupt () at floppy.c:264
+#3  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#4  0x00000000 in ?? ()
+$51988 = (struct task_struct **) 0x27d60 <wait_on_floppy_select>
+$51989 = -1
+
+
+Breakpoint 23, wake_up (p=0x2c738) at sched.c:191
+191		if (p && *p) {
+$51990 = 2836
+$51991 = 0
+#0  wake_up (p=0x2c738) at sched.c:191
+#1  0x0001428a in unlock_buffer (bh=0x2c728) at blk.h:106
+#2  0x000142f4 in end_request (uptodate=1) at blk.h:114
+#3  0x0001486f in rw_interrupt () at floppy.c:265
+#4  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#5  0x00000000 in ?? ()
+$51992 = (struct task_struct **) 0x2c738
+$51993 = 9
+
+
+Breakpoint 23, wake_up (p=0x29f68 <request+1032>) at sched.c:191
+191		if (p && *p) {
+$51994 = 2836
+$51995 = 0
+#0  wake_up (p=0x29f68 <request+1032>) at sched.c:191
+#1  0x00014353 in end_request (uptodate=1) at blk.h:121
+#2  0x0001486f in rw_interrupt () at floppy.c:265
+#3  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#4  0x00000000 in ?? ()
+$51996 = (struct task_struct **) 0x29f68 <request+1032>
+$51997 = -1
+
+
+Breakpoint 23, wake_up (p=0x27d00 <wait_for_request>) at sched.c:191
+191		if (p && *p) {
+$51998 = 2836
+$51999 = 0
+#0  wake_up (p=0x27d00 <wait_for_request>) at sched.c:191
+#1  0x00014365 in end_request (uptodate=1) at blk.h:122
+#2  0x0001486f in rw_interrupt () at floppy.c:265
+#3  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#4  0x00000000 in ?? ()
+$52000 = (struct task_struct **) 0x27d00 <wait_for_request>
+$52001 = -1
+
+
+Breakpoint 13, floppy_interrupt () at system_call.s:272
+272		pop %fs
+$52002 = 2836
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52003 = 2836
+$52004 = 0
+$52005 = 4
+$52006 = 9
+$52007 = 0
+$52008 = 13
+$52009 = 15
+$52010 = 4
+$52011 = 0
+$52012 = 0
+$52013 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$52014 = 2836
+$52015 = 0
+$52016 = 4
+$52017 = 13
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52018 = 2836
+$52019 = 0
+$52020 = 3
+$52021 = 3
+$52022 = 1
+$52023 = 27
+$52024 = 15
+$52025 = 1
+$52026 = 0
+$52027 = 0
+$52028 = 13
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52029 = 2836
+$52030 = 0
+$52031 = 2
+$52032 = 4
+$52033 = 1
+$52034 = 3
+$52035 = 15
+$52036 = 1
+$52037 = 0
+$52038 = 0
+$52039 = 13
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52040 = 2836
+$52041 = 0
+$52042 = 1
+$52043 = 1
+$52044 = 1
+$52045 = 27
+$52046 = 15
+$52047 = 0
+$52048 = 0
+$52049 = 0
+$52050 = 13
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$52051 = 2836
+$52052 = 0
+#0  schedule () at sched.c:141
+#1  0x00006f59 in sys_pause () at sched.c:147
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x00022000 in ?? ()
+$52053 = 4
+$52054 = 9
+
+
+Breakpoint 22, sleep_on (p=0x2c738) at sched.c:164
+164		if (tmp)
+$52055 = 2836
+$52056 = 9
+$52057 = -1
+
+
+Breakpoint 23, wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+191		if (p && *p) {
+$52058 = 2836
+$52059 = 9
+#0  wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+#1  0x0000de0d in brelse (buf=0x2c728) at buffer.c:263
+#2  0x0000dfcf in bread_page (address=16391168, dev=541, b=0xfd3f9c)
+    at buffer.c:316
+#3  0x0000b7bd in do_no_page (error_code=4, address=268439552) at memory.c:387
+#4  0x0000b9f7 in page_fault () at page.s:30
+#5  0x00000004 in startup_32 () at head.s:19
+$52060 = (struct task_struct **) 0x27ce8 <buffer_wait>
+$52061 = -1
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$52062 = 2837
+$52063 = 2
+0xfd3fd4:	0x000565ec	0x00000003	0x00000008	0x00000017
+0xfd3fe4:	0x00000017	0x00000017	0x0000018f	0x0000000f
+0xfd3ff4:	0x00000212	0x03fffed0	0x00000017	0x00f47d83
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$52064 = 2837
+$52065 = 9
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x000565ec in ?? ()
+$52066 = 1
+$52067 = 1
+$52068 = 10
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$52069 = 2837
+$52070 = 9
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x000565ec in ?? ()
+$52071 = 2
+$52072 = 4
+$52073 = 10
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$52074 = 2837
+$52075 = 9
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x000565ec in ?? ()
+$52076 = 3
+$52077 = 3
+$52078 = 10
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$52079 = 2837
+$52080 = 9
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x000565ec in ?? ()
+$52081 = 4
+$52082 = 9
+$52083 = 10
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$52084 = 2837
+$52085 = 9
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x000565ec in ?? ()
+$52086 = 5
+$52087 = -1
+$52088 = 10
+
+
+Breakpoint 9, sys_fork () at system_call.s:210
+210		testl %eax,%eax
+$52089 = 2837
+0x5 <startup_32+5>:	0x07000020
+0xfd3fd0:	0x00007967	0x000565ec	0x00000003	0x00000008
+0xfd3fe0:	0x00000017	0x00000017	0x00000017	0x0000018f
+0xfd3ff0:	0x0000000f	0x00000212	0x03fffed0	0x00000017
+0xfd4000:	0x00f47d83
+
+
+Breakpoint 10, sys_fork () at system_call.s:217
+217		call copy_process
+$52090 = 2837
+0xfd3fbc:	0x00000005	0x03fffef4	0x00000ffc	0x00000001
+0xfd3fcc:	0x00000017	0x00007967	0x000565ec	0x00000003
+0xfd3fdc:	0x00000008	0x00000017	0x00000017	0x00000017
+0xfd3fec:	0x0000018f	0x0000000f	0x00000212	0x03fffed0
+0xfd3ffc:	0x00000017	0x00f47d83
+
+
+Breakpoint 11, sys_fork () at system_call.s:218
+218		addl $20,%esp
+$52091 = 2838
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$52092 = 2838
+$52093 = 2
+0xfd3fd4:	0x000565ec	0x00000003	0x00000008	0x00000017
+0xfd3fe4:	0x00000017	0x00000017	0x0000018f	0x0000000f
+0xfd3ff4:	0x00000206	0x03fffed4	0x00000017	0x00f47d83
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$52094 = 2838
+$52095 = 9
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x000565ec in ?? ()
+$52096 = 1
+$52097 = 1
+$52098 = 11
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$52099 = 2838
+$52100 = 9
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x000565ec in ?? ()
+$52101 = 2
+$52102 = 4
+$52103 = 11
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$52104 = 2838
+$52105 = 9
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x000565ec in ?? ()
+$52106 = 3
+$52107 = 3
+$52108 = 11
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$52109 = 2838
+$52110 = 9
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x000565ec in ?? ()
+$52111 = 4
+$52112 = 9
+$52113 = 11
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$52114 = 2838
+$52115 = 9
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x000565ec in ?? ()
+$52116 = 5
+$52117 = 10
+$52118 = 11
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$52119 = 2838
+$52120 = 9
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x000565ec in ?? ()
+$52121 = 6
+$52122 = -1
+$52123 = 11
+
+
+Breakpoint 9, sys_fork () at system_call.s:210
+210		testl %eax,%eax
+$52124 = 2838
+0x6 <startup_32+6>:	0x30070000
+0xfd3fd0:	0x00007967	0x000565ec	0x00000003	0x00000008
+0xfd3fe0:	0x00000017	0x00000017	0x00000017	0x0000018f
+0xfd3ff0:	0x0000000f	0x00000206	0x03fffed4	0x00000017
+0xfd4000:	0x00f47d83
+
+
+Breakpoint 10, sys_fork () at system_call.s:217
+217		call copy_process
+$52125 = 2838
+0xfd3fbc:	0x00000006	0x03fffef4	0x00000ffc	0x00000001
+0xfd3fcc:	0x00000017	0x00007967	0x000565ec	0x00000003
+0xfd3fdc:	0x00000008	0x00000017	0x00000017	0x00000017
+0xfd3fec:	0x0000018f	0x0000000f	0x00000206	0x03fffed4
+0xfd3ffc:	0x00000017	0x00f47d83
+
+
+Breakpoint 11, sys_fork () at system_call.s:218
+218		addl $20,%esp
+$52126 = 2839
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$52127 = 2839
+$52128 = 7
+0xfd3fd4:	0xffffffff	0x00000000	0x00000000	0x00000017
+0xfd3fe4:	0x00000017	0x00000017	0x0000024d	0x0000000f
+0xfd3ff4:	0x00000246	0x03fffec8	0x00000017	0x00f47d83
+
+
+Breakpoint 27,    at exit.c:179
+179					flag=1;
+$52129 = 2839
+$52130 = 9
+$52131 = 11
+
+
+Breakpoint 27,    at exit.c:179
+179					flag=1;
+$52132 = 2839
+$52133 = 9
+$52134 = 10
+
+
+Breakpoint 28,    at exit.c:186
+186			current->state=TASK_INTERRUPTIBLE;
+$52135 = 2839
+$52136 = 9
+$52137 = 0
+$52138 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52139 = 2839
+$52140 = 9
+$52141 = 6
+$52142 = 11
+$52143 = 0
+$52144 = 15
+$52145 = 15
+$52146 = 9
+$52147 = 0
+$52148 = 0
+$52149 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$52150 = 2839
+$52151 = 9
+$52152 = 6
+$52153 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52154 = 2839
+$52155 = 9
+$52156 = 5
+$52157 = 10
+$52158 = 0
+$52159 = 15
+$52160 = 15
+$52161 = 9
+$52162 = 0
+$52163 = 0
+$52164 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52165 = 2839
+$52166 = 9
+$52167 = 4
+$52168 = 9
+$52169 = 1
+$52170 = 10
+$52171 = 15
+$52172 = 4
+$52173 = 0
+$52174 = 0
+$52175 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52176 = 2839
+$52177 = 9
+$52178 = 3
+$52179 = 3
+$52180 = 1
+$52181 = 27
+$52182 = 15
+$52183 = 1
+$52184 = 0
+$52185 = 0
+$52186 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52187 = 2839
+$52188 = 9
+$52189 = 2
+$52190 = 4
+$52191 = 1
+$52192 = 3
+$52193 = 15
+$52194 = 1
+$52195 = 0
+$52196 = 0
+$52197 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52198 = 2839
+$52199 = 9
+$52200 = 1
+$52201 = 1
+$52202 = 1
+$52203 = 27
+$52204 = 15
+$52205 = 0
+$52206 = 0
+$52207 = 0
+$52208 = 15
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$52209 = 2839
+$52210 = 9
+#0  schedule () at sched.c:141
+#1  0x0000a720 in sys_waitpid (pid=-1, stat_addr=0x0 <startup_32>, options=0)
+    at exit.c:187
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0xffffffff in ?? ()
+$52211 = 6
+$52212 = 11
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$52213 = 2839
+$52214 = 5
+0xf92fd4:	0x000000aa	0x00000000	0x00000000	0x00000017
+0xf92fe4:	0x00000017	0x00000017	0x000001b4	0x0000000f
+0xf92ff4:	0x00000246	0x03fffec8	0x00000017	0x00000000
+
+
+Breakpoint 33,    at open.c:146
+146			if (!current->filp[fd])
+$52215 = 2839
+$52216 = 11
+$52217 = 0
+$52218 = 8576
+$52219 = 2
+$52220 = 12
+$52221 = (struct m_inode *) 0x27688 <inode_table+168>
+$52222 = 0
+
+
+Breakpoint 33,    at open.c:146
+146			if (!current->filp[fd])
+$52223 = 2839
+$52224 = 11
+$52225 = 1
+$52226 = 8576
+$52227 = 2
+$52228 = 12
+$52229 = (struct m_inode *) 0x27688 <inode_table+168>
+$52230 = 0
+
+
+Breakpoint 33,    at open.c:146
+146			if (!current->filp[fd])
+$52231 = 2839
+$52232 = 11
+$52233 = 2
+$52234 = 8576
+$52235 = 2
+$52236 = 12
+$52237 = (struct m_inode *) 0x27688 <inode_table+168>
+$52238 = 0
+
+
+Breakpoint 33,    at open.c:146
+146			if (!current->filp[fd])
+$52239 = 2839
+$52240 = 11
+$52241 = 3
+$52242 = -1
+$52243 = -1
+$52244 = -1
+$52245 = -1
+$52246 = -1
+
+
+Breakpoint 34,    at open.c:153
+153			if (!f->f_count) break;
+$52247 = 2839
+$52248 = 11
+$52249 = 0
+$52250 = 3
+
+
+Breakpoint 34,    at open.c:153
+153			if (!f->f_count) break;
+$52251 = 2839
+$52252 = 11
+$52253 = 1
+$52254 = 12
+
+
+Breakpoint 34,    at open.c:153
+153			if (!f->f_count) break;
+$52255 = 2839
+$52256 = 11
+$52257 = 2
+$52258 = 0
+
+
+Breakpoint 23, wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+191		if (p && *p) {
+$52259 = 2839
+$52260 = 11
+#0  wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+#1  0x0000de0d in brelse (buf=0x2bffc) at buffer.c:263
+#2  0x00011875 in get_dir (pathname=0xac <setup_gdt+11> "") at namei.c:265
+#3  0x000118ce in dir_namei (pathname=0xaa <setup_gdt+9> "", namelen=0xf92f7c, 
+    name=0xf92f80) at namei.c:285
+#4  0x00011ad7 in open_namei (pathname=0xaa <setup_gdt+9> "", flag=0, 
+    mode=32768, res_inode=0xf92fb4) at namei.c:350
+#5  0x0000bfa3 in sys_open (filename=0xaa <setup_gdt+9> "", flag=0, mode=0)
+    at open.c:157
+#6  0x00007967 in system_call () at system_call.s:94
+#7  0x000000aa in setup_gdt () at head.s:109
+#8  0x00000000 in ?? ()
+$52261 = (struct task_struct **) 0x27ce8 <buffer_wait>
+$52262 = -1
+
+
+Breakpoint 23, wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+191		if (p && *p) {
+$52263 = 2839
+$52264 = 11
+#0  wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+#1  0x0000de0d in brelse (buf=0x2bffc) at buffer.c:263
+#2  0x00011cea in open_namei (pathname=0xaa <setup_gdt+9> "", flag=0, 
+    mode=32768, res_inode=0xf92fb4) at namei.c:394
+#3  0x0000bfa3 in sys_open (filename=0xaa <setup_gdt+9> "", flag=0, mode=0)
+    at open.c:157
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x000000aa in setup_gdt () at head.s:109
+#6  0x00000000 in ?? ()
+$52265 = (struct task_struct **) 0x27ce8 <buffer_wait>
+$52266 = -1
+
+
+Breakpoint 23, wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+191		if (p && *p) {
+$52267 = 2839
+$52268 = 11
+#0  wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+#1  0x0000de0d in brelse (buf=0x2abe0) at buffer.c:263
+#2  0x0000d42e in read_inode (inode=0x27928 <inode_table+840>) at inode.c:310
+#3  0x0000d30a in iget (dev=541, nr=49) at inode.c:290
+#4  0x00011d24 in open_namei (pathname=0xaa <setup_gdt+9> "", flag=0, 
+    mode=32768, res_inode=0xf92fb4) at namei.c:398
+#5  0x0000bfa3 in sys_open (filename=0xaa <setup_gdt+9> "", flag=0, mode=0)
+    at open.c:157
+#6  0x00007967 in system_call () at system_call.s:94
+#7  0x000000aa in setup_gdt () at head.s:109
+#8  0x00000000 in ?? ()
+$52269 = (struct task_struct **) 0x27ce8 <buffer_wait>
+$52270 = -1
+
+
+Breakpoint 23, wake_up (p=0x27948 <inode_table+872>) at sched.c:191
+191		if (p && *p) {
+$52271 = 2839
+$52272 = 11
+#0  wake_up (p=0x27948 <inode_table+872>) at sched.c:191
+#1  0x0000c7d3 in unlock_inode (inode=0x27928 <inode_table+840>) at inode.c:40
+#2  0x0000d43d in read_inode (inode=0x27928 <inode_table+840>) at inode.c:311
+#3  0x0000d30a in iget (dev=541, nr=49) at inode.c:290
+#4  0x00011d24 in open_namei (pathname=0xaa <setup_gdt+9> "", flag=0, 
+    mode=32768, res_inode=0xf92fb4) at namei.c:398
+#5  0x0000bfa3 in sys_open (filename=0xaa <setup_gdt+9> "", flag=0, mode=0)
+    at open.c:157
+#6  0x00007967 in system_call () at system_call.s:94
+#7  0x000000aa in setup_gdt () at head.s:109
+#8  0x00000000 in ?? ()
+$52273 = (struct task_struct **) 0x27948 <inode_table+872>
+$52274 = -1
+
+
+Breakpoint 35,    at open.c:185
+185		return (fd);
+$52275 = 2839
+$52276 = 11
+$52277 = 0
+$52278 = 33270
+$52279 = 0
+$52280 = 1
+$52281 = (struct m_inode *) 0x27928 <inode_table+840>
+$52282 = 0
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$52283 = 2839
+$52284 = 3
+0xf92fd4:	0x00000003	0x00006000	0x00000006	0x00000017
+0xf92fe4:	0x00000017	0x00000017	0x000001dc	0x0000000f
+0xf92ff4:	0x00000206	0x03fffebc	0x00000017	0x00000000
+
+
+Breakpoint 36,    at read_write.c:77
+77			return file_read(inode,file,buf,count);
+$52285 = 2839
+$52286 = 11
+$52287 = 0
+$52288 = 0
+$52289 = 0
+$52290 = 1
+
+
+Breakpoint 39,    at file_dev.c:22
+22		if ((left=count)<=0)
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2c74c) at buffer.c:40
+40	{
+$52291 = 2839
+$52292 = 11
+#0  wait_on_buffer (bh=0x2c74c) at buffer.c:40
+#1  0x0000dce6 in getblk (dev=541, block=659) at buffer.c:231
+#2  0x0000de37 in bread (dev=541, block=659) at buffer.c:274
+#3  0x0000f3d5 in file_read (inode=0x27928 <inode_table+840>, 
+    filp=0x29780 <file_table+32>, buf=0x6000 <gdt+840> "", count=6)
+    at file_dev.c:26
+#4  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#5  0x00007967 in system_call () at system_call.s:94
+#6  0x00000003 in startup_32 () at head.s:19
+$52293 = 0 '\000'
+
+
+Breakpoint 44, bread (dev=541, block=659) at buffer.c:278
+278		ll_rw_block(READ,bh);
+$52294 = 2839
+$52295 = 11
+#0  bread (dev=541, block=659) at buffer.c:278
+#1  0x0000f3d5 in file_read (inode=0x27928 <inode_table+840>, 
+    filp=0x29780 <file_table+32>, buf=0x6000 <gdt+840> "", count=6)
+    at file_dev.c:26
+#2  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#3  0x00007967 in system_call () at system_call.s:94
+#4  0x00000003 in startup_32 () at head.s:19
+$52296 = 0 '\000'
+
+
+Breakpoint 49, lock_buffer (bh=0x2c74c) at ll_rw_blk.c:48
+48		sti();
+$52297 = 2839
+$52298 = 11
+
+
+Breakpoint 52, make_request (major=2, rw=0, bh=0x2c74c) at ll_rw_blk.c:142
+142		add_request(major+blk_dev,req);
+$52299 = 2839
+$52300 = 11
+$52301 = 541
+$52302 = 0
+$52303 = 0
+$52304 = 1318
+$52305 = 2
+$52306 = 0x3b9c00 ""
+$52307 = (struct task_struct *) 0x0 <startup_32>
+$52308 = (struct buffer_head *) 0x2c74c
+$52309 = (struct request *) 0x0 <startup_32>
+
+
+Breakpoint 50,    req=0x29fbc <request+1116>) at ll_rw_blk.c:75
+75			(dev->request_fn)();
+$52310 = 2839
+$52311 = 11
+
+
+Breakpoint 54, do_fd_request () at floppy.c:455
+455		add_timer(ticks_to_floppy_on(current_drive),&floppy_on_interrupt);
+$52312 = 2839
+$52313 = 11
+#0  do_fd_request () at floppy.c:455
+#1  0x00013e1f in add_request (dev=0x27d30 <blk_dev+16>, 
+    req=0x29fbc <request+1116>) at ll_rw_blk.c:75
+#2  0x0001416a in make_request (major=2, rw=0, bh=0x2c74c) at ll_rw_blk.c:142
+#3  0x000141d7 in ll_rw_block (rw=0, bh=0x2c74c) at ll_rw_blk.c:154
+#4  0x0000de77 in bread (dev=541, block=659) at buffer.c:278
+#5  0x0000f3d5 in file_read (inode=0x27928 <inode_table+840>, 
+    filp=0x29780 <file_table+32>, buf=0x6000 <gdt+840> "", count=6)
+    at file_dev.c:26
+#6  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#7  0x00007967 in system_call () at system_call.s:94
+#8  0x00000003 in startup_32 () at head.s:19
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2c74c) at buffer.c:40
+40	{
+$52314 = 2839
+$52315 = 11
+#0  wait_on_buffer (bh=0x2c74c) at buffer.c:40
+#1  0x0000de86 in bread (dev=541, block=659) at buffer.c:279
+#2  0x0000f3d5 in file_read (inode=0x27928 <inode_table+840>, 
+    filp=0x29780 <file_table+32>, buf=0x6000 <gdt+840> "", count=6)
+    at file_dev.c:26
+#3  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000003 in startup_32 () at head.s:19
+$52316 = 1 '\001'
+
+
+Breakpoint 47, wait_on_buffer (bh=0x2c74c) at buffer.c:43
+43			sleep_on(&bh->b_wait);
+$52317 = 2839
+$52318 = 11
+#0  wait_on_buffer (bh=0x2c74c) at buffer.c:43
+#1  0x0000de86 in bread (dev=541, block=659) at buffer.c:279
+#2  0x0000f3d5 in file_read (inode=0x27928 <inode_table+840>, 
+    filp=0x29780 <file_table+32>, buf=0x6000 <gdt+840> "", count=6)
+    at file_dev.c:26
+#3  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000003 in startup_32 () at head.s:19
+
+
+Breakpoint 21, sleep_on (p=0x2c75c) at sched.c:159
+159		tmp = *p;
+$52319 = 2839
+$52320 = 11
+#0  sleep_on (p=0x2c75c) at sched.c:159
+#1  0x0000d5d4 in wait_on_buffer (bh=0x2c74c) at buffer.c:43
+#2  0x0000de86 in bread (dev=541, block=659) at buffer.c:279
+#3  0x0000f3d5 in file_read (inode=0x27928 <inode_table+840>, 
+    filp=0x29780 <file_table+32>, buf=0x6000 <gdt+840> "", count=6)
+    at file_dev.c:26
+#4  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#5  0x00007967 in system_call () at system_call.s:94
+#6  0x00000003 in startup_32 () at head.s:19
+$52321 = 317395140
+$52322 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52323 = 2839
+$52324 = 11
+$52325 = 6
+$52326 = 11
+$52327 = 2
+$52328 = 15
+$52329 = 15
+$52330 = 9
+$52331 = 0
+$52332 = 0
+$52333 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52334 = 2839
+$52335 = 11
+$52336 = 5
+$52337 = 10
+$52338 = 0
+$52339 = 15
+$52340 = 15
+$52341 = 9
+$52342 = 0
+$52343 = 0
+$52344 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$52345 = 2839
+$52346 = 11
+$52347 = 5
+$52348 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52349 = 2839
+$52350 = 11
+$52351 = 4
+$52352 = 9
+$52353 = 1
+$52354 = 10
+$52355 = 15
+$52356 = 4
+$52357 = 0
+$52358 = 0
+$52359 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52360 = 2839
+$52361 = 11
+$52362 = 3
+$52363 = 3
+$52364 = 1
+$52365 = 27
+$52366 = 15
+$52367 = 1
+$52368 = 0
+$52369 = 0
+$52370 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52371 = 2839
+$52372 = 11
+$52373 = 2
+$52374 = 4
+$52375 = 1
+$52376 = 3
+$52377 = 15
+$52378 = 1
+$52379 = 0
+$52380 = 0
+$52381 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52382 = 2839
+$52383 = 11
+$52384 = 1
+$52385 = 1
+$52386 = 1
+$52387 = 27
+$52388 = 15
+$52389 = 0
+$52390 = 0
+$52391 = 0
+$52392 = 15
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$52393 = 2839
+$52394 = 11
+#0  schedule () at sched.c:141
+#1  0x00006fbe in sleep_on (p=0x2c75c) at sched.c:162
+#2  0x0000d5d4 in wait_on_buffer (bh=0x2c74c) at buffer.c:43
+#3  0x0000de86 in bread (dev=541, block=659) at buffer.c:279
+#4  0x0000f3d5 in file_read (inode=0x27928 <inode_table+840>, 
+    filp=0x29780 <file_table+32>, buf=0x6000 <gdt+840> "", count=6)
+    at file_dev.c:26
+#5  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#6  0x00007967 in system_call () at system_call.s:94
+#7  0x00000003 in startup_32 () at head.s:19
+$52395 = 5
+$52396 = 10
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$52397 = 2839
+$52398 = 5
+0xf96fd4:	0x0000009e	0x00000000	0x00000000	0x00000017
+0xf96fe4:	0x00000017	0x00000017	0x000001b4	0x0000000f
+0xf96ff4:	0x00000246	0x03fffec8	0x00000017	0x00000000
+
+
+Breakpoint 33,    at open.c:146
+146			if (!current->filp[fd])
+$52399 = 2839
+$52400 = 10
+$52401 = 0
+$52402 = 8576
+$52403 = 2
+$52404 = 12
+$52405 = (struct m_inode *) 0x27688 <inode_table+168>
+$52406 = 0
+
+
+Breakpoint 33,    at open.c:146
+146			if (!current->filp[fd])
+$52407 = 2839
+$52408 = 10
+$52409 = 1
+$52410 = 8576
+$52411 = 2
+$52412 = 12
+$52413 = (struct m_inode *) 0x27688 <inode_table+168>
+$52414 = 0
+
+
+Breakpoint 33,    at open.c:146
+146			if (!current->filp[fd])
+$52415 = 2839
+$52416 = 10
+$52417 = 2
+$52418 = 8576
+$52419 = 2
+$52420 = 12
+$52421 = (struct m_inode *) 0x27688 <inode_table+168>
+$52422 = 0
+
+
+Breakpoint 33,    at open.c:146
+146			if (!current->filp[fd])
+$52423 = 2839
+$52424 = 10
+$52425 = 3
+$52426 = -1
+$52427 = -1
+$52428 = -1
+$52429 = -1
+$52430 = -1
+
+
+Breakpoint 34,    at open.c:153
+153			if (!f->f_count) break;
+$52431 = 2839
+$52432 = 10
+$52433 = 0
+$52434 = 3
+
+
+Breakpoint 34,    at open.c:153
+153			if (!f->f_count) break;
+$52435 = 2839
+$52436 = 10
+$52437 = 1
+$52438 = 12
+
+
+Breakpoint 34,    at open.c:153
+153			if (!f->f_count) break;
+$52439 = 2839
+$52440 = 10
+$52441 = 2
+$52442 = 1
+
+
+Breakpoint 34,    at open.c:153
+153			if (!f->f_count) break;
+$52443 = 2839
+$52444 = 10
+$52445 = 3
+$52446 = 0
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2bffc) at buffer.c:40
+40	{
+$52447 = 2839
+$52448 = 10
+#0  wait_on_buffer (bh=0x2bffc) at buffer.c:40
+#1  0x0000dba6 in get_hash_table (dev=541, block=1321) at buffer.c:194
+#2  0x0000dc06 in getblk (dev=541, block=1321) at buffer.c:214
+#3  0x0000de37 in bread (dev=541, block=1321) at buffer.c:274
+#4  0x0001132b in find_entry (dir=0xf96f08, name=0x9e <rp_sidt+16> "", 
+    namelen=1, res_dir=0xf96f04) at namei.c:129
+#5  0x00011828 in get_dir (pathname=0xa0 <rp_sidt+18> "") at namei.c:259
+#6  0x000118ce in dir_namei (pathname=0x9e <rp_sidt+16> "", namelen=0xf96f7c, 
+    name=0xf96f80) at namei.c:285
+#7  0x00011ad7 in open_namei (pathname=0x9e <rp_sidt+16> "", flag=0, 
+    mode=32768, res_inode=0xf96fb4) at namei.c:350
+#8  0x0000bfa3 in sys_open (filename=0x9e <rp_sidt+16> "", flag=0, mode=0)
+    at open.c:157
+#9  0x00007967 in system_call () at system_call.s:94
+#10 0x0000009e in rp_sidt () at head.s:94
+#11 0x00000000 in ?? ()
+$52449 = 0 '\000'
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2bffc) at buffer.c:40
+40	{
+$52450 = 2839
+$52451 = 10
+#0  wait_on_buffer (bh=0x2bffc) at buffer.c:40
+#1  0x0000ddd3 in brelse (buf=0x2bffc) at buffer.c:260
+#2  0x00011875 in get_dir (pathname=0xa0 <rp_sidt+18> "") at namei.c:265
+#3  0x000118ce in dir_namei (pathname=0x9e <rp_sidt+16> "", namelen=0xf96f7c, 
+    name=0xf96f80) at namei.c:285
+#4  0x00011ad7 in open_namei (pathname=0x9e <rp_sidt+16> "", flag=0, 
+    mode=32768, res_inode=0xf96fb4) at namei.c:350
+#5  0x0000bfa3 in sys_open (filename=0x9e <rp_sidt+16> "", flag=0, mode=0)
+    at open.c:157
+#6  0x00007967 in system_call () at system_call.s:94
+#7  0x0000009e in rp_sidt () at head.s:94
+#8  0x00000000 in ?? ()
+$52452 = 0 '\000'
+
+
+Breakpoint 23, wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+191		if (p && *p) {
+$52453 = 2839
+$52454 = 10
+#0  wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+#1  0x0000de0d in brelse (buf=0x2bffc) at buffer.c:263
+#2  0x00011875 in get_dir (pathname=0xa0 <rp_sidt+18> "") at namei.c:265
+#3  0x000118ce in dir_namei (pathname=0x9e <rp_sidt+16> "", namelen=0xf96f7c, 
+    name=0xf96f80) at namei.c:285
+#4  0x00011ad7 in open_namei (pathname=0x9e <rp_sidt+16> "", flag=0, 
+    mode=32768, res_inode=0xf96fb4) at namei.c:350
+#5  0x0000bfa3 in sys_open (filename=0x9e <rp_sidt+16> "", flag=0, mode=0)
+    at open.c:157
+#6  0x00007967 in system_call () at system_call.s:94
+#7  0x0000009e in rp_sidt () at head.s:94
+#8  0x00000000 in ?? ()
+$52455 = (struct task_struct **) 0x27ce8 <buffer_wait>
+$52456 = -1
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2bffc) at buffer.c:40
+40	{
+$52457 = 2839
+$52458 = 10
+#0  wait_on_buffer (bh=0x2bffc) at buffer.c:40
+#1  0x0000dba6 in get_hash_table (dev=541, block=1321) at buffer.c:194
+#2  0x0000dc06 in getblk (dev=541, block=1321) at buffer.c:214
+#3  0x0000de37 in bread (dev=541, block=1321) at buffer.c:274
+#4  0x0001132b in find_entry (dir=0xf96f78, name=0xa0 <rp_sidt+18> "", 
+    namelen=9, res_dir=0xf96f74) at namei.c:129
+#5  0x00011b4a in open_namei (pathname=0x9e <rp_sidt+16> "", flag=0, 
+    mode=32768, res_inode=0xf96fb4) at namei.c:360
+#6  0x0000bfa3 in sys_open (filename=0x9e <rp_sidt+16> "", flag=0, mode=0)
+    at open.c:157
+#7  0x00007967 in system_call () at system_call.s:94
+#8  0x0000009e in rp_sidt () at head.s:94
+#9  0x00000000 in ?? ()
+$52459 = 0 '\000'
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2bffc) at buffer.c:40
+40	{
+$52460 = 2839
+$52461 = 10
+#0  wait_on_buffer (bh=0x2bffc) at buffer.c:40
+#1  0x0000ddd3 in brelse (buf=0x2bffc) at buffer.c:260
+#2  0x00011cea in open_namei (pathname=0x9e <rp_sidt+16> "", flag=0, 
+    mode=32768, res_inode=0xf96fb4) at namei.c:394
+#3  0x0000bfa3 in sys_open (filename=0x9e <rp_sidt+16> "", flag=0, mode=0)
+    at open.c:157
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x0000009e in rp_sidt () at head.s:94
+#6  0x00000000 in ?? ()
+$52462 = 0 '\000'
+
+
+Breakpoint 23, wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+191		if (p && *p) {
+$52463 = 2839
+$52464 = 10
+#0  wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+#1  0x0000de0d in brelse (buf=0x2bffc) at buffer.c:263
+#2  0x00011cea in open_namei (pathname=0x9e <rp_sidt+16> "", flag=0, 
+    mode=32768, res_inode=0xf96fb4) at namei.c:394
+#3  0x0000bfa3 in sys_open (filename=0x9e <rp_sidt+16> "", flag=0, mode=0)
+    at open.c:157
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x0000009e in rp_sidt () at head.s:94
+#6  0x00000000 in ?? ()
+$52465 = (struct task_struct **) 0x27ce8 <buffer_wait>
+$52466 = -1
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2bcc0) at buffer.c:40
+40	{
+$52467 = 2839
+$52468 = 10
+#0  wait_on_buffer (bh=0x2bcc0) at buffer.c:40
+#1  0x0000dba6 in get_hash_table (dev=541, block=6) at buffer.c:194
+#2  0x0000dc06 in getblk (dev=541, block=6) at buffer.c:214
+#3  0x0000de37 in bread (dev=541, block=6) at buffer.c:274
+#4  0x0000d3b4 in read_inode (inode=0x27998 <inode_table+952>) at inode.c:305
+#5  0x0000d30a in iget (dev=541, nr=66) at inode.c:290
+#6  0x00011d24 in open_namei (pathname=0x9e <rp_sidt+16> "", flag=0, 
+    mode=32768, res_inode=0xf96fb4) at namei.c:398
+#7  0x0000bfa3 in sys_open (filename=0x9e <rp_sidt+16> "", flag=0, mode=0)
+    at open.c:157
+#8  0x00007967 in system_call () at system_call.s:94
+#9  0x0000009e in rp_sidt () at head.s:94
+#10 0x00000000 in ?? ()
+$52469 = 0 '\000'
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2bcc0) at buffer.c:40
+40	{
+$52470 = 2839
+$52471 = 10
+#0  wait_on_buffer (bh=0x2bcc0) at buffer.c:40
+#1  0x0000ddd3 in brelse (buf=0x2bcc0) at buffer.c:260
+#2  0x0000d42e in read_inode (inode=0x27998 <inode_table+952>) at inode.c:310
+#3  0x0000d30a in iget (dev=541, nr=66) at inode.c:290
+#4  0x00011d24 in open_namei (pathname=0x9e <rp_sidt+16> "", flag=0, 
+    mode=32768, res_inode=0xf96fb4) at namei.c:398
+#5  0x0000bfa3 in sys_open (filename=0x9e <rp_sidt+16> "", flag=0, mode=0)
+    at open.c:157
+#6  0x00007967 in system_call () at system_call.s:94
+#7  0x0000009e in rp_sidt () at head.s:94
+#8  0x00000000 in ?? ()
+$52472 = 0 '\000'
+
+
+Breakpoint 23, wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+191		if (p && *p) {
+$52473 = 2839
+$52474 = 10
+#0  wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+#1  0x0000de0d in brelse (buf=0x2bcc0) at buffer.c:263
+#2  0x0000d42e in read_inode (inode=0x27998 <inode_table+952>) at inode.c:310
+#3  0x0000d30a in iget (dev=541, nr=66) at inode.c:290
+#4  0x00011d24 in open_namei (pathname=0x9e <rp_sidt+16> "", flag=0, 
+    mode=32768, res_inode=0xf96fb4) at namei.c:398
+#5  0x0000bfa3 in sys_open (filename=0x9e <rp_sidt+16> "", flag=0, mode=0)
+    at open.c:157
+#6  0x00007967 in system_call () at system_call.s:94
+#7  0x0000009e in rp_sidt () at head.s:94
+#8  0x00000000 in ?? ()
+$52475 = (struct task_struct **) 0x27ce8 <buffer_wait>
+$52476 = -1
+
+
+Breakpoint 23, wake_up (p=0x279b8 <inode_table+984>) at sched.c:191
+191		if (p && *p) {
+$52477 = 2839
+$52478 = 10
+#0  wake_up (p=0x279b8 <inode_table+984>) at sched.c:191
+#1  0x0000c7d3 in unlock_inode (inode=0x27998 <inode_table+952>) at inode.c:40
+#2  0x0000d43d in read_inode (inode=0x27998 <inode_table+952>) at inode.c:311
+#3  0x0000d30a in iget (dev=541, nr=66) at inode.c:290
+#4  0x00011d24 in open_namei (pathname=0x9e <rp_sidt+16> "", flag=0, 
+    mode=32768, res_inode=0xf96fb4) at namei.c:398
+#5  0x0000bfa3 in sys_open (filename=0x9e <rp_sidt+16> "", flag=0, mode=0)
+    at open.c:157
+#6  0x00007967 in system_call () at system_call.s:94
+#7  0x0000009e in rp_sidt () at head.s:94
+#8  0x00000000 in ?? ()
+$52479 = (struct task_struct **) 0x279b8 <inode_table+984>
+$52480 = -1
+
+
+Breakpoint 35,    at open.c:185
+185		return (fd);
+$52481 = 2839
+$52482 = 10
+$52483 = 0
+$52484 = 33270
+$52485 = 0
+$52486 = 1
+$52487 = (struct m_inode *) 0x27998 <inode_table+952>
+$52488 = 0
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$52489 = 2839
+$52490 = 3
+0xf96fd4:	0x00000003	0x00006000	0x00000006	0x00000017
+0xf96fe4:	0x00000017	0x00000017	0x000001dc	0x0000000f
+0xf96ff4:	0x00000206	0x03fffebc	0x00000017	0x00000000
+
+
+Breakpoint 36,    at read_write.c:77
+77			return file_read(inode,file,buf,count);
+$52491 = 2839
+$52492 = 10
+$52493 = 0
+$52494 = 0
+$52495 = 0
+$52496 = 1
+
+
+Breakpoint 39,    at file_dev.c:22
+22		if ((left=count)<=0)
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2c770) at buffer.c:40
+40	{
+$52497 = 2839
+$52498 = 10
+#0  wait_on_buffer (bh=0x2c770) at buffer.c:40
+#1  0x0000dce6 in getblk (dev=541, block=662) at buffer.c:231
+#2  0x0000de37 in bread (dev=541, block=662) at buffer.c:274
+#3  0x0000f3d5 in file_read (inode=0x27998 <inode_table+952>, 
+    filp=0x29790 <file_table+48>, buf=0x6000 <gdt+840> "", count=6)
+    at file_dev.c:26
+#4  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#5  0x00007967 in system_call () at system_call.s:94
+#6  0x00000003 in startup_32 () at head.s:19
+$52499 = 0 '\000'
+
+
+Breakpoint 44, bread (dev=541, block=662) at buffer.c:278
+278		ll_rw_block(READ,bh);
+$52500 = 2839
+$52501 = 10
+#0  bread (dev=541, block=662) at buffer.c:278
+#1  0x0000f3d5 in file_read (inode=0x27998 <inode_table+952>, 
+    filp=0x29790 <file_table+48>, buf=0x6000 <gdt+840> "", count=6)
+    at file_dev.c:26
+#2  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#3  0x00007967 in system_call () at system_call.s:94
+#4  0x00000003 in startup_32 () at head.s:19
+$52502 = 0 '\000'
+
+
+Breakpoint 49, lock_buffer (bh=0x2c770) at ll_rw_blk.c:48
+48		sti();
+$52503 = 2839
+$52504 = 10
+
+
+Breakpoint 52, make_request (major=2, rw=0, bh=0x2c770) at ll_rw_blk.c:142
+142		add_request(major+blk_dev,req);
+$52505 = 2839
+$52506 = 10
+$52507 = 541
+$52508 = 0
+$52509 = 0
+$52510 = 1324
+$52511 = 2
+$52512 = 0x3b9800 ""
+$52513 = (struct task_struct *) 0x0 <startup_32>
+$52514 = (struct buffer_head *) 0x2c770
+$52515 = (struct request *) 0x0 <startup_32>
+
+
+Breakpoint 51,    req=0x29f98 <request+1080>) at ll_rw_blk.c:85
+85		sti();
+$52516 = 2839
+$52517 = 10
+$52518 = (struct request *) 0x29fbc <request+1116>
+$52519 = (struct request *) 0x29f98 <request+1080>
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2c770) at buffer.c:40
+40	{
+$52520 = 2839
+$52521 = 10
+#0  wait_on_buffer (bh=0x2c770) at buffer.c:40
+#1  0x0000de86 in bread (dev=541, block=662) at buffer.c:279
+#2  0x0000f3d5 in file_read (inode=0x27998 <inode_table+952>, 
+    filp=0x29790 <file_table+48>, buf=0x6000 <gdt+840> "", count=6)
+    at file_dev.c:26
+#3  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000003 in startup_32 () at head.s:19
+$52522 = 1 '\001'
+
+
+Breakpoint 47, wait_on_buffer (bh=0x2c770) at buffer.c:43
+43			sleep_on(&bh->b_wait);
+$52523 = 2839
+$52524 = 10
+#0  wait_on_buffer (bh=0x2c770) at buffer.c:43
+#1  0x0000de86 in bread (dev=541, block=662) at buffer.c:279
+#2  0x0000f3d5 in file_read (inode=0x27998 <inode_table+952>, 
+    filp=0x29790 <file_table+48>, buf=0x6000 <gdt+840> "", count=6)
+    at file_dev.c:26
+#3  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000003 in startup_32 () at head.s:19
+
+
+Breakpoint 21, sleep_on (p=0x2c780) at sched.c:159
+159		tmp = *p;
+$52525 = 2839
+$52526 = 10
+#0  sleep_on (p=0x2c780) at sched.c:159
+#1  0x0000d5d4 in wait_on_buffer (bh=0x2c770) at buffer.c:43
+#2  0x0000de86 in bread (dev=541, block=662) at buffer.c:279
+#3  0x0000f3d5 in file_read (inode=0x27998 <inode_table+952>, 
+    filp=0x29790 <file_table+48>, buf=0x6000 <gdt+840> "", count=6)
+    at file_dev.c:26
+#4  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#5  0x00007967 in system_call () at system_call.s:94
+#6  0x00000003 in startup_32 () at head.s:19
+$52527 = 317395140
+$52528 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52529 = 2839
+$52530 = 10
+$52531 = 6
+$52532 = 11
+$52533 = 2
+$52534 = 15
+$52535 = 15
+$52536 = 9
+$52537 = 0
+$52538 = 0
+$52539 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52540 = 2839
+$52541 = 10
+$52542 = 5
+$52543 = 10
+$52544 = 2
+$52545 = 15
+$52546 = 15
+$52547 = 9
+$52548 = 0
+$52549 = 0
+$52550 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52551 = 2839
+$52552 = 10
+$52553 = 4
+$52554 = 9
+$52555 = 1
+$52556 = 10
+$52557 = 15
+$52558 = 4
+$52559 = 0
+$52560 = 0
+$52561 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52562 = 2839
+$52563 = 10
+$52564 = 3
+$52565 = 3
+$52566 = 1
+$52567 = 27
+$52568 = 15
+$52569 = 1
+$52570 = 0
+$52571 = 0
+$52572 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52573 = 2839
+$52574 = 10
+$52575 = 2
+$52576 = 4
+$52577 = 1
+$52578 = 3
+$52579 = 15
+$52580 = 1
+$52581 = 0
+$52582 = 0
+$52583 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$52584 = 2839
+$52585 = 10
+$52586 = 1
+$52587 = 1
+$52588 = 1
+$52589 = 27
+$52590 = 15
+$52591 = 0
+$52592 = 0
+$52593 = 0
+$52594 = -1
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$52595 = 2839
+$52596 = 10
+#0  schedule () at sched.c:141
+#1  0x00006fbe in sleep_on (p=0x2c780) at sched.c:162
+#2  0x0000d5d4 in wait_on_buffer (bh=0x2c770) at buffer.c:43
+#3  0x0000de86 in bread (dev=541, block=662) at buffer.c:279
+#4  0x0000f3d5 in file_read (inode=0x27998 <inode_table+952>, 
+    filp=0x29790 <file_table+48>, buf=0x6000 <gdt+840> "", count=6)
+    at file_dev.c:26
+#5  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#6  0x00007967 in system_call () at system_call.s:94
+#7  0x00000003 in startup_32 () at head.s:19
+$52597 = 0
+$52598 = 0
+
+
+
+Breakpoint 12, floppy_interrupt () at system_call.s:259
+259		movl $0x10,%eax
+$85431 = 2854
+0x14761 <rw_interrupt>:	0xe8535657
+0x231a4 <init_task+3972>:	0x00020017	0x00000010	0x00000010	0x00000000
+0x231b4 <init_task+3988>:	0x000055e8
+
+
+Breakpoint 23, wake_up (p=0x27d60 <wait_on_floppy_select>) at sched.c:191
+191		if (p && *p) {
+$85432 = 2854
+$85433 = 0
+#0  wake_up (p=0x27d60 <wait_on_floppy_select>) at sched.c:191
+#1  0x000143de in floppy_deselect (nr=1) at floppy.c:130
+#2  0x00014862 in rw_interrupt () at floppy.c:264
+#3  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#4  0x00000000 in ?? ()
+$85434 = (struct task_struct **) 0x27d60 <wait_on_floppy_select>
+$85435 = -1
+
+
+Breakpoint 53, rw_interrupt () at floppy.c:265
+265		end_request(1);
+$85436 = 2854
+$85437 = 0
+#0  rw_interrupt () at floppy.c:265
+#1  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#2  0x00000000 in ?? ()
+
+
+Breakpoint 55, unlock_buffer (bh=0x2c74c) at blk.h:106
+106		wake_up(&bh->b_wait);
+$85438 = 2854
+$85439 = 0
+$85440 = (struct task_struct **) 0x2c75c
+
+
+Breakpoint 23, wake_up (p=0x2c75c) at sched.c:191
+191		if (p && *p) {
+$85441 = 2854
+$85442 = 0
+#0  wake_up (p=0x2c75c) at sched.c:191
+#1  0x0001428a in unlock_buffer (bh=0x2c74c) at blk.h:106
+#2  0x000142f4 in end_request (uptodate=1) at blk.h:114
+#3  0x0001486f in rw_interrupt () at floppy.c:265
+#4  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#5  0x00000000 in ?? ()
+$85443 = (struct task_struct **) 0x2c75c
+$85444 = 11
+
+
+Breakpoint 56, end_request (uptodate=1) at blk.h:121
+121		wake_up(&CURRENT->waiting);
+$85445 = 2854
+$85446 = 0
+$85447 = (struct task_struct **) 0x29fd4 <request+1140>
+
+
+Breakpoint 23, wake_up (p=0x29fd4 <request+1140>) at sched.c:191
+191		if (p && *p) {
+$85448 = 2854
+$85449 = 0
+#0  wake_up (p=0x29fd4 <request+1140>) at sched.c:191
+#1  0x00014353 in end_request (uptodate=1) at blk.h:121
+#2  0x0001486f in rw_interrupt () at floppy.c:265
+#3  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#4  0x00000000 in ?? ()
+$85450 = (struct task_struct **) 0x29fd4 <request+1140>
+$85451 = -1
+
+
+Breakpoint 57, end_request (uptodate=1) at blk.h:122
+122		wake_up(&wait_for_request);
+$85452 = 2854
+$85453 = 0
+$85454 = (struct task_struct **) 0x27d00 <wait_for_request>
+
+
+Breakpoint 23, wake_up (p=0x27d00 <wait_for_request>) at sched.c:191
+191		if (p && *p) {
+$85455 = 2854
+$85456 = 0
+#0  wake_up (p=0x27d00 <wait_for_request>) at sched.c:191
+#1  0x00014365 in end_request (uptodate=1) at blk.h:122
+#2  0x0001486f in rw_interrupt () at floppy.c:265
+#3  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#4  0x00000000 in ?? ()
+$85457 = (struct task_struct **) 0x27d00 <wait_for_request>
+$85458 = -1
+
+
+Breakpoint 58, end_request (uptodate=1) at blk.h:124
+124		CURRENT = CURRENT->next;
+$85459 = 2854
+$85460 = 0
+$85461 = -1
+$85462 = (struct request *) 0x29f98 <request+1080>
+
+
+Breakpoint 54, do_fd_request () at floppy.c:455
+455		add_timer(ticks_to_floppy_on(current_drive),&floppy_on_interrupt);
+$85463 = 2854
+$85464 = 0
+#0  do_fd_request () at floppy.c:455
+#1  0x00014877 in rw_interrupt () at floppy.c:266
+#2  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#3  0x00000000 in ?? ()
+
+
+Breakpoint 13, floppy_interrupt () at system_call.s:272
+272		pop %fs
+$85465 = 2854
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85466 = 2854
+$85467 = 0
+$85468 = 6
+$85469 = 11
+$85470 = 0
+$85471 = 15
+$85472 = 15
+$85473 = 9
+$85474 = 0
+$85475 = 0
+$85476 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$85477 = 2854
+$85478 = 0
+$85479 = 6
+$85480 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85481 = 2854
+$85482 = 0
+$85483 = 5
+$85484 = 10
+$85485 = 2
+$85486 = 15
+$85487 = 15
+$85488 = 9
+$85489 = 0
+$85490 = 0
+$85491 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85492 = 2854
+$85493 = 0
+$85494 = 4
+$85495 = 9
+$85496 = 1
+$85497 = 10
+$85498 = 15
+$85499 = 4
+$85500 = 0
+$85501 = 0
+$85502 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85503 = 2854
+$85504 = 0
+$85505 = 3
+$85506 = 3
+$85507 = 1
+$85508 = 27
+$85509 = 15
+$85510 = 1
+$85511 = 0
+$85512 = 0
+$85513 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85514 = 2854
+$85515 = 0
+$85516 = 2
+$85517 = 4
+$85518 = 1
+$85519 = 3
+$85520 = 15
+$85521 = 1
+$85522 = 0
+$85523 = 0
+$85524 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85525 = 2854
+$85526 = 0
+$85527 = 1
+$85528 = 1
+$85529 = 1
+$85530 = 27
+$85531 = 15
+$85532 = 0
+$85533 = 0
+$85534 = 0
+$85535 = 15
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$85536 = 2854
+$85537 = 0
+#0  schedule () at sched.c:141
+#1  0x00006f59 in sys_pause () at sched.c:147
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x00022000 in ?? ()
+$85538 = 6
+$85539 = 11
+
+
+Breakpoint 22, sleep_on (p=0x2c75c) at sched.c:164
+164		if (tmp)
+$85540 = 2854
+$85541 = 11
+$85542 = -1
+
+
+Breakpoint 45, bread (dev=541, block=659) at buffer.c:280
+280		if (bh->b_uptodate)
+$85543 = 2854
+$85544 = 11
+$85545 = 1 '\001'
+
+
+Breakpoint 40,    at file_dev.c:30
+30			nr = filp->f_pos % BLOCK_SIZE;
+$85546 = 2854
+$85547 = 11
+$85548 = 659
+$85549 = 541
+
+
+Breakpoint 41,    at file_dev.c:34
+34			if (bh) {
+$85550 = 2854
+$85551 = 11
+$85552 = 0
+$85553 = 6
+$85554 = 6
+$85555 = 0
+
+
+Breakpoint 42,    at file_dev.c:36
+36				while (chars-->0)
+$85556 = 2854
+$85557 = 11
+$85558 = 0x3b9c00 "hello\n "
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2c74c) at buffer.c:40
+40	{
+$85559 = 2854
+$85560 = 11
+#0  wait_on_buffer (bh=0x2c74c) at buffer.c:40
+#1  0x0000ddd3 in brelse (buf=0x2c74c) at buffer.c:260
+#2  0x0000f499 in file_read (inode=0x27928 <inode_table+840>, 
+    filp=0x29780 <file_table+32>, buf=0x6006 <gdt+846> "", count=6)
+    at file_dev.c:38
+#3  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000003 in startup_32 () at head.s:19
+$85561 = 0 '\000'
+
+
+Breakpoint 43,    at file_dev.c:45
+45		return (count-left)?(count-left):-ERROR;
+
+
+Breakpoint 12, floppy_interrupt () at system_call.s:259
+259		movl $0x10,%eax
+$85566 = 2856
+0x14761 <rw_interrupt>:	0xe8535657
+0xf92fac:	0x00000017	0x00000010	0x00000010	0x03fffe9c
+0xf92fbc:	0x00f922e7
+
+
+Breakpoint 53, rw_interrupt () at floppy.c:265
+265		end_request(1);
+$84083 = 2856
+$84084 = 11
+#0  rw_interrupt () at floppy.c:265
+#1  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#2  0x18000000 in ?? ()
+
+
+Breakpoint 55, unlock_buffer (bh=0x2c770) at blk.h:106
+106		wake_up(&bh->b_wait);
+$84085 = 2856
+$84086 = 11
+$84087 = (struct task_struct **) 0x2c780
+
+
+Breakpoint 23, wake_up (p=0x2c780) at sched.c:191
+191		if (p && *p) {
+$85571 = 2856
+$85572 = 11
+#0  wake_up (p=0x2c780) at sched.c:191
+#1  0x0001428a in unlock_buffer (bh=0x2c770) at blk.h:106
+#2  0x000142f4 in end_request (uptodate=1) at blk.h:114
+#3  0x0001486f in rw_interrupt () at floppy.c:265
+#4  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#5  0x03fffe9c in ?? ()
+$85573 = (struct task_struct **) 0x2c780
+$85574 = 10
+
+
+Breakpoint 56, end_request (uptodate=1) at blk.h:121
+121		wake_up(&CURRENT->waiting);
+$84092 = 2856
+$84093 = 11
+$84094 = (struct task_struct **) 0x29fb0 <request+1104>
+
+
+Breakpoint 23, wake_up (p=0x29fb0 <request+1104>) at sched.c:191
+191		if (p && *p) {
+$85575 = 2856
+$85576 = 11
+#0  wake_up (p=0x29fb0 <request+1104>) at sched.c:191
+#1  0x00014353 in end_request (uptodate=1) at blk.h:121
+#2  0x0001486f in rw_interrupt () at floppy.c:265
+#3  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#4  0x03fffe9c in ?? ()
+$85577 = (struct task_struct **) 0x29fb0 <request+1104>
+$85578 = -1
+
+
+Breakpoint 57, end_request (uptodate=1) at blk.h:122
+122		wake_up(&wait_for_request);
+$84099 = 2856
+$84100 = 11
+$84101 = (struct task_struct **) 0x27d00 <wait_for_request>
+
+
+Breakpoint 23, wake_up (p=0x27d00 <wait_for_request>) at sched.c:191
+191		if (p && *p) {
+$85579 = 2856
+$85580 = 11
+#0  wake_up (p=0x27d00 <wait_for_request>) at sched.c:191
+#1  0x00014365 in end_request (uptodate=1) at blk.h:122
+#2  0x0001486f in rw_interrupt () at floppy.c:265
+#3  0x00007ae2 in floppy_interrupt () at system_call.s:271
+#4  0x03fffe9c in ?? ()
+$85581 = (struct task_struct **) 0x27d00 <wait_for_request>
+$85582 = -1
+
+
+Breakpoint 58, end_request (uptodate=1) at blk.h:124
+124		CURRENT = CURRENT->next;
+$84106 = 2856
+$84107 = 11
+$84108 = -1
+$84109 = (struct request *) 0x0 <startup_32>
+
+
+Breakpoint 13, floppy_interrupt () at system_call.s:272
+272		pop %fs
+$85583 = 2856
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85584 = 2869
+$85585 = 11
+$85586 = 6
+$85587 = 11
+$85588 = 0
+$85589 = 0
+$85590 = 15
+$85591 = 9
+$85592 = 0
+$85593 = 0
+$85594 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$85595 = 2869
+$85596 = 11
+$85597 = 6
+$85598 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85599 = 2869
+$85600 = 11
+$85601 = 5
+$85602 = 10
+$85603 = 0
+$85604 = 15
+$85605 = 15
+$85606 = 9
+$85607 = 0
+$85608 = 0
+$85609 = 0
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$85610 = 2869
+$85611 = 11
+$85612 = 5
+$85613 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85614 = 2869
+$85615 = 11
+$85616 = 4
+$85617 = 9
+$85618 = 1
+$85619 = 10
+$85620 = 15
+$85621 = 4
+$85622 = 0
+$85623 = 0
+$85624 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85625 = 2869
+$85626 = 11
+$85627 = 3
+$85628 = 3
+$85629 = 1
+$85630 = 27
+$85631 = 15
+$85632 = 1
+$85633 = 0
+$85634 = 0
+$85635 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85636 = 2869
+$85637 = 11
+$85638 = 2
+$85639 = 4
+$85640 = 1
+$85641 = 3
+$85642 = 15
+$85643 = 1
+$85644 = 0
+$85645 = 0
+$85646 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85647 = 2869
+$85648 = 11
+$85649 = 1
+$85650 = 1
+$85651 = 1
+$85652 = 27
+$85653 = 15
+$85654 = 0
+$85655 = 0
+$85656 = 0
+$85657 = 15
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$85658 = 2869
+$85659 = 11
+#0  schedule () at sched.c:141
+#1  0x00007978 in system_call () at system_call.s:100
+#2  0x00000b34 in setup_gdt () at head.s:109
+#3  0x03fffe90 in ?? ()
+$85660 = 5
+$85661 = 10
+
+
+Breakpoint 22, sleep_on (p=0x2c780) at sched.c:164
+164		if (tmp)
+$85662 = 2869
+$85663 = 10
+$85664 = -1
+
+
+Breakpoint 45, bread (dev=541, block=662) at buffer.c:280
+280		if (bh->b_uptodate)
+$84192 = 2869
+$84193 = 10
+$84194 = 1 '\001'
+
+
+Breakpoint 40,    at file_dev.c:30
+30			nr = filp->f_pos % BLOCK_SIZE;
+$84195 = 2869
+$84196 = 10
+$84197 = 662
+$84198 = 541
+
+
+Breakpoint 41,    at file_dev.c:34
+34			if (bh) {
+$84199 = 2869
+$84200 = 10
+$84201 = 0
+$84202 = 6
+$84203 = 6
+$84204 = 0
+
+
+Breakpoint 42,    at file_dev.c:36
+36				while (chars-->0)
+$84205 = 2869
+$84206 = 10
+$84207 = 0x3b9800 "world\n "
+
+
+Breakpoint 46, wait_on_buffer (bh=0x2c770) at buffer.c:40
+40	{
+$84208 = 2869
+$84209 = 10
+#0  wait_on_buffer (bh=0x2c770) at buffer.c:40
+#1  0x0000ddd3 in brelse (buf=0x2c770) at buffer.c:260
+#2  0x0000f499 in file_read (inode=0x27998 <inode_table+952>, 
+    filp=0x29790 <file_table+48>, buf=0x6006 <gdt+846> "", count=6)
+    at file_dev.c:38
+#3  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000003 in startup_32 () at head.s:19
+$84210 = 0 '\000'
+
+
+Breakpoint 23, wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+191		if (p && *p) {
+$85665 = 2869
+$85666 = 10
+#0  wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+#1  0x0000de0d in brelse (buf=0x2c770) at buffer.c:263
+#2  0x0000f499 in file_read (inode=0x27998 <inode_table+952>, 
+    filp=0x29790 <file_table+48>, buf=0x6006 <gdt+846> "", count=6)
+    at file_dev.c:38
+#3  0x0000c54c in sys_read (fd=3, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:77
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000003 in startup_32 () at head.s:19
+$85667 = (struct task_struct **) 0x27ce8 <buffer_wait>
+$85668 = -1
+
+
+Breakpoint 43,    at file_dev.c:45
+45		return (count-left)?(count-left):-ERROR;
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85669 = 2884
+$85670 = 10
+$85671 = 6
+$85672 = 11
+$85673 = 0
+$85674 = 0
+$85675 = 15
+$85676 = 9
+$85677 = 0
+$85678 = 0
+$85679 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$85680 = 2884
+$85681 = 10
+$85682 = 6
+$85683 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85684 = 2884
+$85685 = 10
+$85686 = 5
+$85687 = 10
+$85688 = 0
+$85689 = 0
+$85690 = 15
+$85691 = 9
+$85692 = 0
+$85693 = 0
+$85694 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85695 = 2884
+$85696 = 10
+$85697 = 4
+$85698 = 9
+$85699 = 1
+$85700 = 10
+$85701 = 15
+$85702 = 4
+$85703 = 0
+$85704 = 0
+$85705 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85706 = 2884
+$85707 = 10
+$85708 = 3
+$85709 = 3
+$85710 = 1
+$85711 = 27
+$85712 = 15
+$85713 = 1
+$85714 = 0
+$85715 = 0
+$85716 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85717 = 2884
+$85718 = 10
+$85719 = 2
+$85720 = 4
+$85721 = 1
+$85722 = 3
+$85723 = 15
+$85724 = 1
+$85725 = 0
+$85726 = 0
+$85727 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85728 = 2884
+$85729 = 10
+$85730 = 1
+$85731 = 1
+$85732 = 1
+$85733 = 27
+$85734 = 15
+$85735 = 0
+$85736 = 0
+$85737 = 0
+$85738 = 0
+
+
+Breakpoint 19, schedule () at sched.c:138
+138					(*p)->counter = ((*p)->counter >> 1) +
+$85739 = 2884
+$85740 = 10
+$85741 = 11
+$85742 = 15
+
+
+Breakpoint 19, schedule () at sched.c:138
+138					(*p)->counter = ((*p)->counter >> 1) +
+$85743 = 2884
+$85744 = 10
+$85745 = 10
+$85746 = 15
+
+
+Breakpoint 19, schedule () at sched.c:138
+138					(*p)->counter = ((*p)->counter >> 1) +
+$85747 = 2884
+$85748 = 10
+$85749 = 9
+$85750 = 20
+
+
+Breakpoint 19, schedule () at sched.c:138
+138					(*p)->counter = ((*p)->counter >> 1) +
+$85751 = 2884
+$85752 = 10
+$85753 = 3
+$85754 = 28
+
+
+Breakpoint 19, schedule () at sched.c:138
+138					(*p)->counter = ((*p)->counter >> 1) +
+$85755 = 2884
+$85756 = 10
+$85757 = 4
+$85758 = 16
+
+
+Breakpoint 19, schedule () at sched.c:138
+138					(*p)->counter = ((*p)->counter >> 1) +
+$85759 = 2884
+$85760 = 10
+$85761 = 1
+$85762 = 28
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85763 = 2884
+$85764 = 10
+$85765 = 6
+$85766 = 11
+$85767 = 0
+$85768 = 15
+$85769 = 15
+$85770 = 9
+$85771 = 0
+$85772 = 0
+$85773 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$85774 = 2884
+$85775 = 10
+$85776 = 6
+$85777 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85778 = 2884
+$85779 = 10
+$85780 = 5
+$85781 = 10
+$85782 = 0
+$85783 = 15
+$85784 = 15
+$85785 = 9
+$85786 = 0
+$85787 = 0
+$85788 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85789 = 2884
+$85790 = 10
+$85791 = 4
+$85792 = 9
+$85793 = 1
+$85794 = 20
+$85795 = 15
+$85796 = 4
+$85797 = 0
+$85798 = 0
+$85799 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85800 = 2884
+$85801 = 10
+$85802 = 3
+$85803 = 3
+$85804 = 1
+$85805 = 28
+$85806 = 15
+$85807 = 1
+$85808 = 0
+$85809 = 0
+$85810 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85811 = 2884
+$85812 = 10
+$85813 = 2
+$85814 = 4
+$85815 = 1
+$85816 = 16
+$85817 = 15
+$85818 = 1
+$85819 = 0
+$85820 = 0
+$85821 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85822 = 2884
+$85823 = 10
+$85824 = 1
+$85825 = 1
+$85826 = 1
+$85827 = 28
+$85828 = 15
+$85829 = 0
+$85830 = 0
+$85831 = 0
+$85832 = 15
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$85833 = 2884
+$85834 = 10
+#0  schedule () at sched.c:141
+#1  0x00007560 in do_timer (cpl=3) at sched.c:336
+#2  0x00007a49 in timer_interrupt () at system_call.s:195
+#3  0x00000003 in startup_32 () at head.s:19
+$85835 = 6
+$85836 = 11
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$85837 = 2889
+$85838 = 4
+0xf92fd4:	0x00000001	0x00006000	0x00000006	0x00000017
+0xf92fe4:	0x00000017	0x00000017	0x00000274	0x0000000f
+0xf92ff4:	0x00000206	0x03fffec4	0x00000017	0x00000000
+
+
+Breakpoint 37,    at read_write.c:96
+96			return rw_char(WRITE,inode->i_zone[0],buf,count,&file->f_pos);
+$85839 = 2889
+$85840 = 11
+$85841 = 1
+$85842 = 0
+$85843 = 0
+
+
+Breakpoint 38,    pos=0x2977c <file_table+28>) at char_dev.c:103
+103		return call_addr(rw,MINOR(dev),buf,count,pos);
+$85844 = 2889
+$85845 = 11
+$85846 = 4
+
+
+Breakpoint 6,    at tty_io.c:326
+326		return (b-buf);
+$85847 = 2889
+$85848 = 11
+#0  tty_write (channel=0, buf=0x6000 <gdt+840> "", nr=0) at tty_io.c:326
+#1  0x0000f0e3 in rw_ttyx (rw=1, minor=0, buf=0x6000 <gdt+840> "", count=6, 
+    pos=0x2977c <file_table+28>) at char_dev.c:23
+#2  0x0000f31e in rw_char (rw=1, dev=1024, buf=0x6000 <gdt+840> "", count=6, 
+    pos=0x2977c <file_table+28>) at char_dev.c:103
+#3  0x0000c65f in sys_write (fd=1, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:96
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000001 in startup_32 () at head.s:19
+--------------------------------------------------------------------------------
+                                                                                
+Bochs BIOS - build: 09/02/12                                                    
+$Revision: 11318 $ $Date: 2012-08-06 19:59:54 +0200 (Mo, 06. Aug 2012) $        
+Options: apmbios pcibios pnpbios eltorito rombios32                             
+                                                                                
+                                                                                
+Press F12 for boot menu.                                                        
+                                                                                
+Booting from Floppy...                                                          
+                                                                                
+Loading system ...                                                              
+                                                                                
+Ram disk: 1049600 bytes, starting at 0x400000                                   
+Insert root floppy and press ENTER                                              
+6/1440 free blocks                                                              
+400/480 free inodes                                                             
+3423 buffers = 3505152 bytes buffer space                                       
+Free mem: 11533312 bytes                                                        
+=== Ok.                                                                         
+syscal[/usr/root]#                                                              
+l[/usr/root]# syscall                                                           
+Hello, Linux 0.11                                                               
+[/usr/root]# process                                                            
+hello                                                                           
+                                                                                
+--------------------------------------------------------------------------------
+
+
+Breakpoint 29, do_exit (code=0) at exit.c:116
+116				sys_close(i);
+$85849 = 2889
+$85850 = 11
+$85851 = 0
+
+
+Breakpoint 29, do_exit (code=0) at exit.c:116
+116				sys_close(i);
+$85852 = 2889
+$85853 = 11
+$85854 = 1
+
+
+Breakpoint 29, do_exit (code=0) at exit.c:116
+116				sys_close(i);
+$85855 = 2889
+$85856 = 11
+$85857 = 2
+
+
+Breakpoint 29, do_exit (code=0) at exit.c:116
+116				sys_close(i);
+$85858 = 2889
+$85859 = 11
+$85860 = 3
+
+
+Breakpoint 30, do_exit (code=0) at exit.c:131
+131		tell_father(current->father);
+$85861 = 2889
+$85862 = 11
+$85863 = 0
+
+
+Breakpoint 31, tell_father (pid=9) at exit.c:93
+93				task[i]->signal |= (1<<(SIGCHLD-1));
+$85864 = 2889
+$85865 = 11
+$85866 = 9
+$85867 = 0
+
+
+Breakpoint 32, tell_father (pid=9) at exit.c:94
+94				return;
+$85868 = 9
+$85869 = 65536
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85870 = 2889
+$85871 = 11
+$85872 = 6
+$85873 = 11
+$85874 = 3
+$85875 = 10
+$85876 = 15
+$85877 = 9
+$85878 = 0
+$85879 = 0
+$85880 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85881 = 2889
+$85882 = 11
+$85883 = 5
+$85884 = 10
+$85885 = 0
+$85886 = 15
+$85887 = 15
+$85888 = 9
+$85889 = 0
+$85890 = 0
+$85891 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$85892 = 2889
+$85893 = 11
+$85894 = 5
+$85895 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85896 = 2889
+$85897 = 11
+$85898 = 4
+$85899 = 9
+$85900 = 0
+$85901 = 20
+$85902 = 15
+$85903 = 4
+$85904 = 0
+$85905 = 65536
+$85906 = 15
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$85907 = 2889
+$85908 = 11
+$85909 = 4
+$85910 = 20
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85911 = 2889
+$85912 = 11
+$85913 = 3
+$85914 = 3
+$85915 = 1
+$85916 = 28
+$85917 = 15
+$85918 = 1
+$85919 = 0
+$85920 = 0
+$85921 = 20
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85922 = 2889
+$85923 = 11
+$85924 = 2
+$85925 = 4
+$85926 = 1
+$85927 = 16
+$85928 = 15
+$85929 = 1
+$85930 = 0
+$85931 = 0
+$85932 = 20
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85933 = 2889
+$85934 = 11
+$85935 = 1
+$85936 = 1
+$85937 = 1
+$85938 = 28
+$85939 = 15
+$85940 = 0
+$85941 = 0
+$85942 = 0
+$85943 = 20
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$85944 = 2889
+$85945 = 11
+#0  schedule () at sched.c:141
+#1  0x0000a4c3 in do_exit (code=0) at exit.c:132
+#2  0x0000a4ee in sys_exit (error_code=0) at exit.c:138
+#3  0x00007967 in system_call () at system_call.s:94
+#4  0x00000000 in ?? ()
+$85946 = 4
+$85947 = 9
+
+
+Breakpoint 24, release (p=0xf92000) at exit.c:28
+28				free_page((long)p);
+$85269 = 2889
+$85270 = 9
+$85271 = 6
+$85272 = 11
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85948 = 2889
+$85949 = 9
+$85950 = 5
+$85951 = 10
+$85952 = 0
+$85953 = 15
+$85954 = 15
+$85955 = 9
+$85956 = 0
+$85957 = 0
+$85958 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$85959 = 2889
+$85960 = 9
+$85961 = 5
+$85962 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85963 = 2889
+$85964 = 9
+$85965 = 4
+$85966 = 9
+$85967 = 0
+$85968 = 20
+$85969 = 15
+$85970 = 4
+$85971 = 0
+$85972 = 0
+$85973 = 15
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$85974 = 2889
+$85975 = 9
+$85976 = 4
+$85977 = 20
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85978 = 2889
+$85979 = 9
+$85980 = 3
+$85981 = 3
+$85982 = 1
+$85983 = 28
+$85984 = 15
+$85985 = 1
+$85986 = 0
+$85987 = 0
+$85988 = 20
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$85989 = 2889
+$85990 = 9
+$85991 = 2
+$85992 = 4
+$85993 = 1
+$85994 = 16
+$85995 = 15
+$85996 = 1
+$85997 = 0
+$85998 = 0
+$85999 = 20
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86000 = 2889
+$86001 = 9
+$86002 = 1
+$86003 = 1
+$86004 = 1
+$86005 = 28
+$86006 = 15
+$86007 = 0
+$86008 = 0
+$86009 = 0
+$86010 = 20
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$86011 = 2889
+$86012 = 9
+#0  schedule () at sched.c:141
+#1  0x00009eb8 in release (p=0xf92000) at exit.c:29
+#2  0x0000a6ab in sys_waitpid (pid=-1, stat_addr=0x0 <startup_32>, options=0)
+    at exit.c:175
+#3  0x00007967 in system_call () at system_call.s:94
+#4  0xffffffff in ?? ()
+$86013 = 4
+$86014 = 9
+
+
+Breakpoint 26,    at exit.c:177
+177					return flag;
+$85340 = 2889
+$85341 = 9
+$85342 = 11
+$85343 = 0
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$86015 = 2889
+$86016 = 7
+0xfd3fd4:	0xffffffff	0x00000000	0x00000000	0x00000017
+0xfd3fe4:	0x00000017	0x00000017	0x0000024d	0x0000000f
+0xfd3ff4:	0x00000246	0x03fffec4	0x00000017	0x00f47d83
+
+
+Breakpoint 27,    at exit.c:179
+179					flag=1;
+$86017 = 2889
+$86018 = 9
+$86019 = 10
+
+
+Breakpoint 28,    at exit.c:186
+186			current->state=TASK_INTERRUPTIBLE;
+$86020 = 2889
+$86021 = 9
+$86022 = 0
+$86023 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86024 = 2889
+$86025 = 9
+$86026 = 5
+$86027 = 10
+$86028 = 0
+$86029 = 15
+$86030 = 15
+$86031 = 9
+$86032 = 0
+$86033 = 0
+$86034 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$86035 = 2889
+$86036 = 9
+$86037 = 5
+$86038 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86039 = 2889
+$86040 = 9
+$86041 = 4
+$86042 = 9
+$86043 = 1
+$86044 = 20
+$86045 = 15
+$86046 = 4
+$86047 = 0
+$86048 = 0
+$86049 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86050 = 2889
+$86051 = 9
+$86052 = 3
+$86053 = 3
+$86054 = 1
+$86055 = 28
+$86056 = 15
+$86057 = 1
+$86058 = 0
+$86059 = 0
+$86060 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86061 = 2889
+$86062 = 9
+$86063 = 2
+$86064 = 4
+$86065 = 1
+$86066 = 16
+$86067 = 15
+$86068 = 1
+$86069 = 0
+$86070 = 0
+$86071 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86072 = 2889
+$86073 = 9
+$86074 = 1
+$86075 = 1
+$86076 = 1
+$86077 = 28
+$86078 = 15
+$86079 = 0
+$86080 = 0
+$86081 = 0
+$86082 = 15
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$86083 = 2889
+$86084 = 9
+#0  schedule () at sched.c:141
+#1  0x0000a720 in sys_waitpid (pid=-1, stat_addr=0x0 <startup_32>, options=0)
+    at exit.c:187
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0xffffffff in ?? ()
+$86085 = 5
+$86086 = 10
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86087 = 2904
+$86088 = 10
+$86089 = 5
+$86090 = 10
+$86091 = 0
+$86092 = 0
+$86093 = 15
+$86094 = 9
+$86095 = 0
+$86096 = 0
+$86097 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$86098 = 2904
+$86099 = 10
+$86100 = 5
+$86101 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86102 = 2904
+$86103 = 10
+$86104 = 4
+$86105 = 9
+$86106 = 1
+$86107 = 20
+$86108 = 15
+$86109 = 4
+$86110 = 0
+$86111 = 0
+$86112 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86113 = 2904
+$86114 = 10
+$86115 = 3
+$86116 = 3
+$86117 = 1
+$86118 = 28
+$86119 = 15
+$86120 = 1
+$86121 = 0
+$86122 = 0
+$86123 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86124 = 2904
+$86125 = 10
+$86126 = 2
+$86127 = 4
+$86128 = 1
+$86129 = 16
+$86130 = 15
+$86131 = 1
+$86132 = 0
+$86133 = 0
+$86134 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86135 = 2904
+$86136 = 10
+$86137 = 1
+$86138 = 1
+$86139 = 1
+$86140 = 28
+$86141 = 15
+$86142 = 0
+$86143 = 0
+$86144 = 0
+$86145 = 0
+
+
+Breakpoint 19, schedule () at sched.c:138
+138					(*p)->counter = ((*p)->counter >> 1) +
+$86146 = 2904
+$86147 = 10
+$86148 = 10
+$86149 = 15
+
+
+Breakpoint 19, schedule () at sched.c:138
+138					(*p)->counter = ((*p)->counter >> 1) +
+$86150 = 2904
+$86151 = 10
+$86152 = 9
+$86153 = 25
+
+
+Breakpoint 19, schedule () at sched.c:138
+138					(*p)->counter = ((*p)->counter >> 1) +
+$86154 = 2904
+$86155 = 10
+$86156 = 3
+$86157 = 29
+
+
+Breakpoint 19, schedule () at sched.c:138
+138					(*p)->counter = ((*p)->counter >> 1) +
+$86158 = 2904
+$86159 = 10
+$86160 = 4
+$86161 = 23
+
+
+Breakpoint 19, schedule () at sched.c:138
+138					(*p)->counter = ((*p)->counter >> 1) +
+$86162 = 2904
+$86163 = 10
+$86164 = 1
+$86165 = 29
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86166 = 2904
+$86167 = 10
+$86168 = 5
+$86169 = 10
+$86170 = 0
+$86171 = 15
+$86172 = 15
+$86173 = 9
+$86174 = 0
+$86175 = 0
+$86176 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$86177 = 2904
+$86178 = 10
+$86179 = 5
+$86180 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86181 = 2904
+$86182 = 10
+$86183 = 4
+$86184 = 9
+$86185 = 1
+$86186 = 25
+$86187 = 15
+$86188 = 4
+$86189 = 0
+$86190 = 0
+$86191 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86192 = 2904
+$86193 = 10
+$86194 = 3
+$86195 = 3
+$86196 = 1
+$86197 = 29
+$86198 = 15
+$86199 = 1
+$86200 = 0
+$86201 = 0
+$86202 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86203 = 2904
+$86204 = 10
+$86205 = 2
+$86206 = 4
+$86207 = 1
+$86208 = 23
+$86209 = 15
+$86210 = 1
+$86211 = 0
+$86212 = 0
+$86213 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86214 = 2904
+$86215 = 10
+$86216 = 1
+$86217 = 1
+$86218 = 1
+$86219 = 29
+$86220 = 15
+$86221 = 0
+$86222 = 0
+$86223 = 0
+$86224 = 15
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$86225 = 2904
+$86226 = 10
+#0  schedule () at sched.c:141
+#1  0x00007978 in system_call () at system_call.s:100
+#2  0x00000b58 in setup_gdt () at head.s:109
+#3  0x03fffe90 in ?? ()
+$86227 = 5
+$86228 = 10
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$86229 = 2914
+$86230 = 4
+0xf96fd4:	0x00000001	0x00006000	0x00000006	0x00000017
+0xf96fe4:	0x00000017	0x00000017	0x00000274	0x0000000f
+0xf96ff4:	0x00000206	0x03fffec4	0x00000017	0x00000000
+
+
+Breakpoint 37,    at read_write.c:96
+96			return rw_char(WRITE,inode->i_zone[0],buf,count,&file->f_pos);
+$86231 = 2914
+$86232 = 10
+$86233 = 1
+$86234 = 0
+$86235 = 0
+
+
+Breakpoint 38,    pos=0x2977c <file_table+28>) at char_dev.c:103
+103		return call_addr(rw,MINOR(dev),buf,count,pos);
+$86236 = 2914
+$86237 = 10
+$86238 = 4
+
+
+Breakpoint 6,    at tty_io.c:326
+326		return (b-buf);
+$86239 = 2914
+$86240 = 10
+#0  tty_write (channel=0, buf=0x6000 <gdt+840> "", nr=0) at tty_io.c:326
+#1  0x0000f0e3 in rw_ttyx (rw=1, minor=0, buf=0x6000 <gdt+840> "", count=6, 
+    pos=0x2977c <file_table+28>) at char_dev.c:23
+#2  0x0000f31e in rw_char (rw=1, dev=1024, buf=0x6000 <gdt+840> "", count=6, 
+    pos=0x2977c <file_table+28>) at char_dev.c:103
+#3  0x0000c65f in sys_write (fd=1, buf=0x6000 <gdt+840> "", count=6)
+    at read_write.c:96
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000001 in startup_32 () at head.s:19
+--------------------------------------------------------------------------------
+Bochs BIOS - build: 09/02/12                                                    
+$Revision: 11318 $ $Date: 2012-08-06 19:59:54 +0200 (Mo, 06. Aug 2012) $        
+Options: apmbios pcibios pnpbios eltorito rombios32                             
+                                                                                
+                                                                                
+Press F12 for boot menu.                                                        
+                                                                                
+Booting from Floppy...                                                          
+                                                                                
+Loading system ...                                                              
+                                                                                
+Ram disk: 1049600 bytes, starting at 0x400000                                   
+Insert root floppy and press ENTER                                              
+6/1440 free blocks                                                              
+400/480 free inodes                                                             
+3423 buffers = 3505152 bytes buffer space                                       
+Free mem: 11533312 bytes                                                        
+=== Ok.                                                                         
+syscal[/usr/root]#                                                              
+l[/usr/root]# syscall                                                           
+Hello, Linux 0.11                                                               
+[/usr/root]# process                                                            
+hello                                                                           
+world                                                                           
+                                                                                
+--------------------------------------------------------------------------------
+
+
+Breakpoint 29, do_exit (code=0) at exit.c:116
+116				sys_close(i);
+$86241 = 2914
+$86242 = 10
+$86243 = 0
+
+
+Breakpoint 29, do_exit (code=0) at exit.c:116
+116				sys_close(i);
+$86244 = 2914
+$86245 = 10
+$86246 = 1
+
+
+Breakpoint 29, do_exit (code=0) at exit.c:116
+116				sys_close(i);
+$86247 = 2914
+$86248 = 10
+$86249 = 2
+
+
+Breakpoint 29, do_exit (code=0) at exit.c:116
+116				sys_close(i);
+$86250 = 2914
+$86251 = 10
+$86252 = 3
+
+
+Breakpoint 30, do_exit (code=0) at exit.c:131
+131		tell_father(current->father);
+$86253 = 2914
+$86254 = 10
+$86255 = 0
+
+
+Breakpoint 31, tell_father (pid=9) at exit.c:93
+93				task[i]->signal |= (1<<(SIGCHLD-1));
+$86256 = 2914
+$86257 = 10
+$86258 = 9
+$86259 = 0
+
+
+Breakpoint 32, tell_father (pid=9) at exit.c:94
+94				return;
+$86260 = 9
+$86261 = 65536
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86262 = 2914
+$86263 = 10
+$86264 = 5
+$86265 = 10
+$86266 = 3
+$86267 = 5
+$86268 = 15
+$86269 = 9
+$86270 = 0
+$86271 = 0
+$86272 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86273 = 2914
+$86274 = 10
+$86275 = 4
+$86276 = 9
+$86277 = 0
+$86278 = 25
+$86279 = 15
+$86280 = 4
+$86281 = 0
+$86282 = 65536
+$86283 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$86284 = 2914
+$86285 = 10
+$86286 = 4
+$86287 = 25
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86288 = 2914
+$86289 = 10
+$86290 = 3
+$86291 = 3
+$86292 = 1
+$86293 = 29
+$86294 = 15
+$86295 = 1
+$86296 = 0
+$86297 = 0
+$86298 = 25
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86299 = 2914
+$86300 = 10
+$86301 = 2
+$86302 = 4
+$86303 = 1
+$86304 = 23
+$86305 = 15
+$86306 = 1
+$86307 = 0
+$86308 = 0
+$86309 = 25
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86310 = 2914
+$86311 = 10
+$86312 = 1
+$86313 = 1
+$86314 = 1
+$86315 = 29
+$86316 = 15
+$86317 = 0
+$86318 = 0
+$86319 = 0
+$86320 = 25
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$86321 = 2914
+$86322 = 10
+#0  schedule () at sched.c:141
+#1  0x0000a4c3 in do_exit (code=0) at exit.c:132
+#2  0x0000a4ee in sys_exit (error_code=0) at exit.c:138
+#3  0x00007967 in system_call () at system_call.s:94
+#4  0x00000000 in ?? ()
+$86323 = 4
+$86324 = 9
+
+
+Breakpoint 24, release (p=0xf96000) at exit.c:28
+28				free_page((long)p);
+$85654 = 2914
+$85655 = 9
+$85656 = 5
+$85657 = 10
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86325 = 2914
+$86326 = 9
+$86327 = 4
+$86328 = 9
+$86329 = 0
+$86330 = 25
+$86331 = 15
+$86332 = 4
+$86333 = 0
+$86334 = 0
+$86335 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$86336 = 2914
+$86337 = 9
+$86338 = 4
+$86339 = 25
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86340 = 2914
+$86341 = 9
+$86342 = 3
+$86343 = 3
+$86344 = 1
+$86345 = 29
+$86346 = 15
+$86347 = 1
+$86348 = 0
+$86349 = 0
+$86350 = 25
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86351 = 2914
+$86352 = 9
+$86353 = 2
+$86354 = 4
+$86355 = 1
+$86356 = 23
+$86357 = 15
+$86358 = 1
+$86359 = 0
+$86360 = 0
+$86361 = 25
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86362 = 2914
+$86363 = 9
+$86364 = 1
+$86365 = 1
+$86366 = 1
+$86367 = 29
+$86368 = 15
+$86369 = 0
+$86370 = 0
+$86371 = 0
+$86372 = 25
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$86373 = 2914
+$86374 = 9
+#0  schedule () at sched.c:141
+#1  0x00009eb8 in release (p=0xf96000) at exit.c:29
+#2  0x0000a6ab in sys_waitpid (pid=-1, stat_addr=0x0 <startup_32>, options=0)
+    at exit.c:175
+#3  0x00007967 in system_call () at system_call.s:94
+#4  0xffffffff in ?? ()
+$86375 = 4
+$86376 = 9
+
+
+Breakpoint 26,    at exit.c:177
+177					return flag;
+$85710 = 2914
+$85711 = 9
+$85712 = 10
+$85713 = 0
+
+
+Breakpoint 29, do_exit (code=0) at exit.c:116
+116				sys_close(i);
+$86377 = 2915
+$86378 = 9
+$86379 = 0
+
+
+Breakpoint 29, do_exit (code=0) at exit.c:116
+116				sys_close(i);
+$86380 = 2915
+$86381 = 9
+$86382 = 1
+
+
+Breakpoint 29, do_exit (code=0) at exit.c:116
+116				sys_close(i);
+$86383 = 2915
+$86384 = 9
+$86385 = 2
+
+
+Breakpoint 23, wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+191		if (p && *p) {
+$86386 = 2915
+$86387 = 9
+#0  wake_up (p=0x27ce8 <buffer_wait>) at sched.c:191
+#1  0x0000de0d in brelse (buf=0x2bcc0) at buffer.c:263
+#2  0x0000d59b in write_inode (inode=0x277d8 <inode_table+504>) at inode.c:336
+#3  0x0000cefe in iput (inode=0x277d8 <inode_table+504>) at inode.c:186
+#4  0x0000a3ef in do_exit (code=0) at exit.c:121
+#5  0x0000a4ee in sys_exit (error_code=0) at exit.c:138
+#6  0x00007967 in system_call () at system_call.s:94
+#7  0x00000000 in ?? ()
+$86388 = (struct task_struct **) 0x27ce8 <buffer_wait>
+$86389 = -1
+
+
+Breakpoint 23, wake_up (p=0x277f8 <inode_table+536>) at sched.c:191
+191		if (p && *p) {
+$86390 = 2915
+$86391 = 9
+#0  wake_up (p=0x277f8 <inode_table+536>) at sched.c:191
+#1  0x0000c7d3 in unlock_inode (inode=0x277d8 <inode_table+504>) at inode.c:40
+#2  0x0000d5aa in write_inode (inode=0x277d8 <inode_table+504>) at inode.c:337
+#3  0x0000cefe in iput (inode=0x277d8 <inode_table+504>) at inode.c:186
+#4  0x0000a3ef in do_exit (code=0) at exit.c:121
+#5  0x0000a4ee in sys_exit (error_code=0) at exit.c:138
+#6  0x00007967 in system_call () at system_call.s:94
+#7  0x00000000 in ?? ()
+$86392 = (struct task_struct **) 0x277f8 <inode_table+536>
+$86393 = -1
+
+
+Breakpoint 30, do_exit (code=0) at exit.c:131
+131		tell_father(current->father);
+$86394 = 2915
+$86395 = 9
+$86396 = 0
+
+
+Breakpoint 31, tell_father (pid=4) at exit.c:93
+93				task[i]->signal |= (1<<(SIGCHLD-1));
+$86397 = 2915
+$86398 = 9
+$86399 = 4
+$86400 = 0
+
+
+Breakpoint 32, tell_father (pid=4) at exit.c:94
+94				return;
+$86401 = 4
+$86402 = 65536
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86403 = 2915
+$86404 = 9
+$86405 = 4
+$86406 = 9
+$86407 = 3
+$86408 = 24
+$86409 = 15
+$86410 = 4
+$86411 = 0
+$86412 = 0
+$86413 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86414 = 2915
+$86415 = 9
+$86416 = 3
+$86417 = 3
+$86418 = 1
+$86419 = 29
+$86420 = 15
+$86421 = 1
+$86422 = 0
+$86423 = 0
+$86424 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86425 = 2915
+$86426 = 9
+$86427 = 2
+$86428 = 4
+$86429 = 0
+$86430 = 23
+$86431 = 15
+$86432 = 1
+$86433 = 0
+$86434 = 65536
+$86435 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$86436 = 2915
+$86437 = 9
+$86438 = 2
+$86439 = 23
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86440 = 2915
+$86441 = 9
+$86442 = 1
+$86443 = 1
+$86444 = 1
+$86445 = 29
+$86446 = 15
+$86447 = 0
+$86448 = 0
+$86449 = 0
+$86450 = 23
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$86451 = 2915
+$86452 = 9
+#0  schedule () at sched.c:141
+#1  0x0000a4c3 in do_exit (code=0) at exit.c:132
+#2  0x0000a4ee in sys_exit (error_code=0) at exit.c:138
+#3  0x00007967 in system_call () at system_call.s:94
+#4  0x00000000 in ?? ()
+$86453 = 2
+$86454 = 4
+
+
+Breakpoint 24, release (p=0xfd3000) at exit.c:28
+28				free_page((long)p);
+$85792 = 2915
+$85793 = 4
+$85794 = 4
+$85795 = 9
+
+
+Breakpoint 26,    at exit.c:177
+177					return flag;
+$85837 = 2915
+$85838 = 4
+$85839 = 9
+$85840 = 0
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$86496 = 2915
+$86497 = 5
+0xffcfd4:	0x00010c0e	0x00000000	0x00000009	0x00040017
+0xffcfe4:	0x00000017	0x00040017	0x000395f0	0x0000000f
+0xffcff4:	0x00000206	0x03fffe40	0x00000017	0x00000065
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$86524 = 2915
+$86525 = 4
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x0005646c in ?? ()
+$86526 = 1
+$86527 = 1
+$86528 = 12
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$86529 = 2915
+$86530 = 4
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x0005646c in ?? ()
+$86531 = 2
+$86532 = 4
+$86533 = 12
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$86534 = 2915
+$86535 = 4
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x0005646c in ?? ()
+$86536 = 3
+$86537 = 3
+$86538 = 12
+
+
+Breakpoint 16, find_empty_process () at fork.c:149
+149			if (!task[i])
+$86539 = 2915
+$86540 = 4
+#0  find_empty_process () at fork.c:149
+#1  0x00007a65 in sys_fork () at system_call.s:209
+#2  0x00007967 in system_call () at system_call.s:94
+#3  0x0005646c in ?? ()
+$86541 = 4
+$86542 = -1
+$86543 = 12
+
+
+Breakpoint 9, sys_fork () at system_call.s:210
+210		testl %eax,%eax
+$86544 = 2915
+0x4 <startup_32+4>:	0x00002027
+0xffcfd0:	0x00007967	0x0005646c	0x00012a3e	0x00050cc0
+0xffcfe0:	0x00000017	0x00050017	0x00000017	0x000394a3
+0xffcff0:	0x0000000f	0x00000246	0x03fff0b4	0x00000017
+0xffd000:	0x00000065
+
+
+Breakpoint 10, sys_fork () at system_call.s:217
+217		call copy_process
+$86545 = 2915
+0xffcfbc:	0x00000004	0x03fff0c0	0x00050ca1	0x00012a53
+0xffcfcc:	0x00000017	0x00007967	0x0005646c	0x00012a3e
+0xffcfdc:	0x00050cc0	0x00000017	0x00050017	0x00000017
+0xffcfec:	0x000394a3	0x0000000f	0x00000246	0x03fff0b4
+0xffcffc:	0x00000017	0x00000065
+
+
+Breakpoint 11, sys_fork () at system_call.s:218
+218		addl $20,%esp
+$86546 = 2916
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$86547 = 2917
+$86548 = 3
+0xffcfd4:	0x00000003	0x03fff0bc	0x00000001	0x00040017
+0xffcfe4:	0x00000017	0x00050017	0x00039638	0x0000000f
+0xffcff4:	0x00000212	0x03fff0a8	0x00000017	0x00000065
+
+
+
+Breakpoint 21, sleep_on (p=0x27a98 <inode_table+1208>) at sched.c:159
+159		tmp = *p;
+$86553 = 2917
+$86554 = 4
+#0  sleep_on (p=0x27a98 <inode_table+1208>) at sched.c:159
+#1  0x00010b53 in read_pipe (inode=0x27a78 <inode_table+1176>, 
+    buf=0x3fff0bc "\006\v\001", count=1) at pipe.c:22
+#2  0x0000c438 in sys_read (fd=3, 
+    buf=0x3fff0bc "-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw"..., count=1) at read_write.c:67
+#3  0x00007967 in system_call () at system_call.s:94
+#4  0x00000003 in startup_32 () at head.s:19
+$86555 = 0
+$86556 = 0
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86557 = 2917
+$86558 = 4
+$86559 = 4
+$86560 = 12
+$86561 = 0
+$86562 = 15
+$86563 = 15
+$86564 = 4
+$86565 = 0
+$86566 = 0
+$86567 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$86568 = 2917
+$86569 = 4
+$86570 = 4
+$86571 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86572 = 2917
+$86573 = 4
+$86574 = 3
+$86575 = 3
+$86576 = 1
+$86577 = 29
+$86578 = 15
+$86579 = 1
+$86580 = 0
+$86581 = 0
+$86582 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86583 = 2917
+$86584 = 4
+$86585 = 2
+$86586 = 4
+$86587 = 2
+$86588 = 21
+$86589 = 15
+$86590 = 1
+$86591 = 0
+$86592 = 0
+$86593 = 15
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86594 = 2917
+$86595 = 4
+$86596 = 1
+$86597 = 1
+$86598 = 1
+$86599 = 29
+$86600 = 15
+$86601 = 0
+$86602 = 0
+$86603 = 0
+$86604 = 15
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$86605 = 2917
+$86606 = 4
+#0  schedule () at sched.c:141
+#1  0x00006fbe in sleep_on (p=0x27a98 <inode_table+1208>) at sched.c:162
+#2  0x00010b53 in read_pipe (inode=0x27a78 <inode_table+1176>, 
+    buf=0x3fff0bc "\006\v\001", count=1) at pipe.c:22
+#3  0x0000c438 in sys_read (fd=3, 
+    buf=0x3fff0bc "-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw"..., count=1) at read_write.c:67
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000003 in startup_32 () at head.s:19
+$86607 = 4
+$86608 = 12
+
+
+Breakpoint 30, do_exit (code=-1454353710) at exit.c:131
+131		tell_father(current->father);
+$86609 = 2917
+$86610 = 12
+$86611 = -1454353710
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$86632 = 2918
+$86633 = 5
+0xfc5fd4:	0x0001b330	0x00000000	0x03ffef73	0x00000017
+0xfc5fe4:	0x00000017	0x00000017	0x000395f0	0x0000000f
+0xfc5ff4:	0x00000206	0x03ffedcc	0x00000017	0x8b1974db
+
+
+Breakpoint 30, do_exit (code=0) at exit.c:131
+131		tell_father(current->father);
+$86712 = 2919
+$86713 = 12
+$86714 = 0
+
+
+Breakpoint 31, tell_father (pid=4) at exit.c:93
+93				task[i]->signal |= (1<<(SIGCHLD-1));
+$86715 = 2919
+$86716 = 12
+$86717 = 4
+$86718 = 0
+
+
+Breakpoint 32, tell_father (pid=4) at exit.c:94
+94				return;
+$86719 = 4
+$86720 = 65536
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86721 = 2919
+$86722 = 12
+$86723 = 4
+$86724 = 12
+$86725 = 3
+$86726 = 13
+$86727 = 15
+$86728 = 4
+$86729 = 0
+$86730 = 0
+$86731 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86732 = 2919
+$86733 = 12
+$86734 = 3
+$86735 = 3
+$86736 = 1
+$86737 = 29
+$86738 = 15
+$86739 = 1
+$86740 = 0
+$86741 = 0
+$86742 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86743 = 2919
+$86744 = 12
+$86745 = 2
+$86746 = 4
+$86747 = 0
+$86748 = 21
+$86749 = 15
+$86750 = 1
+$86751 = 0
+$86752 = 65536
+$86753 = -1
+
+
+Breakpoint 18, schedule () at sched.c:133
+133					c = (*p)->counter, next = i;
+$86754 = 2919
+$86755 = 12
+$86756 = 2
+$86757 = 21
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86758 = 2919
+$86759 = 12
+$86760 = 1
+$86761 = 1
+$86762 = 1
+$86763 = 29
+$86764 = 15
+$86765 = 0
+$86766 = 0
+$86767 = 0
+$86768 = 21
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$86769 = 2919
+$86770 = 12
+#0  schedule () at sched.c:141
+#1  0x0000a4c3 in do_exit (code=0) at exit.c:132
+#2  0x0000a4ee in sys_exit (error_code=0) at exit.c:138
+#3  0x00007967 in system_call () at system_call.s:94
+#4  0x00000000 in ?? ()
+$86771 = 2
+$86772 = 4
+
+
+Breakpoint 22, sleep_on (p=0x27a98 <inode_table+1208>) at sched.c:164
+164		if (tmp)
+$86773 = 2919
+$86774 = 4
+$86775 = -1
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$86780 = 2919
+$86781 = 3
+0xffcfd4:	0x00000003	0x03fff0bc	0x00000001	0x00000017
+0xffcfe4:	0x00050017	0x00000017	0x00039638	0x0000000f
+0xffcff4:	0x00000212	0x03fff0a8	0x00000017	0x00000065
+
+
+Breakpoint 24, release (p=0xfc5000) at exit.c:28
+28				free_page((long)p);
+$86191 = 2920
+$86192 = 4
+$86193 = 4
+$86194 = 12
+
+
+Breakpoint 26,    at exit.c:177
+177					return flag;
+$86236 = 2370
+$86237 = 4
+$86238 = 12
+$86239 = 0
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$86897 = 2920
+$86898 = 4
+0xffcfd4:	0x00000002	0x0004840c	0x0000000d	0x00040017
+0xffcfe4:	0x00000017	0x00000017	0x0003978c	0x0000000f
+0xffcff4:	0x00000293	0x03fff50c	0x00000017	0x00000065
+
+
+Breakpoint 6, tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+326		return (b-buf);
+$86899 = 2920
+$86900 = 4
+#0  tty_write (channel=0, buf=0x4840c "", nr=0) at tty_io.c:326
+#1  0x0000f0e3 in rw_ttyx (rw=1, minor=0, buf=0x4840c "", count=13, 
+    pos=0x2977c <file_table+28>) at char_dev.c:23
+#2  0x0000f31e in rw_char (rw=1, dev=1024, buf=0x4840c "", count=13, 
+    pos=0x2977c <file_table+28>) at char_dev.c:103
+#3  0x0000c65f in sys_write (fd=2, buf=0x4840c "", count=13) at read_write.c:96
+#4  0x00007967 in system_call () at system_call.s:94
+#5  0x00000002 in startup_32 () at head.s:19
+--------------------------------------------------------------------------------
+Bochs BIOS - build: 09/02/12                                                    
+$Revision: 11318 $ $Date: 2012-08-06 19:59:54 +0200 (Mo, 06. Aug 2012) $        
+Options: apmbios pcibios pnpbios eltorito rombios32                             
+                                                                                
+                                                                                
+Press F12 for boot menu.                                                        
+                                                                                
+Booting from Floppy...                                                          
+                                                                                
+Loading system ...                                                              
+                                                                                
+Ram disk: 1049600 bytes, starting at 0x400000                                   
+Insert root floppy and press ENTER                                              
+6/1440 free blocks                                                              
+400/480 free inodes                                                             
+3423 buffers = 3505152 bytes buffer space                                       
+Free mem: 11533312 bytes                                                        
+=== Ok.                                                                         
+syscal[/usr/root]#                                                              
+l[/usr/root]# syscall                                                           
+Hello, Linux 0.11                                                               
+[/usr/root]# process                                                            
+hello                                                                           
+world                                                                           
+[/usr/root]#                                                                    
+--------------------------------------------------------------------------------
+
+
+Breakpoint 7, system_call () at system_call.s:94
+94		call *sys_call_table(,%eax,4)
+$86901 = 2920
+$86902 = 3
+0xffcfd4:	0x00000000	0x03fff58c	0x00000001	0x00040017
+0xffcfe4:	0x00000017	0x00000017	0x00039638	0x0000000f
+0xffcff4:	0x00000212	0x03fff578	0x00000017	0x00000065
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86903 = 2920
+$86904 = 4
+$86905 = 3
+$86906 = 3
+$86907 = 1
+$86908 = 29
+$86909 = 15
+$86910 = 1
+$86911 = 0
+$86912 = 0
+$86913 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86914 = 2920
+$86915 = 4
+$86916 = 2
+$86917 = 4
+$86918 = 1
+$86919 = 20
+$86920 = 15
+$86921 = 1
+$86922 = 0
+$86923 = 0
+$86924 = -1
+
+
+Breakpoint 17, schedule () at sched.c:132
+132				if ((*p)->state == TASK_RUNNING && (*p)->counter > c)
+$86925 = 2920
+$86926 = 4
+$86927 = 1
+$86928 = 1
+$86929 = 1
+$86930 = 29
+$86931 = 15
+$86932 = 0
+$86933 = 0
+$86934 = 0
+$86935 = -1
+
+
+Breakpoint 20, schedule () at sched.c:141
+141		switch_to(next);
+$86936 = 2920
+$86937 = 4
+#0  schedule () at sched.c:141
+#1  0x00007044 in interruptible_sleep_on (p=0x23d1c <tty_table+2140>)
+    at sched.c:179
+#2  0x0001669a in sleep_if_empty (queue=0x23d10 <tty_table+2128>)
+    at tty_io.c:126
+#3  0x00016f4c in tty_read (channel=0, buf=0x3fff58c "\231m\001", nr=1)
+    at tty_io.c:258
+#4  0x0000f0c8 in rw_ttyx (rw=0, minor=0, 
+    buf=0x3fff58c "\246", <incomplete sequence \360>, count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:23
+#5  0x0000f31e in rw_char (rw=0, dev=1024, 
+    buf=0x3fff58c "\235", <incomplete sequence \360>, count=1, 
+    pos=0x2977c <file_table+28>) at char_dev.c:103
+#6  0x0000c486 in sys_read (fd=0, 
+    buf=0x3fff58c "-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw-\364\377\377\203\370Hw"..., count=1) at read_write.c:69
+#7  0x00007967 in system_call () at system_call.s:94
+#8  0x00000000 in ?? ()
+$86938 = 0
+$86939 = 0

@@ -155,7 +155,6 @@ namespace OSPresentation
         //Buttons
         List<Button> taskButtons = new List<Button>();
         List<ListViewItem> stackButtons = new List<ListViewItem>();
-        List<List<Button>> fileButtons = new List<List<Button>>();
         // Bandges
         List<Badged> taskBadges = new List<Badged>();
         //Tooltips
@@ -286,9 +285,14 @@ namespace OSPresentation
             _openScene = -1;
 
             breakPoints.Clear();
+            //button
+            taskButtons.Clear();
+            stackButtons.Clear();
+            taskBadges.Clear();
+            taskToolTips.Clear();
+            stackToolTips.Clear();
             //Animation
-
-            OSAnimation.Remove(App.Current.MainWindow);
+            OSAnimation = new Storyboard();
             consoleText = new StringAnimationUsingKeyFrames();
             despTextAnimation = new StringAnimationUsingKeyFrames();
             tbTextAnimation = new StringAnimationUsingKeyFrames();
@@ -310,12 +314,15 @@ namespace OSPresentation
             stackVisibilityAnimations.Clear();
 
             // refresh process
-            TaskList.Items.Clear();
             processStructs.Clear();
             taskTooltipTextAnimations.Clear();
             processStructs.Add(new ProcessStruct(0, 0, 1, 0, 0, -1, -1, -1));
             foreach (var ind in Range(0, 63))
                 processStructs.Add(null);
+            TaskList.Items.Clear();
+            addProcessButton(0, true);
+            foreach (var index in Range(1, 63))
+                addProcessButton(index);
 
             // Stack
             stackDataList.Clear();
@@ -326,9 +333,7 @@ namespace OSPresentation
             KernelStackList.Items.Clear();
             foreach (var index in Range(1, 18))
                 addStackButton();
-            addProcessButton(0, true) ;
-            foreach (var index in Range(1, 63))
-                addProcessButton(index);
+
             _stackPointer = -1;
 
             // FS
@@ -1357,7 +1362,7 @@ namespace OSPresentation
                             gtime += itv1;
                             setFSListString(1, 3, 1, "b_lock=0");
                             gtime += itv1;
-                            showQButton(DiskQ3);
+                            showQButton(DiskQ3,false);
                         }
                         else if(_apid == 0)
                         {
@@ -1373,7 +1378,7 @@ namespace OSPresentation
                             gtime += itv1;
                             setFSListString(0, 3, 1, "b_lock=0");
                             gtime += itv1;
-                            showQButton(DiskQ1);
+                            showQButton(DiskQ1, false);
                         }
                         else if(_apid == 11)
                         {
@@ -1389,7 +1394,7 @@ namespace OSPresentation
                             gtime += itv1;
                             setFSListString(2, 3, 1, "b_lock=0");
                             gtime += itv1;
-                            showQButton(DiskQ2);
+                            showQButton(DiskQ2, false);
                         }
                         else
                         {
@@ -2121,6 +2126,7 @@ namespace OSPresentation
             
             OSAnimation.Children.Add(da);
         }
+
         void setCardSelected(Card c, bool to=true)
         {
             ColorAnimation cc = new ColorAnimation();
@@ -2242,10 +2248,13 @@ namespace OSPresentation
         #region Events
         void AnimationCompleted(object sender, EventArgs e)
         {
-            OSAnimation.Stop(App.Current.MainWindow);
-            OSAnimation.Seek(App.Current.MainWindow, TimeSpan.Zero, TimeSeekOrigin.BeginTime);
-            OSAnimation.Pause(App.Current.MainWindow);
-            _playing = 2;
+            if (_playing == 1)
+            {
+                _playing = 2;
+                OSAnimation.Stop(App.Current.MainWindow);
+                OSAnimation.Seek(App.Current.MainWindow, TimeSpan.Zero, TimeSeekOrigin.BeginTime);
+                OSAnimation.Pause(App.Current.MainWindow);
+            }
         }
         #endregion
 
@@ -2255,20 +2264,29 @@ namespace OSPresentation
             StartPauseAnimationButton.IsEnabled = true;
             AnimationSlider.Maximum = gtime / 1000;
             AnimationSlider.IsEnabled = true;
+            AnimationSlider.Value = 0;
+            _playing = 0;
         }
 
         #region ButtonInteactions
+        void Load_Click(object sender, RoutedEventArgs args)
+        {
+            if (_playing != 0)
+                OSAnimation.Pause(App.Current.MainWindow);
+        }
         void LoadBreakpointFile(object sender, DialogClosingEventArgs args)
         {
             string dataFile = "";
             if (!Equals(args.Parameter, true)) return;
 
             if (string.IsNullOrWhiteSpace(bpFileBox.Text))
-                dataFile = "./Data/output_all_m.txt";
+                dataFile = "./Data/output_all_xs.txt";
             else
                 dataFile = bpFileBox.Text.Trim();
-
+            OSAnimation.Stop(App.Current.MainWindow);
+            OSAnimation.Remove(App.Current.MainWindow);
             dataManipulate(dataFile);
+            Trace.WriteLine("here");
         }
 
         void StartPauseAnimation(object sender, RoutedEventArgs args)

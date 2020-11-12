@@ -12,7 +12,7 @@
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         xmlns:local="clr-namespace:OSPresentation"
         mc:Ignorable="d"
-        Title="OSPresentation" MinHeight="900" MinWidth="1500">
+        Title="OSPresentation" MinHeight="950" MinWidth="1600">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -27,8 +27,8 @@
         <materialDesign:DialogHost Identifier="mainDialog" DialogTheme="Inherit" DialogClosing="LoadBreakpointFile">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition MinWidth="500"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition MinWidth="600"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
@@ -72,10 +72,7 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <StackPanel Orientation="Vertical" Margin="8">
-                            <Grid MinWidth="700">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="0 0 0 10">Process Queue</TextBlock>
-                                </StackPanel>
+                            <StackPanel >
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                     <TextBlock Name="CNText" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Padding="10 0" Margin="0 5"></TextBlock>
                                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Padding="10 0" Margin="0 5">Jeffies:</TextBlock>
@@ -85,7 +82,10 @@
                                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Padding="10 0" Margin="0 5">Counter:</TextBlock>
                                     <TextBlock Name="CounterN" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Padding="5 0" Margin="0 7 0 5">?</TextBlock>
                                 </StackPanel>
-                            </Grid>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="0 0 0 10">Process Queue</TextBlock>
+                                </StackPanel>
+                            </StackPanel>
                             <ToolBarTray>
                                 <ToolBar Name="TaskList" Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
                                 </ToolBar>
@@ -348,7 +348,7 @@
                                                 Height="50"
                                                 Canvas.Top="400">
                                             <TextBlock 
-                                                    Text=" add to queue" 
+                                                    Text="do_fd_request" 
                                                     Margin="10 15"
                                                     Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
                                         </materialDesign:Card>
@@ -2015,6 +2015,7 @@
                     </StackPanel>
                 </Grid>
                 <materialDesign:PopupBox 
+                    Name="PopupButton"
                     Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"    
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Bottom"  
@@ -2023,7 +2024,7 @@
                     <StackPanel>
                         <Slider Name="SpeedSlider" 
                                 Orientation="Vertical"  
-                                Value="10"  
+                                Value="9"  
                                 Minimum="1"    
                                 Maximum="100"    
                                 Height="100" 
@@ -2034,6 +2035,7 @@
                         <Button Name="Load" 
                                 Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  
                                 ToolTip="Read a breakpoint file."
+                                Click="Load_Click"
                                 Command ="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
                             <materialDesign:PackIcon Kind="Plus"/>
                         </Button>
@@ -2043,7 +2045,7 @@
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
                     <TextBlock>Input the file path here.</TextBlock>
-                    <TextBox Text=""  Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="bpFileBox" />
+                    <TextBox Text="./Data/output_all_xs.txt"  Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="bpFileBox" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                         IsDefault="False"
