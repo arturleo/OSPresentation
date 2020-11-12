@@ -9,11 +9,11 @@ using System.Windows.Media.Animation;
 
 namespace OSPresentation.DataManipulation
 {
-    public class BP24 : BreakPoint
+    public class BP29 : BreakPoint
     {
         #region Contructor
 
-        public BP24(string bpo, int bpn) : base(bpo, bpn)
+        public BP29(string bpo, int bpn) : base(bpo, bpn)
         {
 
         }
@@ -22,18 +22,15 @@ namespace OSPresentation.DataManipulation
         #region Field
         #endregion
         #region Properties
-        public int TaskN { get => int.Parse(paras[0]); }
-        public int ChildPid { get=> int.Parse(paras[1]); }
         override public string Description
         {
             get
             {
-                return "Emptying task["+TaskN+"], \nfreeing the page of the process.\n";
+                return "Exiting the current process. Closing opened files and process file table.";
             }
         }
         #endregion
         #region Methods
-
         #endregion
     }
 

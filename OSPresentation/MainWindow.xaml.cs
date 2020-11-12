@@ -210,7 +210,7 @@ namespace OSPresentation
                             bpn != 24 &&
                             bpn != 26 &&
                             bpn != 27 &&
-                            bpn != 27 &&
+                            bpn != 29 &&
                             bpn != 32 &&
                             bpn != 33 &&
                             bpn != 35 &&
@@ -258,7 +258,6 @@ namespace OSPresentation
             intializeUI();
         }
 
-        // TODO
         void addUIElements_RegisterAnimation()
         {
             gtime = 0;
@@ -550,6 +549,8 @@ namespace OSPresentation
                         foreach (var index in Range(1, 6))
                             popStack(true);
                         stackDataList.Pop();
+                        checkFileClose();
+                        checkStackClose();
                         break;
                     case 14:
                         gtime += itv1;
@@ -641,8 +642,26 @@ namespace OSPresentation
                         break;
                     case 24:
                         BP24 bp24 = (BP24)bp;
+                        int id24 = bp24.ChildPid == 11 ? 1 : bp24.ChildPid == 10 ? 2 : 0;
+                        if (id24==1)
+                        {
+                            showScene(id24);
+                            checkStackClose();
+                            checkFileOpen();
+                            setFSOpacity(fsObj101, false);
+                            gtime += itv0;
+                        }
+                        else if (id24==2)
+                        {
+                            showScene(id24);
+                            checkStackClose();
+                            checkFileOpen();
+                            setFSOpacity(fsObj201, false);
+                            gtime += itv0;
+                        }
                         taskDisable(bp24.TaskN);
                         gtime += itv2;
+                        checkFileClose();
                         break;
                     case 26:
                         gtime += itv1;
@@ -654,10 +673,60 @@ namespace OSPresentation
                         taskChangeCounter(prc27.TaskN);
                         gtime += itv2;
                         break;
+                    case 29:
+                        BP29 bp29 = (BP29)bp;
+                        int id29 = bp29.Pid == 11 ? 1 : bp29.Pid == 10 ? 2 : 0;
+                        if (bp29.Pid == 11&& _fsStates[id29] == 2)
+                        {
+                            showScene(id29);
+                            checkStackClose();
+                            checkFileOpen();
+                            setFSOpacity(fsObj105, false);
+                            setFSOpacity(fsObj104, false);
+                            gtime += itv1;
+                            setFSListString(id29, 1, 0, "");
+                            gtime += itv1;
+                            setFSListString(id29, 1, 1, "");
+                            gtime += itv1;
+                            setFSListString(id29, 1, 2, "");
+                            gtime += itv1;
+                            setFSListString(id29, 1, 3, "");
+                            setFSOpacity(fsObj103, false);
+                            setFSOpacity(fsObj102, false);
+                            gtime += itv1;
+                            _fsStates[id29] = 3;
+                        }
+                        else if (bp29.Pid == 10 && _fsStates[id29] == 2)
+                        {
+                            showScene(id29);
+                            checkStackClose();
+                            checkFileOpen();
+                            setFSOpacity(fsObj205, false);
+                            setFSOpacity(fsObj204, false);
+                            gtime += itv1;
+                            setFSListString(id29, 1, 0, "");
+                            gtime += itv1;
+                            setFSListString(id29, 1, 1, "");
+                            gtime += itv1;
+                            setFSListString(id29, 1, 2, "");
+                            gtime += itv1;
+                            setFSListString(id29, 1, 3, "");
+                            setFSOpacity(fsObj203, false);
+                            setFSOpacity(fsObj202, false);
+                            gtime += itv1;
+                            _fsStates[id29] = 3;
+                        }
+                        else
+                        {
+                            Trace.WriteLine("29," + bp29.Pid);
+                        }
+                        checkFileClose();
+                        break;
                     case 32:
                         BP32 bp32 = (BP32)bp;
                         ProcessStruct prc32 = getProcess(_apid);
                         prc32.State = 3;
+                        prc32.ExitCode = 0;
                         taskChangeCounter(prc32.TaskN);
                         gtime += itv0;
                         prc32 = getProcess(bp32.FatherPid);
@@ -1385,8 +1454,8 @@ namespace OSPresentation
                             showScene(2);
                             checkStackClose();
                             checkFileOpen();
-                            setFSOpacity(fsObj145);
-                            setFSOpacity(fsObj146);
+                            setFSOpacity(fsObj245);
+                            setFSOpacity(fsObj246);
                             gtime += itv2;
                             setButtonRunning(false);
                             gtime += itv1;
@@ -2056,7 +2125,7 @@ namespace OSPresentation
         }
         void changeTaskBandge(int idx,int state=-1)
         {
-            string str= state == 1 ? "INTERRUPTIBLE" : (state == 2 ? "UNINTERRUPTIBLE" : (state == 3 ? "ZOMBIE" : (state == 4 ? "STOPPED" : "")));
+            string str= state == 1 ? "INTR" : (state == 2 ? "UNIN" : (state == 3 ? "ZOMB" : (state == 4 ? "STOPPED" : "")));
             changeBandge(idx, str);
         }
         ColorAnimation buttonForeBackgroundAnimation(Button button, bool changeTo = true, bool isFore = false, bool selected=false)
@@ -2267,7 +2336,6 @@ namespace OSPresentation
             AnimationSlider.Value = 0;
             _playing = 0;
         }
-
         #region ButtonInteactions
         void Load_Click(object sender, RoutedEventArgs args)
         {
@@ -2288,7 +2356,6 @@ namespace OSPresentation
             dataManipulate(dataFile);
             Trace.WriteLine("here");
         }
-
         void StartPauseAnimation(object sender, RoutedEventArgs args)
         {
             if (_playing == 0)
@@ -2311,7 +2378,6 @@ namespace OSPresentation
                 _playing = 1;
             }
         }
-
         private void Slider_DragCompleted(object sender, RoutedEventArgs e)
         {
             if(_playing != 0)
@@ -2325,7 +2391,6 @@ namespace OSPresentation
             else 
                 AnimationSlider.Value = ((Slider)sender).Value;
         }
-
         private void Slider_DragStarted(object sender, RoutedEventArgs e)
         {
             if (_playing==1)
@@ -2345,7 +2410,6 @@ namespace OSPresentation
                 OSAnimation.Resume(App.Current.MainWindow);
             }   
         }
-
         private void SpeedSlider_DragStarted(object sender, RoutedEventArgs e)
         {
             if (_playing == 1)
